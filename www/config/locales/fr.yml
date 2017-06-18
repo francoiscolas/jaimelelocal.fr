@@ -1,0 +1,42 @@
+fr:
+  activerecord:
+    models:
+      user: "Utilisateur"
+    attributes:
+      user:
+        email: "Adresse e-mail"
+        password: "Mot de passe"
+        password_confirmation: "Mot de passe (confirmation)"
+        current_password: "Mot de passe actuel"
+        remember_me: "Se souvenir de moi"
+        name: "Prénom NOM"
+        show_email: "Adresse e-mail"
+        url: "Site personnel"
+        bio: "Minibio"
+      farm:
+        name: "Nom de la ferme"
+        website: "Adresse internet"
+        address: "Adresse géographique"
+        farmer: "Prénom NOM"
+        phone: "Téléphone"
+    errors:
+        messages:
+            inclusion: "is not included in the list"
+            exclusion: "is reserved"
+            invalid: "est invalide"
+            confirmation: "ne correspond pas"
+            accepted: "must be accepted"
+            empty: "ne peut pas être vide"
+            blank: "ne peut pas être vide"
+            too_long: "est trop long (le maximum est de %{count} caractères de long)"
+            too_short: "est trop court (le minimum est de %{count} caractères de long)"
+            wrong_length: "ne fait pas la bonne taille (devrait faire %{count} caractères de long)"
+            taken: "est déjà utilisé"
+            not_a_number: "n'est pas un numéro"
+            greater_than: "doit faire plus de %{count}"
+            greater_than_or_equal_to: "doit faire au moins %{count}"
+            equal_to: "doit-être égal à %{count}"
+            less_than: "doit-être inférieur à %{count}"
+            less_than_or_equal_to: "doit faire au plus %{count}"
+            odd: "doit-être impair"
+            even: "doit-être pair"

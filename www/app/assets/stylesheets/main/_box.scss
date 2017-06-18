@@ -1,0 +1,35 @@
+$box-color: $light-gray;
+$alert-box-color: $alert-color;
+
+.box {
+  border: 1px solid $box-color;
+  padding: 0.8rem;
+  margin-bottom: 2rem;
+  h2 {
+    background: $box-color;
+    padding: 0.4rem 0.8rem;
+    margin: -0.8rem -0.8rem 0.8rem;
+    @include breakpoint(medium) {
+      font-size: 1.8rem;
+    }
+  }
+}
+.alert.box {
+  border: 1px solid $alert-box-color;
+  h2 {
+    background: $alert-box-color;
+    color: foreground($alert-box-color);
+  }
+}
+.menu.box {
+  padding: 0;
+  .separator {
+    background: $box-color;
+    height: 1px;
+  }
+  .active a {
+    background: none;
+    color: $black;
+    font-weight: bold;
+  }
+}

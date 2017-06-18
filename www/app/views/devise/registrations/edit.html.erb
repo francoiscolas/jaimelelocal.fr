@@ -1,0 +1,66 @@
+<% content_for :head do %>
+  <title>Paramètres - Cestlocal.fr</title>
+<% end %>
+
+<div class="content row">
+  <%= render partial: "account/shared/menu" %>
+  <div class="small-12 medium-8 columns end">
+    <div class="box">
+      <h2>Changer d'adresse e-mail</h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div>
+          <%= f.label :email %>
+          <%= f.email_field :email %>
+          <% if resource.errors[:email].any? %>
+            <p class="field_error_message"><%= resource.errors[:email][0] %></p>
+          <% end %>
+        </div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+        <div class="actions">
+          <%= f.submit "Enregistrer", class: "button" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="box">
+      <h2>Changer de mot de passe</h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div>
+          <%= f.label :password %>
+          <%= f.password_field :password, autocomplete: "off" %>
+          <% if resource.errors[:password].any? %>
+            <p class="field_error_message"><%= resource.errors[:password][0] %></p>
+          <% end %>
+        </div>
+        <div>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          <% if resource.errors[:password_confirmation].any? %>
+            <p class="field_error_message"><%= resource.errors[:password_confirmation][0] %></p>
+          <% end %>
+        </div>
+        <div>
+          <%= f.label :current_password %>
+          <%= f.password_field :current_password, autocomplete: "off" %>
+          <% if resource.errors[:current_password].any? %>
+            <p class="field_error_message"><%= resource.errors[:current_password][0] %></p>
+          <% end %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Enregistrer", class: "button" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="alert box">
+      <h2>Supprimer mon compte</h2>
+      <p><strong>Attention!</strong> Une fois que votre compte sera supprimé,
+      il n'y aura pas de retour possible. Êtes-vous sûr de vouloir supprimer
+      votre compte ?</p>
+      <div class="text-right">
+        <%= button_to "Oui, je veux supprimer mon compte !", user_registration_path, data: {confirm: "Confirmez-vous la suppression de votre compte et de toutes les données liées ?"}, method: :delete, :class => "alert button" %>
+      </div>
+    </div>
+  </div>
+</div>
+

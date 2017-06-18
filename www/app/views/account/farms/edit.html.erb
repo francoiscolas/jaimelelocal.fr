@@ -1,0 +1,24 @@
+<% content_for :head do %>
+  <title>Paramètres ferme - Cestlocal.fr</title>
+<% end %>
+
+<% content_for :pagename do 'edit-user-farm' end %>
+
+<div class="content row">
+  <%= render partial: 'account/shared/menu' %>
+  <div class="small-12 medium-8 columns end">
+    <div class="box">
+      <h2>Paramètres de la ferme</h2>
+      <%= render 'form' %>
+    </div>
+    <div class="alert box">
+      <h2>Supprimer la ferme</h2>
+      <p><strong>Attention!</strong> Une fois que votre ferme sera supprimé,
+      il n'y aura pas de retour possible. Êtes-vous sûr de vouloir supprimer
+      votre ferme ?</p>
+      <div class="text-right">
+        <%= button_to "Oui, je veux supprimer ma ferme !", user_farm_path, data: {confirm: "Confirmez-vous la suppression de votre ferme et de toutes les données liées ?"}, method: :delete, :class => "alert button" %>
+      </div>
+    </div>
+  </div>
+</div>

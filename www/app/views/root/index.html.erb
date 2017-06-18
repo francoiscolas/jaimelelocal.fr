@@ -1,0 +1,24 @@
+<% content_for :head do %>
+  <title>Cestlocal.fr</title>
+<% end %>
+
+<% content_for :pagename do 'index' end %>
+
+<div class="row text-center subtitle">
+  <h2><strong>Producteurs</strong> en vente <strong>directe</strong>.</h2>
+</div>
+<div class="row search-form">
+  <form>
+    <div class="medium-6 columns" id="query-input">
+      <input type="text" placeholder="Légume, fruit, ..."/>
+    </div>
+    <div class="medium-6 columns" id="where-input">
+      <input type="text" placeholder="Lieu"/>
+      <select>
+        <option>&lt; 20 km</option>
+      </select>
+    </div>
+  </form>
+</div>
+<div class="row content" style="height:300px;">
+</div>

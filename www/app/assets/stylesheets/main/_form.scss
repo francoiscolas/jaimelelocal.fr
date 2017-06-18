@@ -1,0 +1,20 @@
+form {
+  .field_with_errors input,
+  .field_with_errors input:focus,
+  .field_with_errors textarea,
+  .field_with_errors textarea:focus {
+    border-color: $alert-color;
+    margin-bottom: 0;
+  }
+  .field_error_message {
+    background: $alert-color;
+    color: $white;
+    padding: 0 0.5rem;
+    &.after-input-group {
+      margin-top: -17px;
+    }
+  }
+  .actions {
+    @extend .text-right;
+  }
+}

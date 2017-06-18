@@ -1,0 +1,48 @@
+$content-background: #eeeeee;
+
+body {
+  background: url(cork-wallet.png);
+}
+
+header {
+  background: $primary-color;
+  user-select: none;
+  h1 {
+    line-height: 3rem;
+    img {
+      height: 2.5rem;
+    }
+  }
+  #hdr-menu {
+    margin-top: 9px;
+    a {
+      color: #ffffff;
+      &.i-am-a-farmer {
+        background: #b2b212;
+        margin-top: 0.4rem;
+        padding: 0.2rem 0.8rem;
+      }
+    }
+  }
+}
+
+.flash.row {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.content.row {
+  background: $content-background;
+  padding: 2rem 1rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  background: #b2b212;
+  color: #ffffff;
+  padding: 10px;
+}

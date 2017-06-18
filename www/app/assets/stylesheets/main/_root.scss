@@ -1,0 +1,43 @@
+body.index {
+
+  .subtitle {
+    background: $content-background;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .search-form {
+    background: #dddddd;
+    @include breakpoint(medium) {
+      padding: 1.5rem;
+    }
+    .columns {
+      background: #cc1446;
+      input, select {
+        display: initial;
+        border: 0;
+        margin: 0.5rem 0;
+        padding: 0.4rem 0.2rem;
+      }
+      &#where-input {
+        input {
+          width: 68%;
+        }
+        select {
+          width: 30%;
+          float: right;
+        }
+        @include breakpoint(small only) {
+          padding-top: 0;
+          input, select {
+            margin-top: 0;
+          }
+        }
+        @include breakpoint(medium) {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
+}

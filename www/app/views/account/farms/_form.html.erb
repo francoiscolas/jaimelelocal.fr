@@ -1,0 +1,61 @@
+<%= form_for(@farm, url: user_farm_path) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: 'Ferme de Martin' %>
+    <% if @farm.errors[:name].any? %>
+      <p class="field_error_message"><%= @farm.errors[:name][0] %></p>
+    <% end %>
+    <div class="input-group">
+      <span class="input-group-label">http://cestlocal.fr/</span>
+      <%= f.text_field :url, class: 'input-group-field', placeholder: 'ferme-de-martin' %>
+    </div>
+    <% if @farm.errors[:url].any? %>
+      <p class="field_error_message after-input-group"><%= @farm.errors[:url][0] %></p>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :website %>
+    <%= f.url_field :website %>
+    <% if @farm.errors[:website].any? %>
+      <p class="field_error_message"><%= @farm.errors[:website][0] %></p>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-7 large-8 columns">
+      <div>
+        <%= f.label :address %>
+        <%= f.text_area :address, rows: 3 %>
+        <% if @farm.errors[:address].any? %>
+          <p class="field_error_message"><%= @farm.errors[:address][0] %></p>
+        <% end %>
+      </div>
+      <div>
+        <%= f.label :farmer %>
+        <%= f.text_field :farmer, placeholder: 'Mr Paul MARTIN' %>
+        <% if @farm.errors[:farmer].any? %>
+          <p class="field_error_message"><%= @farm.errors[:farmer][0] %></p>
+        <% end %>
+      </div>
+      <div>
+        <%= f.label :phone %>
+        <%= f.phone_field :phone %>
+        <% if @farm.errors[:phone].any? %>
+          <p class="field_error_message"><%= @farm.errors[:phone][0] %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="medium-5 large-4 columns">
+      <div class="warning callout">
+        Votre <b>prénom</b>, <b>nom</b>, <b>téléphone</b> et
+        <b>adresse</b> de la ferme ne sont pas rendus public
+        ni vendus.
+        <br/>
+        Ils sont uniquement utilisés par <i>Cestlocal.fr</i>
+        pour vous contacter.
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Enregistrer", class: "button" %>
+  </div>
+<% end %>

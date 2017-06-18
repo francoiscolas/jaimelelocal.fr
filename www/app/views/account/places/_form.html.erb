@@ -1,0 +1,32 @@
+<%= form_for [:user, :farm, @place] do |f| %>
+   <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, required: true %>
+    <% if @place.errors[:name].any? %>
+      <p class="field_error_message"><%= @place.errors[:name][0] %></p>
+    <% end %>
+  </div>
+   <div>
+    <%= f.check_box :is_opened %>
+    <%= f.label :is_opened %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 2 %>
+    <% if @place.errors[:description].any? %>
+      <p class="field_error_message"><%= @place.errors[:description][0] %></p>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :address %>
+    <%= f.text_area :address, rows: 2, required: true %>
+    <%= f.hidden_field :lat %>
+    <%= f.hidden_field :lng %>
+    <% if @place.errors[:address].any? %>
+      <p class="field_error_message"><%= @place.errors[:address][0] %></p>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit (@place.new_record?) ? 'Ajouter' : 'Enregistrer', class: 'button' %>
+  </div>
+<% end %>
