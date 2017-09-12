@@ -30,6 +30,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
     sudo apt-get install -y ruby ruby-dev nodejs build-essential libz-dev libsqlite3-dev
-    sudo gem install rails -v ">= 5.0.0"
+    sudo gem install bundler
+    cd /vagrant/www && sudo bundle install
   SHELL
 end
