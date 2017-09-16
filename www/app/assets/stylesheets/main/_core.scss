@@ -15,6 +15,12 @@ header {
   }
   #hdr-menu {
     margin-top: 9px;
+    @include breakpoint(small only) {
+      li {
+        display: block;
+        text-align: center;
+      }
+    }
     a {
       color: #ffffff;
       &.i-am-a-farmer {
