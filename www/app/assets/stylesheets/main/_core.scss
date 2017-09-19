@@ -23,10 +23,14 @@ header {
     }
     a {
       color: #ffffff;
+      text-decoration: none;
+      &:hover {
+        background: darken($primary-color, 5%);
+      }
       &.i-am-a-farmer {
         background: #b2b212;
-        margin-top: 0.4rem;
-        padding: 0.2rem 0.8rem;
+        margin-top: 0;
+        padding: 0.4rem 0.8rem;
       }
     }
   }

@@ -26,19 +26,19 @@
           <% if !user_has_farm? %>
             <li>
               <%= link_to new_user_farm_path, class: 'i-am-a-farmer button' do %>
-                <i class="fi-arrow-right">&nbsp;</i>Je suis producteur
+                <i class="fi-arrow-right"></i> Je suis producteur
               <% end %>
             </li>
           <% end %>
           <% if user_signed_in? %>
             <li>
               <%= link_to user_root_path do %>
-                <i class="fi-torso">&nbsp;</i>Mon compte
+                <i class="fi-torso"></i> Mon compte
               <% end %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fi-power">&nbsp;</i>Déconnexion
+                <i class="fi-power"></i> Déconnexion
               <% end %>
             </li>
           <% else %>
