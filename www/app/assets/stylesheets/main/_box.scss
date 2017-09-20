@@ -1,7 +1,9 @@
 $box-color: $light-gray;
+$box-background: $white;
 $alert-box-color: $alert-color;
 
 .box {
+  background: $box-background;
   border: 1px solid $box-color;
   padding: 0.8rem;
   margin-bottom: 2rem;
@@ -13,23 +15,21 @@ $alert-box-color: $alert-color;
       font-size: 1.8rem;
     }
   }
-}
-.alert.box {
-  border: 1px solid $alert-box-color;
-  h2 {
-    background: $alert-box-color;
-    color: foreground($alert-box-color);
+  &.menu {
+    padding: 0;
+    li.separator {
+      background: $box-color;
+      height: 1px;
+    }
+    a {
+      white-space: normal;
+    }
   }
-}
-.menu.box {
-  padding: 0;
-  .separator {
-    background: $box-color;
-    height: 1px;
-  }
-  .active a {
-    background: none;
-    color: $black;
-    font-weight: bold;
+  &.alert {
+    border: 1px solid $alert-box-color;
+    h2 {
+      background: $alert-box-color;
+      color: foreground($alert-box-color);
+    }
   }
 }
