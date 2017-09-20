@@ -53,17 +53,17 @@
     </div>
   </header>
   <% if notice %>
-    <div class="flash row">
-      <div class="success callout text-center" data-closable>
-        <%= notice %>
+    <div class="flash row" data-closable>
+      <div class="success callout text-center">
+        <i class="fi-check"></i>&emsp;<%= notice %>
         <button class="close-button" data-close>&times;</button>
       </div>
     </div>
   <% end %>
   <% if alert %>
-    <div class="flash row">
-      <div class="alert callout text-center" data-closable>
-        <%= alert %>
+    <div class="flash row" data-closable>
+      <div class="alert callout text-center">
+        <i class="fi-alert"></i>&emsp;<%= alert %>
         <button class="close-button" data-close>&times;</button>
       </div>
     </div>

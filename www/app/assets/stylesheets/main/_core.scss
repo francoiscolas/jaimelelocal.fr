@@ -36,10 +36,27 @@ header {
   }
 }
 
-.flash.row {
+.flash {
   position: absolute;
+  top: 2rem;
   left: 0;
   right: 0;
+  z-index: 10000;
+  .callout {
+    border: 0;
+    color: $white;
+    &.success {
+      background: $success-color;
+      border-top: 4px solid darken($success-color, 7%);
+    }
+    &.alert {
+      background: $alert-color;
+      border-top: 4px solid darken($alert-color, 7%);
+    }
+    button {
+      color: $white;
+    }
+  }
 }
 
 .content.row {
