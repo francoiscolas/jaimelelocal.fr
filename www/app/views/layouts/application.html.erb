@@ -36,6 +36,13 @@
                 <i class="fi-torso"></i> Mon compte
               <% end %>
             </li>
+            <% if user_has_farm? %>
+              <li>
+                <%= link_to user_farm_path, class: 'button' do %>
+                  <i class="fi-home"></i> Ma ferme
+                <% end %>
+              </li>
+            <% end %>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fi-power"></i> Déconnexion
