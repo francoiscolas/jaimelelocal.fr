@@ -3,11 +3,6 @@ class Account::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_scope!, only: [:edit, :update, :destroy, :profile]
   before_action :configure_account_update_params, only: [:update]
 
-  # GET /account (user_root_path)
-  def show
-    render :show
-  end
-
   # GET /account/profile (edit_user_profile_path)
   def profile
     render :profile

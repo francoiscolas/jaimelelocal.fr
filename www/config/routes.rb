@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     # Registrations
     get    '/signup',           to: 'account/registrations#new',     as: :new_user_registration
     post   '/account',          to: 'account/registrations#create',  as: :user_registration
-    get    '/account',          to: 'account/registrations#show',    as: :user_root
+    get    '/account',          to: redirect('/account/profile'),    as: :user_root
     get    '/account/edit',     to: 'account/registrations#edit',    as: :edit_user_registration
     get    '/account/profile',  to: 'account/registrations#profile', as: :edit_user_profile
     patch  '/account',          to: 'account/registrations#update'
