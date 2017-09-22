@@ -1,3 +1,5 @@
+$search-form-background: #cc1446;
+
 body.index {
 
   .subtitle {
@@ -12,12 +14,13 @@ body.index {
       padding: 1.5rem;
     }
     .columns {
-      background: #cc1446;
+      background: $search-form-background;
       input, select {
         display: initial;
-        border: 0;
+        border: 1px solid darken($search-form-background, 10%);
+        box-shadow: none;
         margin: 0.5rem 0;
-        padding: 0.4rem 0.2rem;
+        padding: 0.4rem 0.4rem;
       }
       &#where-input {
         input {
