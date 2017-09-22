@@ -19,6 +19,10 @@ fr:
         address: "Adresse géographique"
         farmer: "Prénom NOM"
         phone: "Téléphone"
+      place:
+        name: "Point de vente"
+        address: "Adresse"
+        description: "Description"
     errors:
         messages:
             inclusion: "is not included in the list"

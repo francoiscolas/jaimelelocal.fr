@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20161212162858) do
     t.text     "address"
     t.float    "lat"
     t.float    "lng"
-    t.boolean  "is_opened"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["farm_id"], name: "index_places_on_farm_id"

@@ -1,15 +1,24 @@
+<% content_for :head do %>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI"></script>
+<% end %>
 <%= form_for [:user, :farm, @place] do |f| %>
-   <div>
+  <div>
     <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, required: true %>
     <% if @place.errors[:name].any? %>
       <p class="field_error_message"><%= @place.errors[:name][0] %></p>
     <% end %>
   </div>
-   <div>
-    <%= f.check_box :is_opened %>
-    <%= f.label :is_opened %>
+  <div>
+    <%= f.label :address %>
+    <%= f.text_field :address, rows: 2, required: true %>
+    <%= f.hidden_field :lat %>
+    <%= f.hidden_field :lng %>
+    <% if @place.errors[:address].any? %>
+      <p class="field_error_message"><%= @place.errors[:address][0] %></p>
+    <% end %>
   </div>
+  <div id="map"></div>
   <div>
     <%= f.label :description %>
     <%= f.text_area :description, rows: 2 %>
@@ -17,16 +26,7 @@
       <p class="field_error_message"><%= @place.errors[:description][0] %></p>
     <% end %>
   </div>
-  <div>
-    <%= f.label :address %>
-    <%= f.text_area :address, rows: 2, required: true %>
-    <%= f.hidden_field :lat %>
-    <%= f.hidden_field :lng %>
-    <% if @place.errors[:address].any? %>
-      <p class="field_error_message"><%= @place.errors[:address][0] %></p>
-    <% end %>
-  </div>
   <div class="actions">
-    <%= f.submit (@place.new_record?) ? 'Ajouter' : 'Enregistrer', class: 'button' %>
+    <%= f.submit (@place.new_record?) ? 'Ajouter' : 'Enregistrer', class: 'hollow button' %>
   </div>
 <% end %>

@@ -1,0 +1,35 @@
+body.new-user-farm,
+body.edit-user-farm {
+  .warning.callout {
+    margin-bottom: 1rem;
+  }
+}
+
+body.user-farm {
+  .no-places, .places {
+    background: $box-background;
+    border: 1px solid $box-color;
+    width: 100%;
+  }
+  .places {
+    td {
+      border: 0;
+      border-bottom: 1px solid $box-color;
+      padding: 0.4rem 0;
+      vertical-align: middle;
+      &.checkbox {
+        text-align: center;
+        width: 2rem;
+        input {
+          margin: 0;
+        }
+      }
+      &.name {
+        span {
+          color: $dark-gray;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}

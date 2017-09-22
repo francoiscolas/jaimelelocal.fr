@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   scope '/account', :module => 'account', as: :user do
     resource :farm do
       resources :places, except: [:show, :destroy] do
-        post '/destroy', to: 'products#destroy', on: :collection, as: :destroy
+        post '/destroy', to: 'places#destroy', on: :collection, as: :destroy
       end
 #      resources :products, :except => [:index, :show, :destroy] do
 #        post '/destroy' => 'products#destroy',           :on => :collection, as: :destroy

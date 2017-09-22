@@ -15,6 +15,7 @@
 //= require jquery-checked
 //= require jquery-disabled
 //= require what-input
+//= require lodash
 //= require foundation
 //= require_tree .
 

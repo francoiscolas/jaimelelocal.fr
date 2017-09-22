@@ -13,6 +13,7 @@ gem 'jquery-rails'
 # gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'redis', '~> 3.0' # Use Redis adapter to run Action Cable in production
 gem 'foundation-rails', '~> 6.4' # CSS framework.
+gem 'lodash-rails', '~> 4'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -8,7 +8,6 @@ class CreatePlaces < ActiveRecord::Migration[5.0]
       t.text    :address
       t.float   :lat
       t.float   :lng
-      t.boolean :is_opened
 
       t.timestamps
     end
