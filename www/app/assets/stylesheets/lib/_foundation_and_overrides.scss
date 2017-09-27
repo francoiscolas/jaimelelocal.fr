@@ -8,8 +8,6 @@
 //
 @import 'motion-ui/motion-ui';
 
-$global-flexbox: false !global;
-
 @include foundation-global-styles;
 @include foundation-grid;
 //@include foundation-flex-grid;

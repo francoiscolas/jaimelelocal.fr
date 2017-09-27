@@ -2,6 +2,8 @@ fr:
   activerecord:
     models:
       user: "Utilisateur"
+      place: "Point de vente"
+      product: "Produit"
     attributes:
       user:
         email: "Adresse e-mail"
@@ -23,6 +25,16 @@ fr:
         name: "Point de vente"
         address: "Adresse"
         description: "Description"
+      product:
+        name: "Nom du produit"
+        description: "Description"
+        price: "Prix (en €)"
+        properties: "Informations supplémentaires"
+    bitmasks:
+      product:
+        properties:
+          available: "En stock"
+          pickable: "À cueillir"
     errors:
         messages:
             inclusion: "is not included in the list"

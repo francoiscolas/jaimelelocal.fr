@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   # Root
   root to: 'root#index'
+  get '/autocomplete/products', :to => 'root#autocomplete_products'
 
   # Account
   devise_for :users, :skip => [:registrations, :sessions, :passwords]
@@ -33,12 +34,12 @@ Rails.application.routes.draw do
   # Farm account
   scope '/account', :module => 'account', as: :user do
     resource :farm do
-      resources :places, except: [:show, :destroy] do
+      resources :places, except: [:index, :show, :destroy] do
         post '/destroy', to: 'places#destroy', on: :collection, as: :destroy
       end
-#      resources :products, :except => [:index, :show, :destroy] do
-#        post '/destroy' => 'products#destroy',           :on => :collection, as: :destroy
-#      end
+      resources :products, :except => [:index, :show, :destroy] do
+        post '/destroy', to: 'products#destroy', on: :collection, as: :destroy
+      end
     end
   end
 

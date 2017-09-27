@@ -1,0 +1,35 @@
+<%= form_for [:user, :farm, @product] do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: 'Pommes de Terre Amandine', 'data-autocomplete-url': autocomplete_products_path, autofocus: true, required: true %>
+    <% if @product.errors[:product_name_id].any? %>
+      <p class="field_error_message"><%= @product.errors[:product_name_id].first %></p>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description, placeholder: 'Variété, conditionnement, etc', autoresize: true %>
+    <% if @product.errors[:description].any? %>
+      <p class="field_error_message"><%= @product.errors[:description].first %></p>
+    <% end %>
+  </div>
+  <div id="price-fields">
+    <%= f.label :price %>
+    <%= f.number_field :price, step: '.01', required: true %>
+    <%= f.select :price_unit, options_for_select(Product::UNITS, @product.price_unit), {} %>
+    <% if @product.errors[:price].any? %>
+      <p class="field_error_message"><%= @product.errors[:price].first %></p>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :properties %>
+    <% @product.each_properties do |property, checked, label| %>
+      <%= check_box_tag 'product[properties][]', property, checked, :class => 'checkbox', :id => 'product_properties_' + property %>
+      <%= label_tag 'product_properties_' + property, label, :class => 'for-checkbox' %><br>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit (@product.new_record?) ? 'Ajouter' : 'Enregistrer', class: 'button' %>
+  </div>
+<% end %>
+

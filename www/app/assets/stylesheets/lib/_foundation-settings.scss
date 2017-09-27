@@ -24,7 +24,7 @@ $global-lineheight: 1.5 !default;
 /// @type Map
 $foundation-palette: (
   primary: #1ea2ff,
-  secondary: #777,
+  secondary: #b2b212,
   success: #4caf50,
   warning: #ffc107,
   alert: #ff5252,
@@ -103,7 +103,7 @@ $global-text-direction: ltr !default;
 
 /// Enables flexbox for components that support it.
 /// @type Boolean
-$global-flexbox: true !default;
+$global-flexbox: false !global;
 
 /// Enabled responsive breakpoints for prototypes if applicable
 /// @type Boolean
@@ -127,6 +127,9 @@ $secondary-color: get-color(secondary);
 $success-color: get-color(success);
 $warning-color: get-color(warning);
 $alert-color: get-color(alert);
+
+// Button settings
+$button-fill: hollow;
 
 @mixin foundation-global-styles {
   @include -zf-normalize;

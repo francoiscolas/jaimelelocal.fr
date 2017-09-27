@@ -1,0 +1,15 @@
+<% content_for :head do %>
+  <title>Ajout d'un produit - Cestlocal.fr</title>
+<% end %>
+
+<% content_for :pagename do 'new-user-farm-product' end %>
+
+<div class="content row">
+  <%= render partial: 'account/shared/menu' %>
+  <div class="small-12 medium-8 columns end">
+    <div class="box">
+      <h2>Ajout d'un produit</h2>
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>

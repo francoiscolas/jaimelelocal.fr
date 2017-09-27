@@ -1,5 +1,8 @@
 @import 'foundation-icons';
-@import 'main/foundation_and_overrides';
+@import 'lib/jquery.ui-1.10.3.core.css';
+@import 'lib/jquery.ui-1.10.3.menu.css';
+@import 'lib/jquery.ui-1.10.3.autocomplete.css';
+@import 'lib/foundation_and_overrides';
 @import 'main/core';
 @import 'main/form';
 @import 'main/box';

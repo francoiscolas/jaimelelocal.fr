@@ -1,0 +1,9 @@
+.user-menu {
+  @extend .vertical;
+  @extend .menu;
+  .is-active a {
+    background: none;
+    color: $body-font-color;
+    font-weight: bold;
+  }
+}

@@ -6,28 +6,33 @@ body.edit-user-farm {
 }
 
 body.user-farm {
-  .no-places, .places {
-    background: $box-background;
-    border: 1px solid $box-color;
-    width: 100%;
-  }
-  .places {
-    td {
-      border: 0;
-      border-bottom: 1px solid $box-color;
-      padding: 0.4rem 0;
-      vertical-align: middle;
-      &.checkbox {
-        text-align: center;
-        width: 2rem;
-        input {
-          margin: 0;
+  #places-ui, #products-ui {
+    margin-bottom: 1rem;
+    .button-group {
+      margin-bottom: 0.3rem;
+    }
+    .empty-list, .list {
+      background: $box-background;
+      border: 1px solid $box-color;
+      width: 100%;
+    }
+    .list {
+      td {
+        border: 0;
+        border-bottom: 1px solid $box-color;
+        padding: 0.4rem 0;
+        vertical-align: middle;
+        &.checkbox {
+          text-align: center;
+          width: 2rem;
+          input {
+            margin: 0;
+          }
         }
-      }
-      &.name {
-        span {
-          color: $dark-gray;
-          font-size: 0.9rem;
+        .label {
+          background: none;
+          color: $body-font-color;
+          font-weight: bold;
         }
       }
     }

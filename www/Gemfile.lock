@@ -44,6 +44,8 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.11)
+    bitmask_attributes (1.0.0)
+      activerecord (>= 3.1)
     builder (3.2.3)
     byebug (9.0.6)
     concurrent-ruby (1.0.5)
@@ -166,6 +168,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bitmask_attributes
   byebug
   devise
   foundation-rails (~> 6.4)
@@ -173,7 +176,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   lodash-rails (~> 4)
   puma (~> 3.0)
-  rails (~> 5.0.0, >= 5.0.0.1)
+  rails (~> 5.0.0)
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)

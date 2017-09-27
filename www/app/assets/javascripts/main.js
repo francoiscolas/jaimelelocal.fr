@@ -12,11 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-checked
-//= require jquery-disabled
 //= require what-input
 //= require lodash
-//= require foundation
+//= require lib/jquery-checked
+//= require lib/jquery-disabled
+//= require lib/jquery.ui-1.10.3.core
+//= require lib/jquery.ui-1.10.3.widget
+//= require lib/jquery.ui-1.10.3.position
+//= require lib/jquery.ui-1.10.3.menu
+//= require lib/jquery.ui-1.10.3.autocomplete
+//= require lib/foundation
 //= require_tree .
 
 $(function () {

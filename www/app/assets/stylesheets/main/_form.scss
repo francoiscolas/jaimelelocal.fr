@@ -1,4 +1,8 @@
 form {
+  .required {
+    color: $alert-color;
+    font-weight: bold;
+  }
   .field_with_errors input,
   .field_with_errors input:focus,
   .field_with_errors textarea,
@@ -16,5 +20,18 @@ form {
   }
   .actions {
     @extend .text-right;
+  }
+}
+
+.ui-autocomplete {
+  background: $input-background;
+  border: $input-border;
+  border-top: 0;
+  .ui-menu-item a {
+    color: $body-font-color;
+    &.ui-state-focus {
+      background: $secondary-color;
+      color: $white;
+    }
   }
 }

@@ -27,19 +27,17 @@ $(function () {
   }
 
   if ($('body.user-farm').length == 1) {
-    var bindList = function (options) {
-      var that = this;
-
-      that.$el         = options.$el;
-      that.$destroyBtn = that.$el.find(':submit').disabled(true);
-      that.$checkboxs  = that.$el.find(':checkbox').checked(false);
-      that.$checkboxs.on('change', function (e) {
-        that.$el.find(e.target).toggleClass('selected');
-        that.$destroyBtn.disabled(!that.$checkboxs.filter(':checked').length);
+    var bindList = function (context) {
+      context.$destroyBtn = context.$el.find(':submit').disabled(true);
+      context.$checkboxs  = context.$el.find(':checkbox').checked(false);
+      context.$checkboxs.on('change', function (e) {
+        context.$el.find(e.target).toggleClass('selected');
+        context.$destroyBtn.disabled(!context.$checkboxs.filter(':checked').length);
       });
     };
 
     bindList({$el: $('#places-ui')});
+    bindList({$el: $('#products-ui')});
   }
 
   var rmAccents = function (str) {
