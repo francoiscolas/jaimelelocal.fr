@@ -6,76 +6,83 @@
 
 <div class="content row">
   <%= render partial: "account/shared/menu" %>
-  <div class="small-12 medium-8 columns end box">
-    <div id="places-ui">
-      <%= form_tag destroy_user_farm_places_path do %>
-        <div class="small button-group">
-          <%= link_to new_user_farm_place_path, class: 'button' do %>
-            <i class="fi-plus"></i> Ajouter
-          <% end %>
-          <%= button_tag type: 'submit', class: 'alert button', data: {confirm: "Êtes-vous sûr de vouloir supprimer ces points de vente ?"} do %>
-            <i class="fi-trash"></i> Supprimer
-          <% end %>
-        </div>
-        <% if @farm.places.empty? %>
-          <div class="empty-list callout">Pas de point de vente.</div>
-        <% else %>
-          <table class="list">
-            <% @farm.places.each do |place| %>
-              <tr>
-                <td class="checkbox">
-                  <input type="checkbox" name="ids[]" value="<%= place.id %>"/>
-                </td>
-                <td>
-                  <%= link_to place.name, edit_user_farm_place_path(place) %>
-                  <span class="label">
-                    <i class="fi-marker"></i> <%= place.address %>
-                  </span>
-                </td>
-              </tr>
+  <div class="small-12 medium-8 columns end">
+    <div class="box">
+      <h2>Profil de la ferme</h2>
+      <div id="banner-ui">
+        <h3></h3>
+      </div>
+      <div id="places-ui">
+        <h3>Points de vente</h3>
+        <%= form_tag destroy_user_farm_places_path do %>
+          <div class="small button-group">
+            <%= link_to new_user_farm_place_path, class: 'button' do %>
+              <i class="fi-plus"></i> Ajouter
             <% end %>
-          </table>
-        <% end %>
-      <% end %>
-    </div>
-    <hr/>
-    <div id="products-ui">
-      <%= form_tag destroy_user_farm_products_path do %>
-        <div class="small button-group">
-          <%= link_to new_user_farm_product_path, class: 'button' do %>
-            <i class="fi-plus"></i> Ajouter
-          <% end %>
-          <%= button_tag type: 'submit', class: 'alert button', data: {confirm: 'Êtes-vous sûr de vouloir supprimer les produits séléctionnés ?'} do %>
-            <i class="fi-trash"></i> Supprimer
-          <% end %>
-        </div>
-        <% if @farm.products.empty? %>
-          <div class="empty-list callout">Pas de produit.</div>
-        <% else %>
-          <table class="list">
-            <% @farm.products.each do |product| %>
-              <tr>
-                <td class="checkbox">
-                  <input type="checkbox" name="ids[]" value="<%= product.id %>" class="checkbox">
-                </td>
-                <td>
-                  <%= link_to product.name, edit_user_farm_product_path(product) %>
-                  <span class="label">
-                    <i class="fi-price-tag"></i> <%= product.price_with_unit %>
-                  </span>
-                  <% Product.values_for_properties.each do |property| %>
-                    <% if product.properties?(property) %>
-                      <span class="label">
-                        <%= t "activerecord.bitmasks.product.properties.#{property}" %>
+            <%= button_tag type: 'submit', class: 'alert button', data: {confirm: "Êtes-vous sûr de vouloir supprimer ces points de vente ?"} do %>
+              <i class="fi-trash"></i> Supprimer
+            <% end %>
+          </div>
+          <% if @farm.places.empty? %>
+            <div class="empty-list callout">Pas de point de vente.</div>
+          <% else %>
+            <table class="list">
+              <% @farm.places.each do |place| %>
+                <tr>
+                  <td class="checkbox">
+                    <input type="checkbox" name="ids[]" value="<%= place.id %>"/>
+                  </td>
+                  <td>
+                    <%= link_to place.name, edit_user_farm_place_path(place) %>
+                    <span class="label">
+                      <i class="fi-marker"></i> <%= place.address %>
                     </span>
-                    <% end %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </table>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <div id="products-ui">
+        <h3>Produits</h3>
+        <%= form_tag destroy_user_farm_products_path do %>
+          <div class="small button-group">
+            <%= link_to new_user_farm_product_path, class: 'button' do %>
+              <i class="fi-plus"></i> Ajouter
+            <% end %>
+            <%= button_tag type: 'submit', class: 'alert button', data: {confirm: 'Êtes-vous sûr de vouloir supprimer les produits séléctionnés ?'} do %>
+              <i class="fi-trash"></i> Supprimer
+            <% end %>
+          </div>
+          <% if @farm.products.empty? %>
+            <div class="empty-list callout">Pas de produit.</div>
+          <% else %>
+            <table class="list">
+              <% @farm.products.each do |product| %>
+                <tr>
+                  <td class="checkbox">
+                    <input type="checkbox" name="ids[]" value="<%= product.id %>" class="checkbox">
+                  </td>
+                  <td>
+                    <%= link_to product.name, edit_user_farm_product_path(product) %>
+                    <span class="label">
+                      <i class="fi-price-tag"></i> <%= product.price_with_unit %>
+                    </span>
+                    <% Product.values_for_properties.each do |property| %>
+                      <% if product.properties?(property) %>
+                        <span class="label">
+                          <%= t "activerecord.bitmasks.product.properties.#{property}" %>
+                        </span>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

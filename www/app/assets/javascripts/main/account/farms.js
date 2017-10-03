@@ -31,8 +31,12 @@ $(function () {
       context.$destroyBtn = context.$el.find(':submit').disabled(true);
       context.$checkboxs  = context.$el.find(':checkbox').checked(false);
       context.$checkboxs.on('change', function (e) {
-        context.$el.find(e.target).toggleClass('selected');
+        $(e.target).parents('tr').toggleClass('selected');
         context.$destroyBtn.disabled(!context.$checkboxs.filter(':checked').length);
+      });
+      context.$el.find('tr').click(function (e) {
+        if ($(e.target).is(':checkbox, a')) return ;
+        $(e.currentTarget).find(':checkbox').click();
       });
     };
 

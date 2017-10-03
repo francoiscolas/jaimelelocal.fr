@@ -20,7 +20,7 @@ body.user-farm {
       td {
         border: 0;
         border-bottom: 1px solid $box-color;
-        padding: 0.4rem 0;
+        padding: 0.4rem 0.2rem;
         vertical-align: middle;
         &.checkbox {
           text-align: center;
@@ -34,6 +34,12 @@ body.user-farm {
           color: $body-font-color;
           font-weight: bold;
         }
+      }
+      td, td * {
+        cursor: pointer;
+      }
+      tr.selected td {
+        background-color: #eee;
       }
     }
   }
