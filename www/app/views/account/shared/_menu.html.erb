@@ -2,10 +2,12 @@
   <ul class="user-menu box">
     <%= menu_box_item "Profil public", edit_user_profile_path %>
     <%= menu_box_item "Paramètres", edit_user_registration_path %>
+    <li class="separator"></li>
     <% if current_user.farm %>
-      <li class="separator"></li>
       <%= menu_box_item "Profil de la ferme", user_farm_path %>
       <%= menu_box_item "Paramètres de la ferme", edit_user_farm_path %>
+    <% else %>
+      <%= menu_box_item "Enregistrer ma ferme", new_user_farm_path %>
     <% end %>
   </ul>
 </div>

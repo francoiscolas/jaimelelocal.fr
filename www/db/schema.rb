@@ -20,8 +20,12 @@ ActiveRecord::Schema.define(version: 20170925123234) do
     t.string   "farmer"
     t.string   "phone"
     t.text     "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.index ["name"], name: "index_farms_on_name", unique: true
     t.index ["url"], name: "index_farms_on_url", unique: true
     t.index ["user_id"], name: "index_farms_on_user_id"

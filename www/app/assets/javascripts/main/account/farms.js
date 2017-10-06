@@ -27,21 +27,53 @@ $(function () {
   }
 
   if ($('body.user-farm').length == 1) {
-    var bindList = function (context) {
-      context.$destroyBtn = context.$el.find(':submit').disabled(true);
-      context.$checkboxs  = context.$el.find(':checkbox').checked(false);
-      context.$checkboxs.on('change', function (e) {
-        $(e.target).parents('tr').toggleClass('selected');
-        context.$destroyBtn.disabled(!context.$checkboxs.filter(':checked').length);
-      });
-      context.$el.find('tr').click(function (e) {
-        if ($(e.target).is(':checkbox, a')) return ;
-        $(e.currentTarget).find(':checkbox').click();
-      });
+
+    //
+    // Header
+
+    var Header = function (options) {
+      this.$el = options.$el;
+      this.$el.on('click', '#remove-banner-btn', _.bind(this.submitForm, this));
+      this.$el.on('change', 'input[type=file]', _.bind(this.submitForm, this));
     };
 
-    bindList({$el: $('#places-ui')});
-    bindList({$el: $('#products-ui')});
+    Header.prototype.submitForm = function () {
+      this.$el.find('form').submit();
+      return false;
+    };
+
+    //
+    // List
+
+    var List = function (options) {
+      this.$el = options.$el;
+
+      this.$destroyBtn = this.$el.find(':submit').disabled(true);
+
+      this.$checkboxs = this.$el.find(':checkbox').checked(false);
+      this.$checkboxs.on('change', _.bind(this._onChange, this));
+
+      this.$trs = this.$el.find('tr');
+      this.$trs.on('click', _.bind(this._onClick, this));
+    };
+
+    List.prototype._onChange = function (e) {
+      $(e.target).parents('tr').toggleClass('selected');
+      this.$destroyBtn.disabled(!this.$checkboxs.filter(':checked').length);
+    };
+
+    List.prototype._onClick = function (e) {
+      if ($(e.target).is(':checkbox, a')) return ;
+      $(e.currentTarget).find(':checkbox').click();
+    };
+
+    //
+    // Main
+
+    new Header({$el: $('#banner-ui')});
+
+    new List({$el: $('#places-ui')});
+    new List({$el: $('#products-ui')});
   }
 
   var rmAccents = function (str) {

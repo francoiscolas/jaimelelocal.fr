@@ -10,7 +10,7 @@ gem 'sqlite3'
 # gem 'redis', '~> 3.0' # Use Redis adapter to run Action Cable in production
 
 # Models
-#gem 'paperclip'          # To manage attachment files.
+gem 'paperclip'           # To manage attachment files.
 gem 'bitmask_attributes'  # To use attributes as bitmask.
 #gem 'geocoder'           # To help searching by location.
 

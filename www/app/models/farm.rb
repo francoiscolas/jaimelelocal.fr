@@ -1,5 +1,10 @@
 class Farm < ApplicationRecord
 
+  has_attached_file :banner,
+    url:         '/system/:hash.:extension',
+    hash_secret: 'menchtf4svrty2ue9zp5wjf456xbqoad5',
+    default_url: '/images/default-farm-banner.jpg'
+
   #
   # Associations
 
@@ -15,6 +20,8 @@ class Farm < ApplicationRecord
   validates :address, presence: true
   validates :farmer, presence: true, length: { minimum: 7 }
   validates :phone, presence: true, format: { with: /\A([0-9]{2} ){4}[0-9]{2}\Z/ }
+  validates :banner, attachment_content_type: { content_type: /image/ }
+  validates :banner, attachment_size: { in: 0..500.kilobytes }
 
   #
   # Accessors

@@ -33,13 +33,15 @@ Rails.application.routes.draw do
 
   # Farm account
   scope '/account', :module => 'account', as: :user do
-    resource :farm do
+    resource :farm, except: :update do
       resources :places, except: [:index, :show, :destroy] do
         post '/destroy', to: 'places#destroy', on: :collection, as: :destroy
       end
       resources :products, :except => [:index, :show, :destroy] do
         post '/destroy', to: 'products#destroy', on: :collection, as: :destroy
       end
+      patch '/',     to: 'farms#update_banner'
+      patch '/edit', to: 'farms#update_settings'
     end
   end
 

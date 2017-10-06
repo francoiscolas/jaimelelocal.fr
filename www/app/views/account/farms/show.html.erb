@@ -10,7 +10,14 @@
     <div class="box">
       <h2>Profil de la ferme</h2>
       <div id="banner-ui">
-        <h3></h3>
+        <h3>Bannière</h3>
+        <div id="banner-content" style="background-image:url(<%= @farm.banner %>)">
+          <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>
+            <%= f.label :banner, "Modifier l'image", id: 'update-banner-btn' %>
+            <%= f.file_field :banner, class: 'show-for-sr' %>
+            <button type="button" id="remove-banner-btn">Supprimer l'image</button>
+          <% end %>
+        </div>
       </div>
       <div id="places-ui">
         <h3>Points de vente</h3>

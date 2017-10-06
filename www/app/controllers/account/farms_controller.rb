@@ -1,7 +1,7 @@
 class Account::FarmsController < Account::AccountController
 
-  before_filter :require_farm!, except: [:new, :create]
-  before_filter :require_no_farm!, only: [:new, :create]
+  before_action :require_farm!, except: [:new, :create]
+  before_action :require_no_farm!, only: [:new, :create]
 
   # GET /account/farm/new (new_user_farm_path)
   def new
@@ -27,14 +27,24 @@ class Account::FarmsController < Account::AccountController
     render :show
   end
 
+  # PATCH /account/farm (user_farm_path)
+  def update_banner
+    @farm = current_user.farm
+    @farm.banner = (params[:farm]) ? params[:farm][:banner] : nil
+    if !@farm.save
+      flash[:alert] = @farm.errors[:banner][0]
+    end
+    redirect_to user_farm_path
+  end
+
   # GET /account/farm/edit (edit_user_farm_path)
   def edit
     @farm = current_user.farm
     render :edit
   end
 
-  # PUT /account/farm (user_farm_path)
-  def update
+  # PATCH /account/farm/edit (edit_user_farm_path)
+  def update_settings
     @farm = current_user.farm
 
     if @farm.update(farm_params)

@@ -1,4 +1,4 @@
-<%= form_for(@farm, url: user_farm_path) do |f| %>
+<%= form_for(@farm, url: @farm.new_record? ? user_farm_path : edit_user_farm_path) do |f| %>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name, placeholder: 'Ferme de Martin' %>

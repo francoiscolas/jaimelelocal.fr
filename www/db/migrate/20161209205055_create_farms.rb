@@ -3,12 +3,13 @@ class CreateFarms < ActiveRecord::Migration[5.0]
     create_table :farms do |t|
       t.belongs_to :user, index: true
 
-      t.string :name
-      t.string :url
-      t.string :website
-      t.string :farmer
-      t.string :phone
-      t.text   :address
+      t.string      :name
+      t.string      :url
+      t.string      :website
+      t.string      :farmer
+      t.string      :phone
+      t.text        :address
+      t.attachment  :banner
 
       t.timestamps
     end
