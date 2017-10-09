@@ -66,6 +66,9 @@ body.farm {
   .products {
     height: 400px;
     position: relative;
+    input {
+      border-color: $box-color;
+    }
     ul {
       background: $white;
       border: 1px solid $box-color;
