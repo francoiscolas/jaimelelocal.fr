@@ -1,12 +1,35 @@
 @charset 'utf-8';
 
-@import 'util/util';
-@import 'foundation-settings';
-@import 'foundation';
-
-// If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
 //
-@import 'motion-ui/motion-ui';
+// Foundation overrides
+
+$global-flexbox: false !global;
+
+$foundation-palette: (
+  primary: #1ea2ff,
+  secondary: #b2b212,
+  success: #4caf50,
+  warning: #ffc107,
+  alert: #ff5252,
+);
+$light-gray: #cacaca;
+$medium-gray: #8a8a8a;
+$dark-gray: #6a6a6a;
+$body-font-color: #333;
+
+$button-fill: hollow;
+$button-padding: 0.5em 0.8em;
+
+//
+// If you'd like to include motion-ui the foundation-rails gem comes
+// prepackaged with it, uncomment the 3 @imports, if you are not using the
+// gem you need to install the motion-ui sass package.
+//@import 'motion-ui/motion-ui';
+
+//
+// Foundation components
+
+@import 'foundation';
 
 @include foundation-global-styles;
 @include foundation-grid;
@@ -49,7 +72,5 @@
 @include foundation-float-classes;
 //@include foundation-flex-classes;
 
-// If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
-//
-@include motion-ui-transitions;
-@include motion-ui-animations;
+//@include motion-ui-transitions;
+//@include motion-ui-animations;
