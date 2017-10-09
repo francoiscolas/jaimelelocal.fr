@@ -9,6 +9,9 @@ body.edit-user-farm {
   @include button-click-effect(light);
   padding: 0.4em;
 }
+a.small-btn {
+  text-decoration: none;
+}
 
 body.user-farm {
   #banner, #places, #products {
