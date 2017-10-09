@@ -5,8 +5,6 @@ Rails.application.routes.draw do
 
   get '/autocomplete/products', :to => 'root#autocomplete_products'
 
-  get '/:farmurl', :to => 'root#farm'
-
   # Account
   devise_for :users, :skip => [:registrations, :sessions, :passwords]
   devise_scope :user do
@@ -47,5 +45,7 @@ Rails.application.routes.draw do
       patch '/edit', to: 'farms#update_settings'
     end
   end
+
+  get '/:farmurl', :to => 'root#farm'
 
 end
