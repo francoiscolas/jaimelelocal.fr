@@ -70,10 +70,10 @@ $(function () {
     //
     // Main
 
-    new Header({$el: $('#banner-ui')});
+    new Header({$el: $('#banner')});
 
-    new List({$el: $('#places-ui')});
-    new List({$el: $('#products-ui')});
+    new List({$el: $('#places')});
+    new List({$el: $('#products')});
   }
 
   var rmAccents = function (str) {

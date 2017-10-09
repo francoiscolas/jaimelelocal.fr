@@ -9,17 +9,17 @@
   <div class="small-12 medium-8 columns end">
     <div class="box">
       <h2>Profil de la ferme</h2>
-      <div id="banner-ui">
-        <h3>Bannière</h3>
+      <div id="banner">
+        <h3>Bannière <a href="/<%= @farm.url %>" class="small-btn">Voir la page publique</a></h3>
         <div id="banner-content" style="background-image:url(<%= @farm.banner %>)">
           <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>
-            <%= f.label :banner, "Modifier l'image", id: 'update-banner-btn' %>
+            <%= f.label :banner, "Modifier l'image", id: 'update-banner-btn', class: 'small-btn' %>
             <%= f.file_field :banner, class: 'show-for-sr' %>
-            <button type="button" id="remove-banner-btn">Supprimer l'image</button>
+            <button type="button" id="remove-banner-btn" class="small-btn">Supprimer l'image</button>
           <% end %>
         </div>
       </div>
-      <div id="places-ui">
+      <div id="places">
         <h3>Points de vente</h3>
         <%= form_tag destroy_user_farm_places_path do %>
           <div class="small button-group">
@@ -51,7 +51,7 @@
           <% end %>
         <% end %>
       </div>
-      <div id="products-ui">
+      <div id="products">
         <h3>Produits</h3>
         <%= form_tag destroy_user_farm_products_path do %>
           <div class="small button-group">

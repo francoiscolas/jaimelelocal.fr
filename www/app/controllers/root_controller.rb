@@ -11,4 +11,10 @@ class RootController < ApplicationController
         .pluck(:name)
   end
 
+  # GET farm_path
+  def farm
+    @farm = Farm.find_by_url(params[:farmurl]) or
+      raise ActionController::RoutingError, 'Not Found'
+  end
+
 end

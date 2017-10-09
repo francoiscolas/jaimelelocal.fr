@@ -1,0 +1,58 @@
+<% content_for :head do %>
+  <title><%= @farm.name %> - Cestlocal.fr</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI"></script>
+  <script type="application/json" id="places-data">
+    <%=
+      @farm.places.to_json(:only => [
+        :id, :name, :description, :address, :lat, :lng
+      ]).html_safe
+    %>
+  </script>
+<% end %>
+
+<% content_for :pagename do 'farm' end %>
+
+<div class="content row">
+  <div class="small-12 columns">
+    <div class="banner" style="background-image:url(<%= @farm.banner %>)">
+      <h2><%= @farm.name %></h2>
+    </div>
+  </div>
+  <div class="small-12 medium-4 columns">
+    <% unless @farm.products.empty? %>
+      <div class="products">
+        <input type="text" placeholder="Filtrer parmis les produits"/>
+        <ul>
+          <% @farm.products.each do |product| %>
+            <li>
+              <%= product.name %>
+              <span class="label">
+                <i class="fi-price-tag"></i> <%= product.price_with_unit %>
+              </span>
+              <% Product.values_for_properties.each do |property| %>
+                <% if product.properties?(property) %>
+                  <span class="label">
+                    <%= t "activerecord.bitmasks.product.properties.#{property}" %>
+                  </span>
+                <% end %>
+              <% end %>
+              <%= simple_format product.description, class: 'top-arrow-box' unless product.description.empty? %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  <div class="small-12 medium-8 columns">
+    <% if @farm.places.empty? %>
+      <div class="places is-empty">
+        <div>
+          Pour le moment, cette ferme n'a aucun point de vente.<br>
+          Revenez-voir un peu plus tard ;)
+        </div>
+      </div>
+    <% else %>
+      <div class="places"></div>
+    <% end %>
+  </div>
+</div>

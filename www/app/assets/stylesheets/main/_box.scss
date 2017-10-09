@@ -36,3 +36,33 @@ $alert-box-color: $alert-color;
     }
   }
 }
+
+.top-arrow-box {
+	position: relative;
+	background: $white;
+	border: 1px solid $box-color;
+  box-shadow: 0 0 7px $box-color;
+  padding: 0.2rem 0.4rem;
+  &:after, &:before {
+    bottom: 100%;
+    left: 80%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  &:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #FFF;
+    border-width: 30px;
+    margin-left: -30px;
+  }
+  &:before {
+    border-color: rgba(202, 202, 202, 0);
+    border-bottom-color: $box-color;
+    border-width: 31px;
+    margin-left: -31px;
+  }
+}

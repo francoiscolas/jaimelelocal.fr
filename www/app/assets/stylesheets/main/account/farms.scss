@@ -4,29 +4,33 @@ body.edit-user-farm {
     margin-bottom: 1rem;
   }
 }
+.small-btn {
+  @include button(false, $secondary-color, auto, $white, solid);
+  @include button-click-effect(light);
+  padding: 0.4em;
+}
 
 body.user-farm {
-  #banner-ui, #places-ui, #products-ui {
+  #banner, #places, #products {
     margin-bottom: 1rem;
   }
-  #banner-ui {
+  #banner {
+    h3 a {
+      margin: 0;
+    }
     #banner-content {
       position: relative;
       background: center;
       height: 250px;
       #update-banner-btn, #remove-banner-btn {
-        @include button(false, $secondary-color, auto, $white, solid);
-        @include button-click-effect(light);
-        padding: 0.4em;
-
         position: absolute;
         right: 0.4rem;
-        &#update-banner-btn { top: 0.4rem; }
-        &#remove-banner-btn { top: 2.5rem; }
       }
+      #update-banner-btn { top: 0.4rem; }
+      #remove-banner-btn { top: 2.5rem; }
     }
   }
-  #places-ui, #products-ui {
+  #places, #products {
     .button-group {
       margin-bottom: 0.3rem;
     }

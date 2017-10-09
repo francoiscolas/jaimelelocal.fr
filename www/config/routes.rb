@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   # Root
   root to: 'root#index'
+
   get '/autocomplete/products', :to => 'root#autocomplete_products'
+
+  get '/:farmurl', :to => 'root#farm'
 
   # Account
   devise_for :users, :skip => [:registrations, :sessions, :passwords]
