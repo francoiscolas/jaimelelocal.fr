@@ -78,8 +78,7 @@ $(function () {
         .on('mouseleave', _.bind(this.delayHideDetails, this));
 
       this.$input = this.$('input');
-      this.$input.val('').focus();
-      this.$input.on('keyup', _.bind(this._onInputChange, this));
+      this.$input.val('').on('keyup', _.bind(this._onInputChange, this));
     }
 
     Products.prototype.$ = function (selector) {
