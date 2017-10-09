@@ -1,6 +1,6 @@
 class Account::ProductsController < Account::AccountController
 
-  before_filter :require_farm!
+  before_action :require_farm!
 
   # GET new_user_farm_product
   def new

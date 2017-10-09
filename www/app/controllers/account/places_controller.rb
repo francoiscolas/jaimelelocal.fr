@@ -1,6 +1,6 @@
 class Account::PlacesController < Account::AccountController
 
-  before_filter :require_farm!
+  before_action :require_farm!
 
   # GET /account/farm/places/new (new_user_farm_place_path)
   def new
