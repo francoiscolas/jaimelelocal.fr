@@ -14,7 +14,6 @@ $(function () {
       this.places = [];
 
       this.addPlaces($.parseJSON($('#places-data').text()));
-      this.selectPlaceById(+window.location.hash.substring(1));
     };
 
     Places.prototype.template = _.template(
@@ -67,16 +66,10 @@ $(function () {
 
       this.details.setContent(this.template(place));
       this.details.open(this.map, place.marker);
-
-      window.location.hash = place.id;
     };
 
-    Places.prototype.selectPlaceById = function (id) {
-      var place = _.find(this.places, function (place) { return (place.id === id); });
-
-      if (place)
-          this.selectPlace(place);
-    };
+    //
+    // Products
 
     var Products = function (options) {
       this.$el = options.$el;
