@@ -81,6 +81,8 @@ $(function () {
       this.$input.val('').on('keyup', _.bind(this._onInputChange, this));
     }
 
+    Products.FADE_DURATION = 300;
+
     Products.prototype.$ = function (selector) {
       return this.$el.find(selector);
     }
@@ -88,12 +90,15 @@ $(function () {
     Products.prototype.showDetails = function (e) {
       var $li = $(e.currentTarget);
       var top = $li.position().top + $li.parent().position().top + $li.height() * 0.7;
-      $li.find('p').css('top', top).fadeIn();
+
+      this.$('li p').hide();
+      $li.find('p').css('top', top).fadeIn(Products.FADE_DURATION);
     }
 
     Products.prototype.hideDetails = function (e) {
       var $li = $(e.currentTarget);
-      $li.find('p').fadeOut();
+
+      $li.find('p').fadeOut(Products.FADE_DURATION);
     }
 
     Products.prototype.delayHideDetails = function (e) {
