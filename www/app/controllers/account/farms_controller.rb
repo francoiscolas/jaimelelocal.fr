@@ -44,7 +44,7 @@ class Account::FarmsController < Account::AccountController
   end
 
   # PATCH /account/farm/edit (edit_user_farm_path)
-  def update_settings
+  def update
     @farm = current_user.farm
 
     if @farm.update(farm_params)
@@ -58,7 +58,7 @@ class Account::FarmsController < Account::AccountController
     @farm = current_user.farm
 
     if @farm.destroy
-      redirect_to user_root_path
+      redirect_to user_path
     end
   end
 

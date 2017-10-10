@@ -1,11 +1,11 @@
 <div class="small-12 medium-3 large-2 columns">
   <ul class="user-menu box">
-    <%= menu_box_item "Profil public", edit_user_profile_path %>
-    <%= menu_box_item "Paramètres", edit_user_registration_path %>
+    <%= menu_box_item "Mon profil", user_path %>
+    <%= menu_box_item "Mes identifiants", edit_user_registration_path %>
     <li class="separator"></li>
     <% if current_user.farm %>
-      <%= menu_box_item "Profil de la ferme", user_farm_path %>
-      <%= menu_box_item "Paramètres de la ferme", edit_user_farm_path %>
+      <%= menu_box_item "Profil de ma ferme", user_farm_path %>
+      <%= menu_box_item "Paramètres de ma ferme", edit_user_farm_path %>
     <% else %>
       <%= menu_box_item "Enregistrer ma ferme", new_user_farm_path %>
     <% end %>
