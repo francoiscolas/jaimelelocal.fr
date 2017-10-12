@@ -14,7 +14,7 @@
       <input type="search" id="q" name="q" placeholder="Légume, fruit, ..." data-autocomplete-url="<%= autocomplete_products_path %>" value="<%= @query %>"/>
     </div>
     <div class="medium-6 columns" id="where-input">
-      <input type="search" id="l" name="l" placeholder="Lieu" value="<%= @location.city if @location %>"/>
+      <input type="search" id="l" name="l" placeholder="Lieu" value="<%= @location_name %>"/>
       <select id="d" name="d">
         <% [[10,'< 10'],[20,'< 20'],[50,'< 50'],[100,'< 100']].each do |v| %>
           <option value="<%= v[0] %>" <%= 'selected="selected"' if @distance == v[0] %>><%= v[1] %> km</option>
@@ -30,7 +30,6 @@
         Aucun producteur trouvé :(
       </div>
     <% else %>
-      <%= request.location %>
       <div class="farms">
         <ul>
           <% @farms.each do |farm| %>
@@ -44,8 +43,8 @@
                   farm.places.each do |place|
                     concat ' / ' unless first
                     concat link_to place.name, farm_path(farm, place)
-                    if @location
-                      concat " (à #{place.distance_to(@location.coordinates).round}&nbsp;km)".html_safe
+                    if @location_coordinates
+                      concat " (à #{place.distance_to(@location_coordinates).round}&nbsp;km)".html_safe
                     end
                     first = false
                   end
