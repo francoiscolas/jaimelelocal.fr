@@ -46,6 +46,6 @@ Rails.application.routes.draw do
   end
 
   # Public farm page
-  get '/:farmurl', :to => 'root#farm'
+  get '/:url(#:place_id)', to: 'root#farm', as: :farm
 
 end

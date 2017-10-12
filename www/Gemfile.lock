@@ -67,6 +67,7 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
       sprockets-es6 (>= 0.9.0)
+    geocoder (1.4.4)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     i18n (0.8.6)
@@ -176,6 +177,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    will_paginate (3.1.6)
 
 PLATFORMS
   ruby
@@ -185,6 +187,7 @@ DEPENDENCIES
   byebug
   devise
   foundation-rails (~> 6.4)
+  geocoder
   jquery-rails
   listen (~> 3.0.5)
   lodash-rails (~> 4)
@@ -197,6 +200,7 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.3.0)
   web-console
+  will_paginate
 
 BUNDLED WITH
    1.15.4

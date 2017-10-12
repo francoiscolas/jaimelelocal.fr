@@ -1,5 +1,9 @@
 class Farm < ApplicationRecord
 
+  def to_param
+    url
+  end
+
   has_attached_file :banner,
     url:         '/system/:hash.:extension',
     hash_secret: 'menchtf4svrty2ue9zp5wjf456xbqoad5',

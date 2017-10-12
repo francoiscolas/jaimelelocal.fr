@@ -1,6 +1,53 @@
 $(function () {
 
-  if ($('body.farm').length == 1) {
+  if ($('body.index').length == 1) {
+
+    //
+    // Search form
+
+    var Form = function (options) {
+      this.$el = options.$el;
+      this.$form = this.$('form');
+
+      var $q = this.$('#q');
+      $q.on('keyup', this._onKeyUp.bind(this));
+      $q.on('change', this.submit.bind(this));
+      $q.on('autocompleteselect', function () {
+        _.defer(_.bind($q.change, $q)); });
+
+      var $l = this.$('#l');
+      $l.on('keyup', this._onKeyUp.bind(this));
+
+      var $d = this.$('#d');
+      $d.on('change', this.submit.bind(this));
+
+      var geocoder = new google.maps.Geocoder();
+      var autocomplete = new google.maps.places.Autocomplete($l.get(0), {
+        componentRestrictions: {country: 'FR'},
+        types                : ['(cities)']
+      });
+      google.maps.event.addListener(autocomplete, 'place_changed', this.submit.bind(this));
+    };
+
+    Form.prototype.$ = function (selector) {
+      return this.$el.find(selector);
+    };
+
+    Form.prototype.submit = function () {
+      this.$form.submit();
+    };
+
+    Form.prototype._onKeyUp = function (e) {
+      if (e.which === 13)
+        this.submit();
+    };
+
+    //
+    // Main
+
+    new Form({$el: $('.search-form')});
+
+  } else if ($('body.farm').length == 1) {
     //
     // Places
 
