@@ -112,7 +112,7 @@ $(function () {
     };
 
     for (var c in accents)
-      str = str.replace(c, accents[c]);
+      str = str.replace(new RegExp(c, 'g'), accents[c]);
     return str;
   };
 
