@@ -1,12 +1,12 @@
-.small-btn {
-  @include button(false, $secondary-color, auto, $white, solid);
-  @include button-click-effect(light);
-  padding: 0.4em;
-}
-a.small-btn {
-  text-decoration: none;
-}
 body.user-farm {
+  .small-btn {
+    @include button(false, $secondary-color, auto, $white, solid);
+    @include button-click-effect(light);
+    padding: 0.4em;
+  }
+  a.small-btn {
+    text-decoration: none;
+  }
   #banner, #places, #products {
     margin-bottom: 1rem;
   }
