@@ -1,9 +1,3 @@
-body.new-user-farm,
-body.edit-user-farm {
-  .warning.callout {
-    margin-bottom: 1rem;
-  }
-}
 .small-btn {
   @include button(false, $secondary-color, auto, $white, solid);
   @include button-click-effect(light);
@@ -12,7 +6,6 @@ body.edit-user-farm {
 a.small-btn {
   text-decoration: none;
 }
-
 body.user-farm {
   #banner, #places, #products {
     margin-bottom: 1rem;

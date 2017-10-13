@@ -4,9 +4,5 @@
 @import 'lib/jquery.ui-1.10.3.autocomplete.css';
 @import 'lib/foundation_and_overrides';
 @import 'main/core';
-@import 'main/button';
-@import 'main/form';
-@import 'main/box';
-@import 'main/root';
-@import 'main/account/*';
-
+@import 'main/*';
+@import 'main/**/*';

@@ -1,0 +1,80 @@
+body.farm {
+  .banner, .places {
+    margin-bottom: 1rem;
+  }
+  .banner {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150px;
+    @include breakpoint(medium) {
+      height: 250px;
+    }
+    position: relative;
+    margin: -1rem 0 1rem;
+    h2 {
+      background: $secondary-color;
+      color: $white;
+      padding: 0rem 0.5rem;
+      position: absolute;
+      bottom: 0rem;
+      left: 1rem;
+      margin: 0;
+    }
+  }
+  .products {
+    height: 400px;
+    position: relative;
+    input {
+      border-color: $box-color;
+    }
+    ul {
+      background: $white;
+      border: 1px solid $box-color;
+      position: absolute;
+      top: 38px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      list-style: none;
+      margin: 0;
+      overflow: hidden;
+      overflow-y: scroll;
+      padding: 0;
+      li {
+        border-bottom: 1px solid $box-color;
+        padding: 0.4rem;
+        p {
+          display: none;
+          position: absolute;
+          width: 90%;
+        }
+      }
+    }
+  }
+  .places {
+    height: 400px;
+    &.is-empty {
+      background: url(/assets/france.png) center/contain no-repeat;
+      line-height: 400px;
+      text-align: center;
+      div {
+        display: inline-block;
+        line-height: normal;
+        vertical-align: middle;
+      }
+    }
+  }
+  .place-details {
+    h4, h5 {
+      font-weight: bold;
+      margin: 0;
+    }
+    h4 { font-size: 1rem; }
+    h5 { font-size: 0.9rem; }
+    p, pre {
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+  }
+}
