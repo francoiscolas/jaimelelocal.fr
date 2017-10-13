@@ -15,6 +15,7 @@
 <div class="content row">
   <div class="banner" style="background-image:url(<%= @farm.banner %>)">
     <h2><%= @farm.name %></h2>
+    <button type="button" class="follow-btn"><i class="fi-megaphone"></i> SUIVRE</button>
   </div>
   <div class="small-12 medium-4 columns">
     <% unless @farm.products.empty? %>

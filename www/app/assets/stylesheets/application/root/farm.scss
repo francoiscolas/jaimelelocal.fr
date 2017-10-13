@@ -16,10 +16,22 @@ body.farm {
       background: $secondary-color;
       color: $white;
       padding: 0rem 0.5rem;
+      margin: 0;
       position: absolute;
       bottom: 0rem;
       left: 1rem;
+    }
+    button.follow-btn {
+      @include button(false, $alert-color, auto, $white, solid);
+      @include button-click-effect(light);
+      padding: 0.4em;
       margin: 0;
+      position: absolute;
+      bottom: 0rem;
+      right: 1rem;
+      @include breakpoint(medium) {
+        bottom: 1rem;
+      }
     }
   }
   .products {
