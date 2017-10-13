@@ -1,0 +1,28 @@
+<% content_for :head do %>
+  <title>Cestlocal.fr</title>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI"></script>
+<% end %>
+
+<% content_for :pagename do 'home' end %>
+
+<div class="row text-center subtitle">
+  <h2><strong>Producteurs</strong> en vente <strong>directe</strong>.</h2>
+</div>
+<div class="row search-form">
+  <form action="/" method="get" data-remote="true">
+    <div class="medium-6 columns" id="query-input">
+      <input type="text" id="q" name="q" value="<%= @query %>" placeholder="Légume, fruit, ..." data-autocomplete-url="<%= autocomplete_products_path %>"/>
+    </div>
+    <div class="medium-6 columns" id="where-input">
+      <input type="text" id="l" name="l" value="<%= @location_name %>" placeholder="Lieu">
+      <select id="d" name="d">
+        <% [[10,'< 10'],[20,'< 20'],[50,'< 50'],[100,'< 100']].each do |v| %>
+          <option value="<%= v[0] %>" <%= 'selected="selected"' if @distance == v[0] %>><%= v[1] %> km</option>
+        <% end %>
+      </select>
+    </div>
+  </form>
+</div>
+<div class="row content">
+  <%= render 'results' %>
+</div>

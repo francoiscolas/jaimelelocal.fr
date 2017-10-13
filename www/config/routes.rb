@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   # Root
-  root to: 'root#index'
+  root to: 'root#home'
 
   # Autocomplete
   get '/autocomplete/products', :to => 'root#autocomplete_products'

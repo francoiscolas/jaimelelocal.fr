@@ -1,32 +1,32 @@
 $(function () {
 
-  if ($('body.index').length == 1) {
+  if ($('body.home').length == 1) {
 
     //
     // Search form
 
     var Form = function (options) {
       this.$el = options.$el;
+
       this.$form = this.$('form');
 
-      var $q = this.$('#q');
-      $q.on('keyup', this._onKeyUp.bind(this));
-      $q.on('change', this.submit.bind(this));
-      $q.on('autocompleteselect', function () {
-        _.defer(_.bind($q.change, $q)); });
+      this.$q = this.$('#q');
+      this.$q.on('change', this.submit.bind(this));
+      this.$q.on('autocompleteselect', function () {
+        _.defer(this.$q.change.bind(this.$q)); }.bind(this));
 
-      var $l = this.$('#l');
-      $l.on('keyup', this._onKeyUp.bind(this));
-
-      var $d = this.$('#d');
-      $d.on('change', this.submit.bind(this));
-
+      this.$l = this.$('#l');
       var geocoder = new google.maps.Geocoder();
-      var autocomplete = new google.maps.places.Autocomplete($l.get(0), {
+      var autocomplete = new google.maps.places.Autocomplete(this.$l.get(0), {
         componentRestrictions: {country: 'FR'},
         types                : ['(cities)']
       });
       google.maps.event.addListener(autocomplete, 'place_changed', this.submit.bind(this));
+
+      this.$d = this.$('#d');
+      this.$d.on('change', this.submit.bind(this));
+
+      window.onpopstate = this._onHistoryBack.bind(this);
     };
 
     Form.prototype.$ = function (selector) {
@@ -37,15 +37,36 @@ $(function () {
       this.$form.submit();
     };
 
-    Form.prototype._onKeyUp = function (e) {
-      if (e.which === 13)
-        this.submit();
+    Form.prototype._onSuccess = function (content) {
+      var state = {
+        q: this.$q.val(),
+        l: this.$l.val(),
+        d: this.$d.val(),
+        content: content
+      };
+      window.history.pushState(state, null,
+        '/?q=' + state.q + '&l=' + state.l + '&d=' + state.d);
+      this.$('.content').html(content);
+    };
+
+    Form.prototype._onHistoryBack = function (e) {
+      console.log(e, e.state);
+      if (e.state) {
+        this.$q.val(e.state.q);
+        this.$l.val(e.state.l);
+        this.$d.val(e.state.d);
+        this.$('.content').html(e.state.content);
+      } else {
+        window.location.reload();
+      }
     };
 
     //
     // Main
 
-    new Form({$el: $('.search-form')});
+    window.home = {
+      form: new Form({$el: $('.home')})
+    };
 
   } else if ($('body.farm').length == 1) {
     //

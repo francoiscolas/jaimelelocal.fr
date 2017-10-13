@@ -1,6 +1,6 @@
 class RootController < ApplicationController
 
-  def index
+  def home
     params.permit! # FIXME need to enhance this
 
     @query = params[:q]
