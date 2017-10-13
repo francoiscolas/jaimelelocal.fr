@@ -5,4 +5,5 @@
 @import 'lib/foundation_and_overrides';
 @import 'application/core';
 @import 'application/*';
-@import 'application/**/*';
+@import 'application/root/*';
+@import 'application/account/**/*';
