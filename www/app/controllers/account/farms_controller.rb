@@ -1,5 +1,7 @@
 class Account::FarmsController < Account::AccountController
 
+  prepend_before_action :wants_to_create_farm, only: :new
+
   before_action :require_farm!, except: [:new, :create]
   before_action :require_no_farm!, only: [:new, :create]
 
@@ -63,6 +65,10 @@ class Account::FarmsController < Account::AccountController
   end
 
   private
+
+    def wants_to_create_farm
+      session[:wants_to_create_farm] = true
+    end
 
     def require_no_farm!
       if current_user.farm
