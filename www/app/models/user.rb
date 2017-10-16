@@ -8,4 +8,9 @@ class User < ApplicationRecord
   #
   # Associations
   has_one :farm, dependent: :destroy
+  has_many :subscribtions, dependent: :destroy
+
+  def subscribed_to?(farm)
+    subscribtions.where(farm_id: farm.id).exists?
+  end
 end

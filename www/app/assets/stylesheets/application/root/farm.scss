@@ -21,9 +21,20 @@ body.farm {
       bottom: 0rem;
       left: 1rem;
     }
-    button.follow-btn {
+    .follow-btn {
       @include button(false, $alert-color, auto, $white, solid);
       @include button-click-effect(light);
+    }
+    .unfollow-btn {
+      @include button(false, $light-gray, auto, $body-font-color, solid);
+      @include button-click-effect(light);
+      @include breakpoint(small only) {
+        width: 4.2rem;
+        i { display: none; }
+      }
+    }
+    .follow-btn, .unfollow-btn {
+      font-weight: bold;
       padding: 0.4em;
       margin: 0;
       position: absolute;

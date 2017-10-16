@@ -15,7 +15,15 @@
 <div class="content row">
   <div class="banner" style="background-image:url(<%= @farm.banner %>)">
     <h2><%= @farm.name %></h2>
-    <button type="button" class="follow-btn"><i class="fi-megaphone"></i> SUIVRE</button>
+    <% if user_signed_in? && current_user.subscribed_to?(@farm) %>
+      <%= link_to farm_subscribtion_path(@farm), method: :delete, class: 'unfollow-btn' do %>
+        <i class="fi-sound"></i> NE PLUS SUIVRE
+      <% end %>
+    <% else %>
+      <%= link_to farm_subscribtion_path(@farm), method: :post, class: 'follow-btn' do %>
+        <i class="fi-sound"></i> SUIVRE
+      <% end %>
+    <% end %>
   </div>
   <div class="small-12 medium-4 columns">
     <% unless @farm.products.empty? %>

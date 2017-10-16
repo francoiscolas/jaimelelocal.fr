@@ -55,6 +55,30 @@ class RootController < ApplicationController
       raise ActionController::RoutingError, 'Not Found'
   end
 
+  def subscribe
+    if user_signed_in?
+      @farm = Farm.find_by_url(params[:farm_url]) or
+        raise ActionController::RoutingError, 'Not Found'
+      @farm.subscribtions.create({user_id: current_user.id})
+      redirect_to farm_path(@farm)
+    else
+      store_location_for(:user, farm_path(@farm))
+      redirect_to new_user_session_path
+    end
+  end
+
+  def unsubscribe
+    if user_signed_in?
+      @farm = Farm.find_by_url(params[:farm_url]) or
+        raise ActionController::RoutingError, 'Not Found'
+      @farm.subscribtions.where(user_id: current_user.id).destroy_all
+      redirect_to farm_path(@farm)
+    else
+      store_location_for(:user, farm_path(@farm))
+      redirect_to new_user_session_path
+    end
+  end
+
   private
 
   def location_is_valid? location

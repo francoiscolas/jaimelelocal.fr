@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   end
 
   # Public farm page
-  get '/:url(#:place_id)', to: 'root#farm', as: :farm
+  get     '/:url(#:place_id)',        to: 'root#farm',        as: :farm
+  post    '/:farm_url/subscribtion',  to: 'root#subscribe',   as: :farm_subscribtion
+  delete  '/:farm_url/subscribtion',  to: 'root#unsubscribe'
 
 end
