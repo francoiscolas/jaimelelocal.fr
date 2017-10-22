@@ -9,7 +9,7 @@ set :domain, 'jaimelelocal.fr'
 set :deploy_to, '/var/www/cestlocal'
 set :repository, 'francoiscolas@bitbucket.org:francoiscolas/cestlocal.git'
 set :branch, 'master'
-set :puma_config, 'config/puma.production.rb'
+set :puma_config, "#{fetch(:current_path)}/config/puma.production.rb"
 
 # Shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 # Some plugins already add folders to shared_dirs like `mina/rails` add `public/assets`, `vendor/bundle` and many more
