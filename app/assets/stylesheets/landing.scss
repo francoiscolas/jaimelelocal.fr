@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=La+Belle+Aurore');
+
+body, html {
+  font-family: sans;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #1AC3F3 image-url(landing/bg);
+  color: #FFFFFF;
+  @media (max-width: 640px) {
+    background-image: none;
+  }
+}
+header, section {
+    margin: 70px auto !important;
+}
+header {
+  text-align: center;
+  @media (max-width: 640px) {
+    img { width: 90%; }
+  }
+}
+main p {
+  font-family: 'La Belle Aurore', cursive;
+  font-size: 2.5em;
+  line-height: 1em;
+  text-align: center;
+  margin: 10px;
+}
+footer {
+  @media (min-height: 640px) {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+  .grass {
+    background: image-url(landing/grass);
+    height: 150px;
+  }
+  .copyright {
+    background: #93663D;
+    border-top: 4px solid #724F2F;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+}

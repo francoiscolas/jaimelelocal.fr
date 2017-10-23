@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   # Root
   root to: 'root#home'
+  get '/lancement', to: 'root#landing', as: :landing
+  get '/je-veux-tester', to: 'root#skip_landing', as: :skip_landing
 
   # Autocomplete
   get '/autocomplete/products', :to => 'root#autocomplete_products'

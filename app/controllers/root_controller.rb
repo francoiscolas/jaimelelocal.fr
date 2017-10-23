@@ -1,5 +1,16 @@
 class RootController < ApplicationController
 
+  skip_before_action :redirect_to_landing, only: [:landing, :skip_landing]
+
+  def landing
+    render layout: false
+  end
+
+  def skip_landing
+    session[:skip_landing] = true
+    redirect_to root_path
+  end
+
   def home
     params.permit! # FIXME need to enhance this
 
