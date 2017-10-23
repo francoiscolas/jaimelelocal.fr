@@ -78,7 +78,7 @@ body.farm {
   .places {
     height: 400px;
     &.is-empty {
-      background: url(/assets/france.png) center/contain no-repeat;
+      background: image-url(france) center/contain no-repeat;
       line-height: 400px;
       text-align: center;
       div {
