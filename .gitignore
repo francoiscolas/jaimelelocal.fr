@@ -21,4 +21,5 @@
 .byebug_history
 
 # Ignore instance specific files and dirs.
+/public/assets
 /public/system
