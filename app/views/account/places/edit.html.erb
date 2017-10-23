@@ -1,7 +1,4 @@
-<% content_for :head do %>
-  <title><%= @place.name %> - Cestlocal.fr</title>
-<% end %>
-
+<% content_for :title do "#{@place.name} - " end %>
 <% content_for :pagename do 'edit-user-farm-place' end %>
 
 <div class="content row">

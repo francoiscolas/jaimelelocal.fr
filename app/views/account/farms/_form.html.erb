@@ -6,7 +6,7 @@
       <p class="field_error_message"><%= @farm.errors[:name][0] %></p>
     <% end %>
     <div class="input-group">
-      <span class="input-group-label">http://cestlocal.fr/</span>
+      <span class="input-group-label"><%= root_url %></span>
       <%= f.text_field :url, class: 'input-group-field', placeholder: 'ferme-de-martin' %>
     </div>
     <% if @farm.errors[:url].any? %>
@@ -50,7 +50,7 @@
         <b>adresse</b> de la ferme ne sont pas rendus public
         ni vendus.
         <br/>
-        Ils sont uniquement utilisés par <i>Cestlocal.fr</i>
+        Ils sont uniquement utilisés par <i><%= request.host.capitalize %></i>
         pour vous contacter.
       </div>
     </div>

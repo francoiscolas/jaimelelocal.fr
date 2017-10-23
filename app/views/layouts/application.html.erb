@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8"/>
+  <title><%= yield(:title) %>Jaimelelocal.fr</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -17,7 +18,7 @@
             <button class="menu-icon" data-toggle></button>
           </span>
           <a href="/">
-            <%= image_tag 'logo.png', alt: 'cestlocal.fr' %>
+            <%= image_tag 'logo.png', alt: request.host %>
           </a>
         </h1>
       </div>
@@ -78,7 +79,7 @@
   <%= yield %>
   <footer class="row">
     <div class="small-12 column text-center">
-      &copy; 2016 Cestlocal.fr
+      &copy; 2016 <%= request.host.capitalize %>
     </div>
   </footer>
 </body>

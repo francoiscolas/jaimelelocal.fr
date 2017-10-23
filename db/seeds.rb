@@ -3,7 +3,7 @@
 #
 # Default users
 User.create([
-  {email: "francois@cestlocal.fr", password: "francois"}
+  {email: "francois@jaimelelocal.fr", password: "francois"}
 ])
 
 #

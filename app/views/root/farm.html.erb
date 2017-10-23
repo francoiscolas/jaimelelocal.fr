@@ -1,5 +1,4 @@
 <% content_for :head do %>
-  <title><%= @farm.name %> - Cestlocal.fr</title>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI"></script>
   <script type="application/json" id="places-data">
     <%=
@@ -9,7 +8,7 @@
     %>
   </script>
 <% end %>
-
+<% content_for :title do "#{@farm.name} - " end %>
 <% content_for :pagename do 'farm' end %>
 
 <div class="content row">
