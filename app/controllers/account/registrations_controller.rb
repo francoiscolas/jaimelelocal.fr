@@ -1,7 +1,8 @@
 class Account::RegistrationsController < Devise::RegistrationsController
 
   before_action :authenticate_scope!, only: [:edit, :update, :destroy, :profile]
-  before_action :configure_account_update_params, only: [:update]
+  before_action :configure_create_params, only: [:create]
+  before_action :configure_update_params, only: [:update]
 
   # GET /account/profile (edit_user_profile_path)
   def profile
@@ -28,7 +29,13 @@ class Account::RegistrationsController < Devise::RegistrationsController
       return updated
     end
 
-    def configure_account_update_params
+    def configure_create_params
+      devise_parameter_sanitizer.permit(:sign_up, keys: [
+        :name
+      ])
+    end
+
+    def configure_update_params
       devise_parameter_sanitizer.permit(:account_update, keys: [
         :name,
         :show_email,
