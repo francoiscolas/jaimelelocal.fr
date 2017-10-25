@@ -67,7 +67,7 @@ class Account::FarmsController < Account::AccountController
   private
 
     def wants_to_create_farm
-      session[:wants_to_create_farm] = true
+      store_location_for(:user, new_user_farm_path)
     end
 
     def require_no_farm!
