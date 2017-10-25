@@ -7,7 +7,7 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <div>
           <%= f.label :email %>
-          <%= f.email_field :email %>
+          <%= f.email_field :email, required: true %>
           <% if resource.errors[:email].any? %>
             <p class="field_error_message"><%= resource.errors[:email][0] %></p>
           <% end %>
@@ -25,21 +25,21 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <div>
           <%= f.label :password %>
-          <%= f.password_field :password, autocomplete: "off" %>
+          <%= f.password_field :password, required: true, autocomplete: "off" %>
           <% if resource.errors[:password].any? %>
             <p class="field_error_message"><%= resource.errors[:password][0] %></p>
           <% end %>
         </div>
         <div>
           <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          <%= f.password_field :password_confirmation, required: true, autocomplete: "off" %>
           <% if resource.errors[:password_confirmation].any? %>
             <p class="field_error_message"><%= resource.errors[:password_confirmation][0] %></p>
           <% end %>
         </div>
         <div>
           <%= f.label :current_password %>
-          <%= f.password_field :current_password, autocomplete: "off" %>
+          <%= f.password_field :current_password, required: true, autocomplete: "off" %>
           <% if resource.errors[:current_password].any? %>
             <p class="field_error_message"><%= resource.errors[:current_password][0] %></p>
           <% end %>

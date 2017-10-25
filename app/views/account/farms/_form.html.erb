@@ -1,7 +1,7 @@
 <%= form_for(@farm, url: @farm.new_record? ? user_farm_path : edit_user_farm_path) do |f| %>
   <div>
     <%= f.label :name %>
-    <%= f.text_field :name, placeholder: 'Ferme de Martin' %>
+    <%= f.text_field :name, placeholder: 'Ferme de Martin', required: true %>
     <% if @farm.errors[:name].any? %>
       <p class="field_error_message"><%= @farm.errors[:name][0] %></p>
     <% end %>
@@ -15,7 +15,7 @@
   </div>
   <div>
     <%= f.label :website %>
-    <%= f.url_field :website %>
+    <%= f.url_field :website, required: true %>
     <% if @farm.errors[:website].any? %>
       <p class="field_error_message"><%= @farm.errors[:website][0] %></p>
     <% end %>
@@ -24,21 +24,21 @@
     <div class="small-12 medium-7 large-8 columns">
       <div>
         <%= f.label :address %>
-        <%= f.text_area :address, rows: 3 %>
+        <%= f.text_area :address, rows: 3, required: true %>
         <% if @farm.errors[:address].any? %>
           <p class="field_error_message"><%= @farm.errors[:address][0] %></p>
         <% end %>
       </div>
       <div>
         <%= f.label :farmer %>
-        <%= f.text_field :farmer, placeholder: 'Mr Paul MARTIN' %>
+        <%= f.text_field :farmer, placeholder: 'Mr Paul MARTIN', required: true %>
         <% if @farm.errors[:farmer].any? %>
           <p class="field_error_message"><%= @farm.errors[:farmer][0] %></p>
         <% end %>
       </div>
       <div>
         <%= f.label :phone %>
-        <%= f.phone_field :phone %>
+        <%= f.phone_field :phone, required: true %>
         <% if @farm.errors[:phone].any? %>
           <p class="field_error_message"><%= @farm.errors[:phone][0] %></p>
         <% end %>
