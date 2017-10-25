@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def user_has_farm?
-    current_user && current_user.farm
+    current_user && current_user.farm && current_user.farm.persisted?
   end
 
 end

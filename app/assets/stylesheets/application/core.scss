@@ -1,4 +1,5 @@
-$content-background: #eeeeee;
+$very-light-gray: #eeeeee;
+$content-background: $very-light-gray;
 
 body {
   background: image-url(cork-wallet);
@@ -6,31 +7,46 @@ body {
 
 header {
   background: $primary-color;
-  user-select: none;
   h1 {
     line-height: 3rem;
     img {
       height: 2.5rem;
     }
   }
-  #hdr-menu {
+  #actions {
+    text-align: right;
     margin-top: 9px;
-    @include breakpoint(small only) {
+    .action {
+      @include button(false, $primary-color, darken($primary-color, 5%), $white, solid);
+      @include button-click-effect;
+      &.i-am-a-farmer {
+        @include button-style($secondary-color, auto, $white);
+      }
+      span.dropdown:after {
+        @include css-triangle(0.4em, $white, down);
+        display: inline-block;
+      }
+    }
+    .menu {
+      li.user-name {
+        @extend .show-for-small-only;
+        padding: $menu-items-padding;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
       li {
-        display: block;
-        text-align: center;
+        &.is-active a {
+          background: none;
+          color: $body-font-color;
+          font-weight: bold;
+        }
+        &:hover {
+          background: $very-light-gray;
+        }
       }
     }
     a {
-      color: #ffffff;
       text-decoration: none;
-      &:hover {
-        background: darken($primary-color, 5%);
-      }
-      &.i-am-a-farmer {
-        background: #b2b212;
-        padding: 0.4rem 0.8rem;
-      }
     }
   }
 }

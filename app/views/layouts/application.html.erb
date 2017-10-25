@@ -12,51 +12,40 @@
 <body<%= (' class="' + yield(:pagename) + '"').html_safe if content_for?(:pagename) %>>
   <header>
     <div class="row">
-      <div class="small-12 medium-4 columns">
+      <div class="small-10 medium-4 columns">
         <h1>
-          <span data-responsive-toggle="hdr-menu" data-hide-for="medium">
-            <button class="menu-icon" data-toggle></button>
-          </span>
-          <a href="/">
-            <%= image_tag 'logo.png', alt: request.host %>
-          </a>
+          <a href="/"><%= image_tag 'logo.png', alt: request.host %></a>
         </h1>
       </div>
-      <div class="small-12 medium-8 columns" id="hdr-menu">
-        <ul class="menu align-right">
-          <% if !user_has_farm? %>
-            <li>
-              <%= link_to new_user_farm_path, class: 'i-am-a-farmer' do %>
-                <i class="fi-arrow-right"></i> Je suis producteur
-              <% end %>
-            </li>
+      <div class="small-2 medium-8 columns" id="actions">
+        <% if !user_has_farm? %>
+          <%= link_to new_user_farm_path, class: 'action i-am-a-farmer hide-for-small-only' do %>
+            <i class="fi-arrow-right"></i> Je suis producteur
           <% end %>
-          <% if user_signed_in? %>
-            <li>
-              <%= link_to user_path do %>
-                <i class="fi-torso"></i> Mon compte
+        <% end %>
+        <% if user_signed_in? %>
+          <button class="action" type="button" data-toggle="menu">
+            <i class="fi-torso"></i><span class="dropdown hide-for-small-only"> <%= current_user.name %> </span>
+          </button>
+          <div id="menu" class="dropdown-pane" data-dropdown data-position="bottom" data-close-on-click="true">
+            <ul class="vertical menu align-left">
+              <li class="user-name"><%= current_user.name %></li>
+              <%= menu_box_item "Mon profil", user_path %>
+              <%= menu_box_item "Mes identifiants", edit_user_registration_path %>
+              <% if user_has_farm? %>
+                <%= menu_box_item "Profil de ma ferme", user_farm_path %>
+                <%= menu_box_item "Paramètres de ma ferme", edit_user_farm_path %>
+              <% else %>
+                <%= menu_box_item 'Enregistrer ma ferme', new_user_farm_path %>
               <% end %>
-            </li>
-            <% if user_has_farm? %>
-              <li>
-                <%= link_to user_farm_path do %>
-                  <i class="fi-home"></i> Ma ferme
-                <% end %>
-              </li>
-            <% end %>
-            <li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fi-power"></i> Déconnexion
-              <% end %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to new_user_session_path do %>
-                <i class="fi-power"></i> Connexion
-              <% end %>
-            </li>
+              <li><%= link_to 'Déconnexion', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </div>
+        <% else %>
+          <%= link_to new_user_session_path, class: 'action' do %>
+            <i class="fi-torso"></i><span class="hide-for-small-only"> Connexion</span>
           <% end %>
-        </ul>
+        <% end %>
       </div>
     </div>
   </header>

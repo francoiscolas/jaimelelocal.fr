@@ -20,6 +20,12 @@ $body-font-color: #333;
 $button-fill: hollow;
 $button-padding: 0.5em 0.8em;
 
+$dropdown-padding: 0;
+$dropdown-border: none;
+.dropdown-pane {
+  box-shadow: 0 16px 32px 0 $light-gray;
+}
+
 //
 // If you'd like to include motion-ui the foundation-rails gem comes
 // prepackaged with it, uncomment the 3 @imports, if you are not using the
@@ -49,7 +55,7 @@ $button-padding: 0.5em 0.8em;
 @include foundation-menu;
 @include foundation-menu-icon;
 //@include foundation-drilldown-menu;
-//@include foundation-dropdown;
+@include foundation-dropdown;
 //@include foundation-dropdown-menu;
 //@include foundation-responsive-embed;
 @include foundation-label;
