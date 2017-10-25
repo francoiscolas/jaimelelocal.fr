@@ -8,6 +8,13 @@ class Account::RegistrationsController < Devise::RegistrationsController
     render :profile
   end
 
+  def update
+    super do
+      render :profile if !resource.errors.blank?
+      break
+    end
+  end
+
   protected
 
     def update_resource(resource, params)
