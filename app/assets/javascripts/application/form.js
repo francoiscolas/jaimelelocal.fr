@@ -10,7 +10,7 @@ $(function () {
 
       if (id !== undefined)
         $('label[for=' + id + ']').append(span.clone());
-    });
+    }).removeAttr('required');
   })();
 
   //
