@@ -64,6 +64,7 @@ class RootController < ApplicationController
   def farm
     @farm = Farm.find_by_url(params[:url]) or
       raise ActionController::RoutingError, 'Not Found'
+    @is_owner = false
   end
 
   def subscribe

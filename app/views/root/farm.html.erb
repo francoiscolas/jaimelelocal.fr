@@ -9,56 +9,148 @@
   </script>
 <% end %>
 <% content_for :title do "#{@farm.name} - " end %>
-<% content_for :pagename do 'farm' end %>
+<% content_for :pagename do "farm#{' is-owner' if @is_owner}" end %>
 
 <div class="content row">
   <div class="banner" style="background-image:url(<%= @farm.banner %>)">
     <h2><%= @farm.name %></h2>
-    <% if user_signed_in? && current_user.subscribed_to?(@farm) %>
-      <%= link_to farm_subscribtion_path(@farm), method: :delete, class: 'unfollow-btn' do %>
-        <i class="fi-sound"></i> NE PLUS SUIVRE
+    <% if @is_owner %>
+      <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>
+        <%= f.label :banner, "Modifier l'image", class: 'update-banner action-btn' %>
+        <%= f.file_field :banner, class: 'show-for-sr' %>
+        <button type="button" class="remove-banner action-btn">Supprimer l'image</button>
       <% end %>
+      <%= link_to 'Voir la page publique', farm_path(@farm), class: 'go-public action-btn' %>
     <% else %>
-      <%= link_to farm_subscribtion_path(@farm), method: :post, class: 'follow-btn' do %>
-        <i class="fi-sound"></i> SUIVRE
+      <% if user_signed_in? && current_user.subscribed_to?(@farm) %>
+        <%= link_to farm_subscribtion_path(@farm), method: :delete, class: 'unfollow action-btn' do %>
+          NE PLUS SUIVRE
+        <% end %>
+      <% else %>
+        <%= link_to farm_subscribtion_path(@farm), method: :post, class: 'follow action-btn' do %>
+          SUIVRE
+        <% end %>
       <% end %>
     <% end %>
   </div>
   <div class="small-12 medium-4 columns">
-    <% unless @farm.products.empty? %>
-      <div class="products">
-        <input type="text" placeholder="Filtrer parmis les produits"/>
-        <ul>
-          <% @farm.products.each do |product| %>
-            <li>
-              <%= product.name %>
-              <span class="label">
-                <i class="fi-price-tag"></i> <%= product.price_with_unit %>
-              </span>
-              <% Product.values_for_properties.each do |property| %>
-                <% if product.properties?(property) %>
-                  <span class="label">
-                    <%= t "activerecord.bitmasks.product.properties.#{property}" %>
-                  </span>
+    <div class="products box">
+      <% if @is_owner %>
+        <form action="<%= destroy_user_farm_products_path %>" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <% end %>
+      <h3>
+        Produits
+        <% if @is_owner %>
+          <div class="small button-group">
+            <%= link_to new_user_farm_product_path, class: 'button' do %>
+              <i class="fi-plus"></i> Ajouter
+            <% end %>
+            <%= button_tag type: 'submit', class: 'alert button', data: {confirm: 'Êtes-vous sûr de vouloir supprimer les produits séléctionnés ?'} do %>
+              <i class="fi-trash"></i> Supprimer
+            <% end %>
+          </div>
+        <% end %>
+      </h3>
+      <% if @farm.products.empty? %>
+        <div class="empty-list callout">Pas de produit.</div>
+      <% else %>
+        <input type="text" class="filter" placeholder="Filtrer parmis les produits"/>
+        <div class="list">
+          <table>
+            <% @farm.products.each do |product| %>
+              <tr>
+                <% if @is_owner %>
+                  <td class="checkbox">
+                    <input type="checkbox" name="ids[]" value="<%= product.id %>" class="checkbox">
+                  </td>
                 <% end %>
-              <% end %>
-              <%= simple_format product.description, class: 'top-arrow-box' unless product.description.empty? %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+                <td>
+                  <% if @is_owner %>
+                    <%= link_to product.name, edit_user_farm_product_path(product) %>
+                  <% else %>
+                    <%= product.name %>
+                  <% end %>
+                  <span class="label">
+                    <i class="fi-price-tag"></i> <%= product.price_with_unit %>
+                  </span>
+                  <% Product.values_for_properties.each do |property| %>
+                    <% if product.properties?(property) %>
+                      <span class="label">
+                        <%= t "activerecord.bitmasks.product.properties.#{property}" %>
+                      </span>
+                    <% end %>
+                  <% end %>
+                  <%= simple_format product.description, class: 'top-arrow-box' unless product.description.empty? %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      <% end %>
+      <% if @is_owner %>
+        </form>
+      <% end %>
+    </div>
   </div>
   <div class="small-12 medium-8 columns">
-    <% if @farm.places.empty? %>
-      <div class="places is-empty">
-        <div>
-          Pour le moment, cette ferme n'a aucun point de vente.<br>
-          Revenez-voir un peu plus tard ;)
-        </div>
+    <% if @is_owner %>
+      <div class="places box">
+        <% if @is_owner %>
+          <form action="<%= destroy_user_farm_places_path %>" method="post">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <% end %>
+        <h3>
+          Points de vente
+          <div class="small button-group">
+            <% if @is_owner %>
+              <%= link_to new_user_farm_place_path, class: 'button' do %>
+                <i class="fi-plus"></i> Ajouter
+              <% end %>
+              <%= button_tag type: 'submit', class: 'alert button', data: {confirm: "Êtes-vous sûr de vouloir supprimer ces points de vente ?"} do %>
+                <i class="fi-trash"></i> Supprimer
+              <% end %>
+            <% end %>
+          </div>
+        </h3>
+        <% if @farm.places.empty? %>
+          <div class="empty-list callout">Pas de point de vente.</div>
+        <% else %>
+          <input type="text" class="filter" placeholder="Filtrer parmis les points de vente"/>
+          <div class="list">
+            <table>
+              <% @farm.places.each do |place| %>
+                <tr>
+                  <td class="checkbox">
+                    <input type="checkbox" name="ids[]" value="<%= place.id %>"/>
+                  </td>
+                  <td>
+                    <%= link_to place.name, edit_user_farm_place_path(place) %>
+                    <span class="label">
+                      <i class="fi-marker"></i> <%= place.address %>
+                    </span>
+                    <%= simple_format place.description, class: 'top-arrow-box' unless place.description.empty? %>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        <% end %>
+        <% if @is_owner %>
+          </form>
+        <% end %>
       </div>
     <% else %>
-      <div class="places"></div>
+      <% if @farm.places.empty? %>
+        <div class="places-map is-empty">
+          <div>
+            Pour le moment, cette ferme n'a aucun point de vente.<br>
+            Revenez-voir un peu plus tard ;)
+          </div>
+        </div>
+      <% else %>
+        <div class="places-map"></div>
+      <% end %>
     <% end %>
   </div>
 </div>

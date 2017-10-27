@@ -18,13 +18,13 @@ header {
     .action {
       @include button(false, $primary-color, darken($primary-color, 5%), $white, solid);
       @include button-click-effect;
+      margin-top: 10px;
+      margin-bottom: 0;
       @include breakpoint(small only) {
         margin-top: 6px;
         padding: 0.4rem 0.6rem;
         i { font-size: 1.8rem; }
       }
-      margin-top: 9px;
-      margin-bottom: 0;
       &.i-am-a-farmer {
         @include button-style($secondary-color, auto, $white);
       }

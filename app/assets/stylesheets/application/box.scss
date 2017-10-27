@@ -1,11 +1,12 @@
 $box-color: $light-gray;
 $box-background: $white;
+$box-padding: 0.8rem;
 $alert-box-color: $alert-color;
 
 .box {
   background: $box-background;
   border: 1px solid $box-color;
-  padding: 0.8rem;
+  padding: $box-padding;
   margin-bottom: 2rem;
   h2 {
     background: $box-color;

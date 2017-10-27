@@ -26,7 +26,8 @@ class Account::FarmsController < Account::AccountController
   # GET /account/farm (user_farm_path)
   def show
     @farm = current_user.farm
-    render :show
+    @is_owner = true
+    render :'root/farm'
   end
 
   # PATCH /account/farm (user_farm_path)
