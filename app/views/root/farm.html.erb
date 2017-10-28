@@ -12,7 +12,7 @@
 <% content_for :pagename do "farm#{' is-owner' if @is_owner}" end %>
 
 <div class="content row">
-  <div class="banner" style="background-image:url(<%= @farm.banner %>)">
+  <div class="banner" style="background-image:url(<%= asset_path @farm.banner %>)">
     <h2><%= @farm.name %></h2>
     <% if @is_owner %>
       <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>

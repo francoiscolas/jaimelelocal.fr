@@ -7,7 +7,7 @@ class Farm < ApplicationRecord
   has_attached_file :banner,
     url:         '/system/:hash.:extension',
     hash_secret: 'menchtf4svrty2ue9zp5wjf456xbqoad5',
-    default_url: '/assets/default-farm-banner.jpg'
+    default_url: 'default-farm-banner.jpg'
 
   #
   # Associations
