@@ -73,7 +73,7 @@ body.farm {
       border-color: $box-color;
       margin-bottom: 0;
     }
-    .empty-list, .list {
+    .empty-list, .list, .places-map {
       background: $box-background;
       border: 1px solid $box-color;
       width: 100%;
@@ -110,18 +110,23 @@ body.farm {
         background-color: #eee;
       }
     }
-  }
-  .places-map {
-    height: 400px;
-    &.is-empty {
-      background: image-url(france) center/contain no-repeat;
-      line-height: 400px;
-      text-align: center;
-      div {
-        display: inline-block;
-        line-height: normal;
-        vertical-align: middle;
+    .places-tabs-title {
+      &.is-active, &:hover, {
+        $c: $primary-color;
+        background-color: $c;
+        border-color: $c;
+        color: $white;
       }
+      i { font-size: 1rem; }
+    }
+    .places-tabs-panel {
+      display: none;
+      &.is-active {
+        display: inherit;
+      }
+    }
+    .places-map {
+      height: 330px;
     }
   }
   .place-details {

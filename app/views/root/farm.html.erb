@@ -1,12 +1,5 @@
 <% content_for :head do %>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI"></script>
-  <script type="application/json" id="places-data">
-    <%=
-      @farm.places.to_json(:only => [
-        :id, :name, :description, :address, :lat, :lng
-      ]).html_safe
-    %>
-  </script>
 <% end %>
 <% content_for :title do "#{@farm.name} - " end %>
 <% content_for :pagename do "farm#{' is-owner' if @is_owner}" end %>
@@ -94,63 +87,75 @@
     </div>
   </div>
   <div class="small-12 medium-8 columns">
-    <% if @is_owner %>
-      <div class="places box">
-        <% if @is_owner %>
-          <form action="<%= destroy_user_farm_places_path %>" method="post">
-          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <% end %>
-        <h3>
-          Points de vente
-          <div class="small button-group">
-            <% if @is_owner %>
-              <%= link_to new_user_farm_place_path, class: 'button' do %>
-                <i class="fi-plus"></i> Ajouter
-              <% end %>
-              <%= button_tag type: 'submit', class: 'alert button', data: {confirm: "Êtes-vous sûr de vouloir supprimer ces points de vente ?"} do %>
-                <i class="fi-trash"></i> Supprimer
-              <% end %>
+    <div class="places box">
+      <% if @is_owner %>
+        <form action="<%= destroy_user_farm_places_path %>" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <% end %>
+      <h3>
+        Points de vente
+        <div class="small button-group">
+          <% if @is_owner %>
+            <%= link_to new_user_farm_place_path, class: 'button' do %>
+              <i class="fi-plus"></i> Ajouter
             <% end %>
-          </div>
-        </h3>
-        <% if @farm.places.empty? %>
-          <div class="empty-list callout">Pas de point de vente.</div>
-        <% else %>
-          <input type="text" class="filter" placeholder="Filtrer parmis les points de vente"/>
-          <div class="list">
-            <table>
-              <% @farm.places.each do |place| %>
-                <tr>
-                  <td class="checkbox">
-                    <input type="checkbox" name="ids[]" value="<%= place.id %>"/>
-                  </td>
-                  <td>
-                    <%= link_to place.name, edit_user_farm_place_path(place) %>
-                    <span class="label">
-                      <i class="fi-marker"></i> <%= place.address %>
-                    </span>
-                    <%= simple_format place.description, class: 'top-arrow-box' unless place.description.empty? %>
-                  </td>
-                </tr>
-              <% end %>
-            </table>
-          </div>
-        <% end %>
-        <% if @is_owner %>
-          </form>
-        <% end %>
-      </div>
-    <% else %>
+            <%= button_tag type: 'submit', class: 'alert button', data: {confirm: "Êtes-vous sûr de vouloir supprimer ces points de vente ?"} do %>
+              <i class="fi-trash"></i> Supprimer
+            <% end %>
+          <% elsif not @farm.places.empty? %>
+            <button title="Carte" type="button" class="places-tabs-title button is-active" data-target="carte-des-pdv"><i class="fi-map"></i></button>
+            <button title="Liste" type="button" class="places-tabs-title button" data-target="liste-des-pdv"><i class="fi-list"></i></button>
+          <% end %>
+        </div>
+      </h3>
       <% if @farm.places.empty? %>
-        <div class="places-map is-empty">
-          <div>
-            Pour le moment, cette ferme n'a aucun point de vente.<br>
-            Revenez-voir un peu plus tard ;)
+        <div class="empty-list callout">Pas de point de vente.</div>
+      <% else %>
+        <div class="places-tabs">
+          <% if not @is_owner %>
+            <div class="places-tabs-panel is-active" id="carte-des-pdv">
+              <script type="application/json" id="places-map-data">
+                <%=
+                  @farm.places.to_json(:only => [
+                    :id, :name, :description, :address, :lat, :lng
+                  ]).html_safe
+                %>
+              </script>
+              <div class="places-map"></div>
+            </div>
+          <% end %>
+          <div class="places-tabs-panel<%= " is-active" if @is_owner %>" id="liste-des-pdv">
+            <input type="text" class="filter" placeholder="Filtrer parmis les points de vente"/>
+            <div class="list">
+              <table>
+                <% @farm.places.each do |place| %>
+                  <tr>
+                    <% if @is_owner %>
+                      <td class="checkbox">
+                        <input type="checkbox" name="ids[]" value="<%= place.id %>"/>
+                      </td>
+                    <% end %>
+                    <td>
+                      <% if @is_owner %>
+                        <%= link_to place.name, edit_user_farm_place_path(place) %>
+                      <% else %>
+                        <%= place.name %>
+                      <% end %>
+                      <span class="label">
+                        <i class="fi-marker"></i> <%= place.address %>
+                      </span>
+                      <%= simple_format place.description, class: 'top-arrow-box' unless place.description.empty? %>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
           </div>
         </div>
-      <% else %>
-        <div class="places-map"></div>
       <% end %>
-    <% end %>
+      <% if @is_owner %>
+        </form>
+      <% end %>
+    </div>
   </div>
 </div>
