@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'francois@jaimelelocal.fr'
+  default from: 'Jaimelelocal.fr <francois@jaimelelocal.fr>'
   layout 'mailer'
 
   def mailto(params)
