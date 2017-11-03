@@ -5,15 +5,24 @@
   <div class="small-12 medium-8 medium-centered columns">
     <div class="box">
       <h2>Message aux abonnés (par courriel)</h2>
-      <%= form_tag mailto_user_farm_subscribtions_path do %>
-        <div>
-          <%= label_tag 'subject', 'Objet' %>
-          <%= text_field_tag 'subject' %>
+      <%= form_tag sendmail_user_farm_subscribtions_path do %>
+        <div<%= ' class="field_with_errors"'.html_safe if @mail.errors[:subject].any? %>>
+          <%= label_tag 'mail[subject]', 'Objet' %>
+          <div class="input-group">
+            <span class="input-group-label"><%= SubscriberMail.prepend_subject_with @farm %></span>
+            <%= text_field_tag 'mail[subject]', @mail.subject, class: 'input-group-field', required: true %>
+          </div>
         </div>
-        <div>
-          <%= label_tag 'body', 'Message' %>
-          <%= text_area_tag 'body', nil, autoresize: true %>
+        <% if @mail.errors[:subject].any? %>
+          <p class="field_error_message"><%= @mail.errors[:subject].first %></p>
+        <% end %>
+        <div<%= ' class="field_with_errors"'.html_safe if @mail.errors[:body].any? %>>
+          <%= label_tag 'mail[body]', 'Message' %>
+          <%= text_area_tag 'mail[body]', @mail.body, autoresize: true, required: true %>
         </div>
+        <% if @mail.errors[:body].any? %>
+          <p class="field_error_message"><%= @mail.errors[:body].first %></p>
+        <% end %>
         <div class="actions">
           <%= submit_tag 'Envoyer', class: 'button' %>
         </div>

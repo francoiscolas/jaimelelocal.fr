@@ -4,8 +4,17 @@ fr:
       update:
         updated: "Votre compte a été modifié avec succès."
     subscribtions:
-      mailto:
+      sendmail:
         sent: "Voilà, le courriel a été envoyé à tous vos abonnés :)"
+  activemodel:
+    errors:
+      models:
+        subscriber_mail:
+          attributes:
+            subject:
+              blank: "Le sujet est obligatoire."
+            body:
+              blank: "Le mail ne peut pas être envoyé sans message."
   activerecord:
     models:
       user: "Utilisateur"

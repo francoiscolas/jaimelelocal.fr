@@ -6,7 +6,8 @@ form {
   .field_with_errors input,
   .field_with_errors input:focus,
   .field_with_errors textarea,
-  .field_with_errors textarea:focus {
+  .field_with_errors textarea:focus,
+  .field_with_errors .input-group {
     border-color: $alert-color;
     margin-bottom: 0;
   }
