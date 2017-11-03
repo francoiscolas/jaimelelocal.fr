@@ -1,0 +1,16 @@
+body.user-farm-subscribtions {
+  .cl-list {
+    h2 {
+      position: relative;
+      .cl-list-actions {
+        position: absolute;
+        right: 0.8rem;
+        top: 0.8rem;
+        .button { background: $very-light-gray; }
+      }
+    }
+    .cl-list-content {
+      height: 200px;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+<% content_for :title do "Abonnés de ma ferme - " end %>
+<% content_for :pagename do 'user-farm-subscribtions' end %>
+
+<div class="content row">
+  <div class="small-12 medium-8 medium-centered columns">
+    <div class="box">
+      <h2>Message aux abonnés (par courriel)</h2>
+      <%= form_tag mailto_user_farm_subscribtions_path do %>
+        <div>
+          <%= label_tag 'subject', 'Objet' %>
+          <%= text_field_tag 'subject' %>
+        </div>
+        <div>
+          <%= label_tag 'body', 'Message' %>
+          <%= text_area_tag 'body', nil, autoresize: true %>
+        </div>
+        <div class="actions">
+          <%= submit_tag 'Envoyer', class: 'button' %>
+        </div>
+      <% end %>
+    </div>
+    <div class="cl-list box">
+      <%= form_tag destroy_user_farm_subscribtions_path do %>
+        <h2>
+          Abonnés
+          <div class="cl-list-actions">
+            <!--%= link_to '#', class: 'button' do %>
+              <i class="fi-plus"></i> Ajouter
+            <!% end %-->
+            <%= button_tag type: 'submit', class: 'alert button', data: {confirm: "Êtes-vous sûr de vouloir désabonner ces personnes ?"} do %>
+              <i class="fi-trash"></i> Désabonner
+            <% end %>
+          </div>
+        </h2>
+        <% if @farm.subscribtions.empty? %>
+          <div class="cl-list-empty">Pas d'abonné.</div>
+        <% else %>
+          <input class="cl-list-filter" type="text" placeholder="Filtrer parmis les abonnés"/>
+          <div class="cl-list-content">
+            <table>
+              <% @farm.subscribtions.each do |s| %>
+                <tr>
+                  <td class="checkbox">
+                    <input type="checkbox" name="ids[]" value="<%= s.id %>"/>
+                  </td>
+                  <td>
+                    <%= "#{s.user.name} -" unless s.user.name.empty? %>
+                    <%= mail_to s.user.email %>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -26,9 +26,10 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Don't care if the mailer can't send.
+  # Mailer settings for dev.
+  config.action_mailer.delivery_method = :file
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.raise_delivery_errors = false
-
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
@@ -51,7 +52,4 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-
-  # Default URL options, mandatory with Devise gem.
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

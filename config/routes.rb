@@ -44,6 +44,10 @@ Rails.application.routes.draw do
       resources :products, path: 'produits', path_names: {new: 'nouveau', edit: ''}, :except => [:index, :show, :destroy] do
         post '/destroy', to: 'products#destroy', on: :collection, as: :destroy
       end
+      resources :subscribtions, path: 'abonnements', except: [:new, :show, :edit, :update, :destroy] do
+        post '/mailto', to: 'subscribtions#mailto', on: :collection
+        post '/destroy', to: 'subscribtions#destroy', on: :collection
+      end
       patch '/parametres', to: 'farms#update', as: nil
       patch '/',           to: 'farms#update_banner'
     end

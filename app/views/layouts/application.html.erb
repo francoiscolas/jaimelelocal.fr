@@ -34,6 +34,7 @@
               <%= menu_box_item "Mes identifiants", edit_user_registration_path %>
               <% if user_has_farm? %>
                 <%= menu_box_item "Profil de ma ferme", user_farm_path %>
+                <%= menu_box_item "Abonnés à ma ferme", user_farm_subscribtions_path %>
                 <%= menu_box_item "Paramètres de ma ferme", edit_user_farm_path %>
               <% else %>
                 <%= menu_box_item 'Enregistrer ma ferme', new_user_farm_path %>

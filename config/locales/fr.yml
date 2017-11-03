@@ -3,6 +3,9 @@ fr:
     farms:
       update:
         updated: "Votre compte a été modifié avec succès."
+    subscribtions:
+      mailto:
+        sent: "Voilà, le courriel a été envoyé à tous vos abonnés :)"
   activerecord:
     models:
       user: "Utilisateur"

@@ -16,6 +16,7 @@ class Farm < ApplicationRecord
   has_many :places, -> { order 'name' }, :dependent => :destroy
   has_many :products, -> { includes('product_name').order('product_names.name ASC') }, :dependent => :destroy
   has_many :subscribtions, dependent: :destroy
+  has_many :subscribers, through: :subscribtions, source: :user
 
   #
   # Validations
