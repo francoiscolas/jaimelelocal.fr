@@ -62,53 +62,19 @@ body.farm {
     height: 400px;
     h3 {
       position: relative;
-      .button-group {
+      .cl-list-actions {
         position: absolute;
         top: 0;
         right: 0;
         margin: 3px 0 0;
       }
     }
-    .filter {
-      border-color: $box-color;
-      margin-bottom: 0;
-    }
-    .empty-list, .list, .places-map {
-      background: $box-background;
-      border: 1px solid $box-color;
-      width: 100%;
-    }
-    .list {
+    .cl-list-content {
       height: 292px;
-      margin-top: -1px;
-      overflow: hidden;
-      overflow-y: scroll;
-      table {
-        width: 100%;
-      }
-      td {
-        position: relative;
-        border: 0;
-        border-bottom: 1px solid $box-color;
-        padding: 0.4rem 0.2rem;
-        vertical-align: middle;
-        &.checkbox {
-          text-align: center;
-          width: 2rem;
-          input {
-            margin: 0;
-          }
-        }
-        p { // to show description
-          display: none;
-          position: absolute;
-          width: 80%;
-          z-index: 1000;
-        }
-      }
-      tr.selected td {
-        background-color: #eee;
-      }
+    }
+    .places-map {
+      @extend %cl-list-style;
+      height: 330px;
     }
     .places-tabs-title {
       &.is-active, &:hover, {
@@ -124,9 +90,6 @@ body.farm {
       &.is-active {
         display: inherit;
       }
-    }
-    .places-map {
-      height: 330px;
     }
   }
   .place-details {

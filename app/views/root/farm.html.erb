@@ -27,7 +27,7 @@
     <% end %>
   </div>
   <div class="small-12 medium-4 columns">
-    <div class="products box">
+    <div class="products cl-list box">
       <% if @is_owner %>
         <form action="<%= destroy_user_farm_products_path %>" method="post">
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -35,7 +35,7 @@
       <h3>
         Produits
         <% if @is_owner %>
-          <div class="small button-group">
+          <div class="cl-list-actions">
             <%= link_to new_user_farm_product_path, class: 'button' do %>
               <i class="fi-plus"></i> Ajouter
             <% end %>
@@ -46,10 +46,10 @@
         <% end %>
       </h3>
       <% if @farm.products.empty? %>
-        <div class="empty-list callout">Pas de produit.</div>
+        <div class="cl-list-empty">Pas de produit.</div>
       <% else %>
-        <input type="text" class="filter" placeholder="Filtrer parmis les produits"/>
-        <div class="list">
+        <input class="cl-list-filter" type="text" placeholder="Filtrer parmis les produits"/>
+        <div class="cl-list-content">
           <table>
             <% @farm.products.each do |product| %>
               <tr>
@@ -87,14 +87,14 @@
     </div>
   </div>
   <div class="small-12 medium-8 columns">
-    <div class="places box">
+    <div class="places cl-list box">
       <% if @is_owner %>
         <form action="<%= destroy_user_farm_places_path %>" method="post">
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <% end %>
       <h3>
         Points de vente
-        <div class="small button-group">
+        <div class="cl-list-actions">
           <% if @is_owner %>
             <%= link_to new_user_farm_place_path, class: 'button' do %>
               <i class="fi-plus"></i> Ajouter
@@ -109,7 +109,7 @@
         </div>
       </h3>
       <% if @farm.places.empty? %>
-        <div class="empty-list callout">Pas de point de vente.</div>
+        <div class="cl-list-empty">Pas de point de vente.</div>
       <% else %>
         <div class="places-tabs">
           <% if not @is_owner %>
@@ -125,8 +125,8 @@
             </div>
           <% end %>
           <div class="places-tabs-panel<%= " is-active" if @is_owner %>" id="liste-des-pdv">
-            <input type="text" class="filter" placeholder="Filtrer parmis les points de vente"/>
-            <div class="list">
+            <input class="cl-list-filter" type="text" placeholder="Filtrer parmis les points de vente"/>
+            <div class="cl-list-content">
               <table>
                 <% @farm.places.each do |place| %>
                   <tr>

@@ -1,0 +1,44 @@
+.cl-list-actions {
+  @extend .small.button-group;
+}
+%cl-list-style {
+  background: $box-background;
+  border: 1px solid $box-color;
+}
+.cl-list-empty {
+  @extend .callout;
+  @extend %cl-list-style;
+}
+.cl-list-filter {
+  border-color: $box-color !important;
+  margin-bottom: -1px;
+}
+.cl-list-content {
+  @extend %cl-list-style;
+  overflow: hidden;
+  overflow-y: scroll;
+  table {
+    width: 100%;
+  }
+  td {
+    position: relative;
+    border: 0;
+    border-bottom: 1px solid $box-color;
+    padding: 0.4rem 0.2rem;
+    vertical-align: middle;
+    &.checkbox {
+      text-align: center;
+      width: 2rem;
+      input { margin: 0; }
+    }
+    p { // to show description
+      display: none;
+      position: absolute;
+      width: 80%;
+      z-index: 1000;
+    }
+  }
+  tr.selected td {
+    background-color: #eee;
+  }
+}
