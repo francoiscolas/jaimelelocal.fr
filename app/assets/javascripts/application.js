@@ -22,6 +22,7 @@
 //= require lib/jquery.ui-1.10.3.autocomplete
 //= require lib/what-input
 //= require lib/foundation
+//= require lib/trix
 //= require_tree .
 
 $(function () {

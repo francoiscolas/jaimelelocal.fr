@@ -15,7 +15,7 @@ class Account::SubscribtionsController < Account::AccountController
         ApplicationMailer.mailto(
           reply_to: current_user.email,
           to: user.email,
-          content_type: 'text/plain',
+          content_type: 'text/html; charset=utf-8',
           subject: SubscriberMail.prepend_subject_with(@farm) + @mail.subject,
           body: @mail.body
         ).deliver_later

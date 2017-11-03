@@ -18,7 +18,8 @@
         <% end %>
         <div<%= ' class="field_with_errors"'.html_safe if @mail.errors[:body].any? %>>
           <%= label_tag 'mail[body]', 'Message' %>
-          <%= text_area_tag 'mail[body]', @mail.body, autoresize: true, required: true %>
+          <%= hidden_field_tag 'mail[body]', @mail.body, required: true %>
+          <trix-editor input="mail_body"></trix-editor>
         </div>
         <% if @mail.errors[:body].any? %>
           <p class="field_error_message"><%= @mail.errors[:body].first %></p>
