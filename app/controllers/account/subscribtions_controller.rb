@@ -8,16 +8,13 @@ class Account::SubscribtionsController < Account::AccountController
   end
 
   def create
-    @farm = current_user.farm
-    @emails = params['emails'].scan(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)
-    if @emails.count > 0
-      @emails.each do |email|
-        @farm.subscribtions.create(email: email)
-      end
-      redirect_to user_farm_subscribtions_path, flash: {notice: t('.added', count: @emails.count)}
-    else
-      redirect_to user_farm_subscribtions_path, flash: {alert: t('.blank')}
+    count = 0
+    emails = params['emails'].scan(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)
+    emails.each do |email|
+      count += 1 if current_user.farm.subscribtions.create(email: email).persisted?
     end
+    redirect_to user_farm_subscribtions_path,
+      flash: (count > 0) ? {notice: t('.added', count: count)} : {alert: t('.blank')}
   end
 
   def sendmail

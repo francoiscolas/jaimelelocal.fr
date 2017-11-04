@@ -71,7 +71,8 @@ class RootController < ApplicationController
     @farm = Farm.find_by_url(params[:farm_url]) or
       raise ActionController::RoutingError, 'Not Found'
     if user_signed_in?
-      @farm.subscribtions.create({user_id: current_user.id})
+      @farm.subscribtions.create(user_id: current_user.id)
+      @farm.subscribtions.where(email: current_user.email).destroy_all
       redirect_to farm_path(@farm)
     else
       store_location_for(:user, farm_path(@farm))

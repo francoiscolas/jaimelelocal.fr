@@ -6,5 +6,6 @@ class CreateSubscribtions < ActiveRecord::Migration[5.0]
       t.string      :email, null: true # null if user
       t.timestamp
     end
+    add_index :subscribtions, [:farm_id, :user_id], unique: true
   end
 end

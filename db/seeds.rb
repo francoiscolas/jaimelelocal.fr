@@ -2,9 +2,19 @@
 
 #
 # Default users
-User.create([
-  {email: "francois@jaimelelocal.fr", password: "francois"}
-])
+User.create({
+  name: "François Colas",
+  email: "francois@jaimelelocal.fr",
+  password: "francois"
+})
+Farm.create({
+  user_id: 1,
+  name: "Les jardins de Béné",
+  url: "les-jardins-de-bene",
+  farmer: "François Colas",
+  address: "?",
+  phone: "06 95 18 14 22"
+})
 
 #
 # Registering products names
