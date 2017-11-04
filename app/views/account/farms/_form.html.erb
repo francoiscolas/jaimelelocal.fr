@@ -20,32 +20,26 @@
       <p class="field_error_message"><%= @farm.errors[:website][0] %></p>
     <% end %>
   </div>
-  <div class="row">
-    <div class="small-12 medium-7 large-8 columns">
-      <div>
-        <%= f.label :address %>
-        <%= f.text_area :address, rows: 3, required: true %>
-        <% if @farm.errors[:address].any? %>
-          <p class="field_error_message"><%= @farm.errors[:address][0] %></p>
-        <% end %>
-      </div>
-      <div>
-        <%= f.label :phone %>
-        <%= f.phone_field :phone, required: true %>
-        <% if @farm.errors[:phone].any? %>
-          <p class="field_error_message"><%= @farm.errors[:phone][0] %></p>
-        <% end %>
-      </div>
-    </div>
-    <div class="medium-5 large-4 columns">
-      <div class="warning callout">
-        Votre <b>adresse</b> et votre <b>téléphone</b>
-        ne sont pas rendus public ni vendus.
-        <br/>
-        Ils sont uniquement utilisés par <i><%= request.host.capitalize %></i>
-        pour vous contacter.
-      </div>
-    </div>
+  <div>
+    <%= f.label :phone %>
+    <%= f.phone_field :phone, required: true %>
+    <% if @farm.errors[:phone].any? %>
+      <p class="field_error_message"><%= @farm.errors[:phone][0] %></p>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :address %>
+    <%= f.text_area :address, rows: 2, autoresize: true, required: true %>
+    <% if @farm.errors[:address].any? %>
+      <p class="field_error_message"><%= @farm.errors[:address][0] %></p>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 2, autoresize: true, placeholder: "Présentation de la ferme, du lieu, du système de production, etc..." %>
+    <% if @farm.errors[:description].any? %>
+      <p class="field_error_message"><%= @farm.errors[:description][0] %></p>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit "Enregistrer", class: "button" %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014201002) do
+ActiveRecord::Schema.define(version: 20171104205903) do
 
   create_table "farms", force: :cascade do |t|
     t.integer  "user_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20171014201002) do
     t.datetime "banner_updated_at"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "description"
     t.index ["name"], name: "index_farms_on_name", unique: true
     t.index ["url"], name: "index_farms_on_url", unique: true
     t.index ["user_id"], name: "index_farms_on_user_id"

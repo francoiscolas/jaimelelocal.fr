@@ -41,9 +41,9 @@ fr:
       farm:
         name: "Nom de la ferme"
         website: "Adresse internet"
-        address: "Adresse géographique"
-        farmer: "Prénom NOM"
         phone: "Téléphone"
+        address: "Adresse géographique"
+        description: "Présentation"
         banner: "Bannière"
       place:
         name: "Point de vente"

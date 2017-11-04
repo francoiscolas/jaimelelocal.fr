@@ -26,7 +26,27 @@
       <% end %>
     <% end %>
   </div>
-  <div class="small-12 medium-4 columns">
+  <div class="small-12 medium-6 large-3 columns">
+    <div class="infos box">
+      <h3>
+        Infos
+        <% if @is_owner %>
+          <%= link_to "Modifier", edit_user_farm_path, class: "small button" %>
+        <% end %>
+      </h3>
+      <ul>
+        <li><i class="fi-telephone"></i> <%= link_to @farm.phone, "tel://#{@farm.phone}" %></li>
+        <li><i class="fi-marker"></i> <%= simple_format @farm.address, nil, wrapper_tag: 'span' %></li>
+        <% if !@farm.website.blank? %>
+          <li><i class="fi-web"></i> <%= link_to @farm.website %></li>
+        <% end %>
+        <% if !@farm.description.blank? %>
+          <li><i class="fi-comment"></i> <%= simple_format @farm.description, nil, wrapper_tag: 'span' %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="small-12 medium-6 large-3 columns">
     <div class="products cl-list box">
       <% if @is_owner %>
         <form action="<%= destroy_user_farm_products_path %>" method="post">
@@ -86,7 +106,7 @@
       <% end %>
     </div>
   </div>
-  <div class="small-12 medium-8 columns">
+  <div class="small-12 medium-12 large-6 columns">
     <div class="places cl-list box">
       <% if @is_owner %>
         <form action="<%= destroy_user_farm_places_path %>" method="post">
