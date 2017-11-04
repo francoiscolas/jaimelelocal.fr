@@ -10,10 +10,12 @@ form {
   .field_with_errors input:focus,
   .field_with_errors textarea,
   .field_with_errors textarea:focus,
+  .field_with_errors select,
+  .field_with_errors select:focus,
   .field_with_errors .input-group,
   .field_with_errors trix-editor {
     border-color: $alert-color !important;
-    margin-bottom: 0 !important;
+    margin-bottom: -1px !important;
   }
   .field_error_message {
     background: $alert-color;

@@ -1,11 +1,11 @@
 <%= form_for [:user, :farm, @product] do |f| %>
-  <div>
+  <div<%= ' class="field_with_errors"'.html_safe if @product.errors[:product_name_id].any? %>>
     <%= f.label :name %>
     <%= f.text_field :name, placeholder: 'Pommes de Terre Amandine', 'data-autocomplete-url': autocomplete_products_path, autofocus: true, required: true %>
-    <% if @product.errors[:product_name_id].any? %>
-      <p class="field_error_message"><%= @product.errors[:product_name_id].first %></p>
-    <% end %>
   </div>
+  <% if @product.errors[:product_name_id].any? %>
+    <p class="field_error_message"><%= @product.errors[:product_name_id].first %></p>
+  <% end %>
   <div>
     <%= f.label :description %>
     <%= f.text_area :description, placeholder: 'Variété, conditionnement, etc', autoresize: true %>
@@ -13,14 +13,14 @@
       <p class="field_error_message"><%= @product.errors[:description].first %></p>
     <% end %>
   </div>
-  <div id="price-fields">
-    <%= f.label :price %>
-    <%= f.number_field :price, step: '.01', required: true %>
+  <div id="price-fields"<%= ' class="field_with_errors"'.html_safe if @product.errors[:price].any? %>>
+    <%= label_tag "product[price]", Product.human_attribute_name(:price) %>
+    <%= number_field_tag "product[price]", @product.price, step: '.01', required: true %>
     <%= f.select :price_unit, options_for_select(Product::UNITS, @product.price_unit), {} %>
-    <% if @product.errors[:price].any? %>
-      <p class="field_error_message"><%= @product.errors[:price].first %></p>
-    <% end %>
   </div>
+  <% if @product.errors[:price].any? %>
+    <p class="field_error_message"><%= @product.errors[:price].first %></p>
+  <% end %>
   <div>
     <%= f.label :properties %>
     <% @product.each_properties do |property, checked, label| %>
