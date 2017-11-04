@@ -1,6 +1,6 @@
 //= require foundation.core.js
 //= require foundation.util.box.js
-// require foundation.util.imageLoader.js
+//= require foundation.util.imageLoader.js
 //= require foundation.util.keyboard.js
 //= require foundation.util.mediaQuery.js
 // require foundation.util.motion.js
@@ -15,7 +15,7 @@
 // require foundation.drilldown.js
 //= require foundation.dropdown.js
 // require foundation.dropdownMenu.js
-// require foundation.equalizer.js
+//= require foundation.equalizer.js
 // require foundation.interchange.js
 // require foundation.magellan.js
 // require foundation.offcanvas.js

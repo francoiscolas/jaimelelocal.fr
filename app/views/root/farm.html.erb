@@ -26,27 +26,44 @@
       <% end %>
     <% end %>
   </div>
-  <div class="small-12 medium-6 large-3 columns">
-    <div class="infos box">
-      <h3>
-        Infos
-        <% if @is_owner %>
-          <%= link_to "Modifier", edit_user_farm_path, class: "small button" %>
-        <% end %>
-      </h3>
-      <ul>
-        <li><i class="fi-telephone"></i> <%= link_to @farm.phone, "tel://#{@farm.phone}" %></li>
-        <li><i class="fi-marker"></i> <%= simple_format @farm.address, nil, wrapper_tag: 'span' %></li>
-        <% if !@farm.website.blank? %>
-          <li><i class="fi-web"></i> <%= link_to @farm.website %></li>
-        <% end %>
-        <% if !@farm.description.blank? %>
-          <li><i class="fi-comment"></i> <%= simple_format @farm.description, nil, wrapper_tag: 'span' %></li>
-        <% end %>
-      </ul>
+  <div data-equalizer data-equalize-on="medium">
+    <div class="small-12 medium-<%= @farm.description.blank? ? '9' : '7' %> columns">
+      <div class="photos box" data-equalizer-watch>
+        <h3>Photos</h3>
+      </div>
+    </div>
+    <div class="small-12 medium-<%= @farm.description.blank? ? '3' : '5' %> columns">
+      <div class="infos box" data-equalizer-watch>
+        <h3>
+          Infos
+          <% if @is_owner %>
+            <%= link_to "Modifier", edit_user_farm_path, class: "small button" %>
+          <% end %>
+        </h3>
+        <div class="row">
+          <% if !@farm.description.blank? %>
+            <div class="small-6 columns">
+              <ul>
+                <li><i class="fi-comment"></i> <%= simple_format @farm.description, nil, wrapper_tag: 'span' %></li>
+              </ul>
+            </div>
+            <div class="small-6 columns">
+          <% else %>
+            <div class="small-12 columns">
+          <% end %>
+            <ul>
+              <li><i class="fi-telephone"></i> <%= link_to @farm.phone, "tel://#{@farm.phone}" %></li>
+              <li><i class="fi-marker"></i> <%= simple_format @farm.address, nil, wrapper_tag: 'span' %></li>
+              <% if !@farm.website.blank? %>
+                <li><i class="fi-web"></i> <%= link_to @farm.website %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="small-12 medium-6 large-3 columns">
+  <div class="small-12 medium-4 columns">
     <div class="products cl-list box">
       <% if @is_owner %>
         <form action="<%= destroy_user_farm_products_path %>" method="post">
@@ -102,7 +119,7 @@
       <% end %>
     </div>
   </div>
-  <div class="small-12 medium-12 large-6 columns">
+  <div class="small-12 medium-8 columns">
     <div class="places cl-list box">
       <% if @is_owner %>
         <form action="<%= destroy_user_farm_places_path %>" method="post">

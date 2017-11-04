@@ -59,6 +59,13 @@ body.farm {
     }
   }
 
+  .photos {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover/70%;
+    background-image: image-url(photos-bg);
+  }
+
   .infos {
     h3 {
       position: relative;
