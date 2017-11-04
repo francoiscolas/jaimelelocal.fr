@@ -18,7 +18,7 @@ class RootController < ApplicationController
 
     if params.key? :l
       @location = Geocoder.search(params[:l]).first
-    else
+    elsif false
       if session[:user_location]
         @location_name = session[:user_location]['name']
         @location_coordinates = session[:user_location]['coordinates']
@@ -95,7 +95,6 @@ class RootController < ApplicationController
   private
 
   def location_is_valid? location
-    logger.debug location
     location && location.coordinates != [0.0, 0.0]
   end
 
