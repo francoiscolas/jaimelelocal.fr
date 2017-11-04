@@ -1,5 +1,6 @@
 .cl-list-actions {
-  @extend .small.button-group;
+  @extend .small;
+  @extend .button-group;
 }
 %cl-list-style {
   background: $box-background;
