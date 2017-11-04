@@ -51,14 +51,9 @@ fr:
         description: "Description"
       product:
         name: "Nom du produit"
-        description: "Description"
         price: "Prix (en €)"
-        properties: "Informations supplémentaires"
-    bitmasks:
-      product:
-        properties:
-          available: "En stock"
-          pickable: "À cueillir"
+        available: "Actuellement disponible"
+        description: "Description"
     errors:
       messages:
         inclusion: "is not included in the list"

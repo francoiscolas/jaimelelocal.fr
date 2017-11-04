@@ -65,13 +65,13 @@
           </div>
         <% end %>
       </h3>
-      <% if @farm.products.empty? %>
+      <% if @products.empty? %>
         <div class="cl-list-empty">Pas de produit.</div>
       <% else %>
         <input class="cl-list-filter" type="text" placeholder="Filtrer parmis les produits"/>
         <div class="cl-list-content">
           <table>
-            <% @farm.products.each do |product| %>
+            <% @products.each do |product| %>
               <tr>
                 <% if @is_owner %>
                   <td class="checkbox">
@@ -81,19 +81,15 @@
                 <td>
                   <% if @is_owner %>
                     <%= link_to product.name, edit_user_farm_product_path(product) %>
+                    <span class="label">
+                      <i class="fi-shopping-cart"></i> <%= (product.available) ? 'En vente' : 'Épuisé' %>
+                    </span>
                   <% else %>
                     <%= product.name %>
                   <% end %>
                   <span class="label">
                     <i class="fi-price-tag"></i> <%= product.price_with_unit %>
                   </span>
-                  <% Product.values_for_properties.each do |property| %>
-                    <% if product.properties?(property) %>
-                      <span class="label">
-                        <%= t "activerecord.bitmasks.product.properties.#{property}" %>
-                      </span>
-                    <% end %>
-                  <% end %>
                   <%= simple_format product.description, class: 'top-arrow-box' unless product.description.empty? %>
                 </td>
               </tr>

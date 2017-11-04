@@ -27,8 +27,6 @@ class Account::ProductsController < Account::AccountController
   def update
     @product = current_user.farm.products.find(params[:id])
 
-#    params[:product][:properties] ||= []
-
     if @product.update_attributes(product_params)
       redirect_to user_farm_path
     else

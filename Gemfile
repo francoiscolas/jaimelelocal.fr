@@ -11,7 +11,6 @@ gem 'sqlite3'
 
 # Models
 gem 'paperclip'           # To manage attachment files.
-gem 'bitmask_attributes'  # To use attributes as bitmask.
 gem 'geocoder'            # To help searching by location.
 gem 'will_paginate'
 

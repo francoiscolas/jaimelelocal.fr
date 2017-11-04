@@ -6,17 +6,13 @@ body.edit-user-farm-product {
     vertical-align: bottom;
   }
   form #product_price {
-    @include breakpoint(small) {
-      width: 40%;
-    }
+    width: 40%;
     @include breakpoint(medium) {
       width: 10%;
     }
   }
   form #product_price_unit {
-    @include breakpoint(small) {
-      width: 40%;
-    }
+    width: 40%;
     @include breakpoint(medium) {
       width: 20%;
     }

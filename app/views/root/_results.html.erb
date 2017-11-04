@@ -28,10 +28,10 @@
             <% unless farm.products.empty? %>
               <div class="products">
                 <i class="fi-shopping-cart"></i>
-                <% farm.products.first(4).each do |product| %>
+                <% farm.products.where(available: true).first(4).each do |product| %>
                   <span class="label"><%= product.name %></span>
                 <% end %>
-                <% if farm.products.count > 4 %>
+                <% if farm.products.where(available: true).count > 4 %>
                   <span class="label"><%= link_to '...', farm_path(farm) %></span>
                 <% end %>
               </div>

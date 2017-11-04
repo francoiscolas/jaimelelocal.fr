@@ -64,6 +64,10 @@ class RootController < ApplicationController
   def farm
     @farm = Farm.find_by_url(params[:url]) or
       raise ActionController::RoutingError, 'Not Found'
+    @products = @farm.products
+      .joins(:product_name)
+      .where(available: true)
+      .order('product_names.name')
     @is_owner = false
   end
 

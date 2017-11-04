@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104205903) do
+ActiveRecord::Schema.define(version: 20171104215320) do
 
   create_table "farms", force: :cascade do |t|
     t.integer  "user_id"
@@ -55,11 +55,11 @@ ActiveRecord::Schema.define(version: 20171104205903) do
     t.integer  "farm_id"
     t.integer  "product_name_id"
     t.text     "description"
-    t.decimal  "price",           precision: 8, scale: 2,             null: false
-    t.integer  "price_unit",                                          null: false
-    t.integer  "properties",                              default: 0, null: false
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.decimal  "price",           precision: 8, scale: 2,                null: false
+    t.integer  "price_unit",                                             null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+    t.boolean  "available",                               default: true
     t.index ["farm_id"], name: "index_products_on_farm_id"
     t.index ["product_name_id"], name: "index_products_on_product_name_id"
   end

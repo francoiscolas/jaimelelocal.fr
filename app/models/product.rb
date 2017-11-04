@@ -8,8 +8,6 @@ class Product < ApplicationRecord
     ["pièce",    3]
   ]
 
-  bitmask :properties, as: [:available, :pickable]
-
   #
   # Associations
   belongs_to :farm
@@ -48,12 +46,6 @@ class Product < ApplicationRecord
 
   def price_with_unit
     return sprintf('%.2f', price).gsub('.', '€') + ' ' + UNITS[price_unit - 1][0]
-  end
-
-  def each_properties
-    Product.values_for_properties.each do |prop|
-      yield prop.to_s, properties?(prop), I18n.t('.activerecord.bitmasks.product.properties.' + prop.to_s)
-    end
   end
 
 end

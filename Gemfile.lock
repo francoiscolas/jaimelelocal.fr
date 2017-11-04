@@ -45,8 +45,6 @@ GEM
       execjs (~> 2.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
-    bitmask_attributes (1.0.0)
-      activerecord (>= 3.1)
     builder (3.2.3)
     byebug (9.1.0)
     climate_control (0.2.0)
@@ -190,7 +188,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bitmask_attributes
   byebug
   devise
   foundation-rails (~> 6.4)
