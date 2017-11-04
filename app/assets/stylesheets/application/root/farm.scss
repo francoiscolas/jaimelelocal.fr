@@ -24,7 +24,7 @@ body.farm {
     .action-btn {
       @include button(false, $light-gray, auto, $body-font-color, solid);
       @include button-click-effect(light);
-      font-weight: bold;
+      font-weight: normal;
       text-decoration: none;
       margin: 0;
       padding: 0.4em;
@@ -44,6 +44,7 @@ body.farm {
       &.follow {
         @extend %bottom;
         @include button-style($alert-color, auto, $white);
+        font-weight: bold;
       }
       &.unfollow, &.go-public {
         @extend %bottom;
