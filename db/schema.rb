@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 20171014201002) do
     t.string   "name"
     t.string   "url"
     t.string   "website"
-    t.string   "farmer"
     t.string   "phone"
     t.text     "address"
     t.string   "banner_file_name"

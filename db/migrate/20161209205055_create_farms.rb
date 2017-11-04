@@ -6,7 +6,6 @@ class CreateFarms < ActiveRecord::Migration[5.0]
       t.string      :name
       t.string      :url
       t.string      :website
-      t.string      :farmer
       t.string      :phone
       t.text        :address
       t.attachment  :banner

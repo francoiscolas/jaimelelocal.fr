@@ -24,7 +24,6 @@ class Farm < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { minimum: 3 }
   validates :url, presence: true, uniqueness: true, length: { minimum: 3 }
   validates :address, presence: true
-  validates :farmer, presence: true, length: { minimum: 7 }
   validates :phone, presence: true, format: { with: /\A([0-9]{2} ){4}[0-9]{2}\Z/ }
   validates :banner, attachment_content_type: { content_type: /image/ }
   validates :banner, attachment_size: { in: 0..500.kilobytes }
