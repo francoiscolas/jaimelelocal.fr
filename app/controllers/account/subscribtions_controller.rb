@@ -7,14 +7,27 @@ class Account::SubscribtionsController < Account::AccountController
     @mail = SubscriberMail.new
   end
 
+  def create
+    @farm = current_user.farm
+    @emails = params['emails'].scan(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)
+    if @emails.count > 0
+      @emails.each do |email|
+        @farm.subscribtions.create(email: email)
+      end
+      redirect_to user_farm_subscribtions_path, flash: {notice: t('.added', count: @emails.count)}
+    else
+      redirect_to user_farm_subscribtions_path, flash: {alert: t('.blank')}
+    end
+  end
+
   def sendmail
     @farm = current_user.farm
     @mail = SubscriberMail.new(mail_params)
     if @mail.valid?
-      current_user.farm.subscribers.each do |user|
+      current_user.farm.subscribtions.each do |s|
         ApplicationMailer.mailto(
           reply_to: current_user.email,
-          to: user.email,
+          to: s.get_email,
           content_type: 'text/html; charset=utf-8',
           subject: SubscriberMail.prepend_subject_with(@farm) + @mail.subject,
           body: @mail.body
@@ -22,14 +35,13 @@ class Account::SubscribtionsController < Account::AccountController
       end
       redirect_to user_farm_subscribtions_path, flash: {notice: t('.sent')}
     else
-      logger.debug @mail.errors.keys
       render :index
     end
   end
 
   def destroy
     Subscribtion.destroy_all(farm_id: current_user.farm.id, id: params[:ids])
-    redirect_to user_farm_subscribtions_path
+    redirect_to user_farm_subscribtions_path, flash: {notice: t('.destroyed')}
   end
 
   private

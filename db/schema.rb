@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20171014201002) do
   create_table "subscribtions", force: :cascade do |t|
     t.integer "farm_id"
     t.integer "user_id"
+    t.string  "email"
     t.index ["farm_id"], name: "index_subscribtions_on_farm_id"
     t.index ["user_id"], name: "index_subscribtions_on_user_id"
   end

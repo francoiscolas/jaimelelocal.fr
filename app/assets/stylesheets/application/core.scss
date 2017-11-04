@@ -33,7 +33,8 @@ header {
         display: inline-block;
       }
     }
-    .menu {
+    #menu {
+      padding: 0;
       li.user-name {
         @extend .show-for-small-only;
         padding: $menu-items-padding;

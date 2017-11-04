@@ -8,8 +8,13 @@ body.user-farm-subscribtions {
       .cl-list-actions {
         position: absolute;
         right: 0.8rem;
-        top: 0.8rem;
-        .button { background: $very-light-gray; }
+        top: 0.4rem;
+        @include breakpoint(medium) {
+          top: 0.8rem;
+        }
+        .button {
+          background: $white;
+        }
       }
     }
     .cl-list-content {

@@ -4,8 +4,13 @@ fr:
       update:
         updated: "Votre compte a été modifié avec succès."
     subscribtions:
+      create:
+        added: "%{count} adresses ont été ajoutées."
+        blank: "Attention, aucune adresse email n'a été ajouté."
       sendmail:
         sent: "Voilà, le courriel a été envoyé à tous vos abonnés :)"
+      destroy:
+        destroyed: "Ok, les personnes séléctionnées ont été désabonnées."
   activemodel:
     errors:
       models:

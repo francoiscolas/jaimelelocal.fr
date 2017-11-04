@@ -34,12 +34,12 @@
         <h2>
           Abonnés
           <div class="cl-list-actions">
-            <!--%= link_to '#', class: 'button' do %>
+            <button type="button" class="button" data-toggle="add-subscriber-panel">
               <i class="fi-plus"></i> Ajouter
-            <!% end %-->
-            <%= button_tag type: 'submit', class: 'alert button', data: {confirm: "Êtes-vous sûr de vouloir désabonner ces personnes ?"} do %>
+            </button>
+            <button type="submit" class="alert button" data-confirm="Êtes-vous sûr de vouloir désabonner ces personnes ?">
               <i class="fi-trash"></i> Désabonner
-            <% end %>
+            </button>
           </div>
         </h2>
         <% if @farm.subscribtions.empty? %>
@@ -54,14 +54,26 @@
                     <input type="checkbox" name="ids[]" value="<%= s.id %>"/>
                   </td>
                   <td>
-                    <%= "#{s.user.name} -" unless s.user.name.empty? %>
-                    <%= mail_to s.user.email %>
+                    <% if s.user %>
+                       <%= s.user.name %> - <%= mail_to s.user.email %>
+                    <% else %>
+                      <%= s.email %>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>
             </table>
           </div>
         <% end %>
+      <% end %>
+    </div>
+    <div id="add-subscriber-panel" class="dropdown-pane" data-dropdown data-close-on-click="true">
+      <%= form_tag user_farm_subscribtions_path do %>
+        <%= label_tag 'emails', 'Email(s) à ajouter' %>
+        <%= text_area_tag 'emails', nil, placeholder: 'pierre@kephas.fr jean@martin.ca', required: true, autoresize: true %>
+        <div class="actions">
+          <%= submit_tag 'Envoyer', class: 'button' %>
+        </div>
       <% end %>
     </div>
   </div>
