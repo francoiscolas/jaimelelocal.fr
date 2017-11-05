@@ -42,12 +42,12 @@
         </h3>
         <div class="row">
           <% if !@farm.description.blank? %>
-            <div class="small-6 columns">
+            <div class="small-12 medium-6 columns">
               <ul>
                 <li><i class="fi-comment"></i> <%= simple_format @farm.description, nil, wrapper_tag: 'span' %></li>
               </ul>
             </div>
-            <div class="small-6 columns">
+            <div class="small-12 medium-6 columns">
           <% else %>
             <div class="small-12 columns">
           <% end %>
