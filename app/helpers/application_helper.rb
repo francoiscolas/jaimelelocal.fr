@@ -16,4 +16,8 @@ module ApplicationHelper
     current_user && current_user.farm && current_user.farm.persisted?
   end
 
+  def text_logo
+    '<i class="logo"><b>Jaimelelocal</b>.fr</i>'.html_safe
+  end
+
 end

@@ -1,0 +1,42 @@
+<% content_for :title do 'Je suis producteur - ' end %>
+
+<div class="content row">
+  <div class="small-12 medium-8 medium-centered columns">
+    <div class="box">
+      <h3><b>Je suis producteur</b>, pourquoi m'inscrire ?</h3>
+      <p>
+        Nous pensons qu'il est absurde de faire parcourir des distances
+        incroyables aux produits de consommation courrante. Dans beaucoup de
+        cas ces produits peuvent-être produits localement. Les produits sont
+        alors de meilleurs qualité que les produits issues de l'agro-industrie.
+        <u>La suppression des intermédiaires et du transport</u> permet aux
+        producteurs d'être payés à un <u>tarif plus équitable</u>. Les
+        consommateurs achètent des produits de qualité nutritive et gustative
+        incomparable.
+      </p>
+      <p>
+        Les consommateurs, particuliers ou professionels, ont le désir de
+        se fournir en produits locaux.<br/>
+        Problème : les producteurs sont souvent difficiles à trouver.
+        <%= text_logo %> à pour ambition de <u>faciliter la mise en
+        relation entre producteurs et consommateurs</u>.
+      </p>
+      <p>
+        <%= text_logo %> <u>n'est pas un nouvel intermiédiaire</u> mais une
+        plateforme de mise en relation. Le consommateur, rencontre et paye en
+        direct le producteur.
+      </p>
+      <p>
+        La plateforme est nationale pour bénéficier de l'effet d'échelle. De
+        fait, un consommateur utilisant <%= text_logo %> dans son quotidien,
+        l'utilisera aussi pendant ces vacances.
+      </p>
+      <p>
+        Pour vous inscrire, il faut d'abord
+        <%= link_to "créer un compte", new_user_registration_path, class: "small button", style: "margin:0" %>.
+        Si vous en avez-un vous pouvez, dés maintenant,
+        <%= link_to "enregistrer votre ferme", new_user_farm_path, class: "small button", style: "margin:0" %>.
+      </p>
+    </div>
+  </div>
+</div>
