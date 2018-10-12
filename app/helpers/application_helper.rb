@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def text_logo
-    '<i class="logo"><b>Jaimelelocal</b>.fr</i>'.html_safe
+    '<span class="logo"><b>jaimelelocal</b>.fr</span>'.html_safe
   end
 
 end

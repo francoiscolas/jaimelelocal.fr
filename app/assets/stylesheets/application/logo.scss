@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700');
-
 .logo-font {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Kite One', sans-serif;
+  font-size: 1rem;
 }
-i.logo {
+span.logo {
   @extend .logo-font;
-  font-style: normal;
+  background: $primary-color;
+  color: $white;
+  padding: 0 0.3rem;
 }
+
