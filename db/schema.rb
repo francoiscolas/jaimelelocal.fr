@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104215320) do
+ActiveRecord::Schema.define(version: 20171110205027) do
+
+  create_table "business_hours", force: :cascade do |t|
+    t.integer "place_id"
+    t.integer "day_of_week"
+    t.boolean "activated"
+    t.time    "opens_at"
+    t.time    "closes_at"
+    t.index ["place_id"], name: "index_business_hours_on_place_id"
+  end
 
   create_table "farms", force: :cascade do |t|
     t.integer  "user_id"
@@ -19,6 +28,8 @@ ActiveRecord::Schema.define(version: 20171104215320) do
     t.string   "website"
     t.string   "phone"
     t.text     "address"
+    t.float    "lat"
+    t.float    "lng"
     t.string   "banner_file_name"
     t.string   "banner_content_type"
     t.integer  "banner_file_size"
@@ -29,39 +40,6 @@ ActiveRecord::Schema.define(version: 20171104215320) do
     t.index ["name"], name: "index_farms_on_name", unique: true
     t.index ["url"], name: "index_farms_on_url", unique: true
     t.index ["user_id"], name: "index_farms_on_user_id"
-  end
-
-  create_table "places", force: :cascade do |t|
-    t.integer  "farm_id"
-    t.string   "name"
-    t.text     "description"
-    t.text     "address"
-    t.float    "lat"
-    t.float    "lng"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["farm_id"], name: "index_places_on_farm_id"
-  end
-
-  create_table "product_names", force: :cascade do |t|
-    t.string   "name",                         null: false
-    t.boolean  "was_reviewed", default: false, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.index ["name"], name: "index_product_names_on_name", unique: true
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.integer  "farm_id"
-    t.integer  "product_name_id"
-    t.text     "description"
-    t.decimal  "price",           precision: 8, scale: 2,                null: false
-    t.integer  "price_unit",                                             null: false
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
-    t.boolean  "available",                               default: true
-    t.index ["farm_id"], name: "index_products_on_farm_id"
-    t.index ["product_name_id"], name: "index_products_on_product_name_id"
   end
 
   create_table "subscribtions", force: :cascade do |t|

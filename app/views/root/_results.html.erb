@@ -7,36 +7,7 @@
     <div class="farms">
       <ul>
         <% @farms.each do |farm| %>
-          <li>
-            <%= link_to farm.name, farm_path(farm) %>
-            <% unless farm.places.empty? %>
-              <div class="places">
-                <i class="fi-marker"></i>
-                <%
-                first = true
-                farm.places.each do |place|
-                  concat ' / ' unless first
-                  concat link_to place.name, farm_path(farm, place)
-                  if @location_coordinates
-                    concat " (à #{place.distance_to(@location_coordinates).round}&nbsp;km)".html_safe
-                  end
-                  first = false
-                end
-                %>
-              </div>
-            <% end %>
-            <% unless farm.products.empty? %>
-              <div class="products">
-                <i class="fi-shopping-cart"></i>
-                <% farm.products.where(available: true).first(4).each do |product| %>
-                  <span class="label"><%= product.name %></span>
-                <% end %>
-                <% if farm.products.where(available: true).count > 4 %>
-                  <span class="label"><%= link_to '...', farm_path(farm) %></span>
-                <% end %>
-              </div>
-            <% end %>
-          </li>
+          <li><%= link_to farm.name, farm_path(farm) %></li>
         <% end %>
       </ul>
     </div>

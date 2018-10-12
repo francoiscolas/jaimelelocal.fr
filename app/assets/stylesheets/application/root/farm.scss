@@ -1,27 +1,47 @@
 body.farm {
-  .banner, .places {
-    margin-bottom: 1rem;
+  &:not(.is-owner) {
+    header {
+      h1 {
+        line-height: 2rem;
+        img { height: 1.5rem; }
+      }
+      #actions {
+        .action {
+          margin-top: 0;
+          @include breakpoint(small only) {
+            i { font-size: 1rem; }
+          }
+        }
+      }
+    }
   }
   .banner {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 150px;
+    height: 200px;
     position: relative;
-    margin: -1rem 0 1rem;
+    margin-bottom: 1rem;
     @include breakpoint(medium) {
-      height: 250px;
+      height: 500px;
     }
     h2 {
-      background: $secondary-color;
+      font-family: 'Gloria Hallelujah', sans-serif;
+      font-weight: bold;
       color: $white;
-      padding: 0rem 0.5rem;
+      text-align: center;
+      text-decoration: underline;
+      text-shadow: 0 0 4px $dark-gray;
+      width: 100%;
       margin: 0;
       position: absolute;
-      bottom: 0rem;
-      left: 1rem;
+      top: 1rem;
     }
-    .action-btn {
+    .banner-btns {
+      height: 100%;
+      position: relative;
+    }
+    .banner-btn {
       @include button(false, $light-gray, auto, $body-font-color, solid);
       @include button-click-effect(light);
       font-weight: normal;
@@ -29,32 +49,18 @@ body.farm {
       margin: 0;
       padding: 0.4em;
       position: absolute;
-      right: 0.4rem;
-      &%bottom {
-        bottom: 0.4rem;
-        @include breakpoint(small only) {
-          bottom: 0rem;
-        }
-      }
-      &.thiner-for-small {
-        @include breakpoint(small only) {
-          width: 4.5rem;
-        }
-      }
+      right: 1rem;
+      bottom: 1rem;
       &.follow {
-        @extend %bottom;
         @include button-style($alert-color, auto, $white);
+        font-size: large;
         font-weight: bold;
       }
-      &.unfollow, &.go-public {
-        @extend %bottom;
-        @extend .thiner-for-small;
-      }
       &.update-banner {
-        top: 0.4rem;
+        bottom: 5rem;
       }
       &.remove-banner {
-        top: 2.5rem;
+        bottom: 3rem;
       }
     }
   }
@@ -85,53 +91,6 @@ body.farm {
         a { color: $body-font-color; }
         span { display: inline-block; width: 90%; text-align: justify; }
       }
-    }
-  }
-
-  .products, .places {
-    height: 400px;
-    h3 {
-      position: relative;
-      .cl-list-actions {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 3px 0 0;
-      }
-    }
-    .cl-list-content {
-      height: 292px;
-    }
-    .places-map {
-      @extend %cl-list-style;
-      height: 330px;
-    }
-    .places-tabs-title {
-      &.is-active, &:hover, {
-        $c: $primary-color;
-        background-color: $c;
-        border-color: $c;
-        color: $white;
-      }
-      i { font-size: 1rem; }
-    }
-    .places-tabs-panel {
-      display: none;
-      &.is-active {
-        display: inherit;
-      }
-    }
-  }
-  .place-details {
-    h4, h5 {
-      font-weight: bold;
-      margin: 0;
-    }
-    h4 { font-size: 1rem; }
-    h5 { font-size: 0.9rem; }
-    p, pre {
-      font-size: 0.9rem;
-      margin-bottom: 0.2rem;
     }
   }
 }

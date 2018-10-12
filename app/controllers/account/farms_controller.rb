@@ -26,9 +26,6 @@ class Account::FarmsController < Account::AccountController
   # GET /account/farm (user_farm_path)
   def show
     @farm = current_user.farm
-    @products = @farm.products
-      .joins(:product_name)
-      .order('product_names.name')
     @is_owner = true
     render :'root/farm'
   end

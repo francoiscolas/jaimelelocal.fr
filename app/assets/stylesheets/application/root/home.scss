@@ -2,12 +2,19 @@ $search-form-background: #cc1446;
 
 body.home {
   .subtitle {
-    background: $content-background;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    background-image: image-url(home-subtitle-bg);
+    background-size: cover;
+    color: $white;
+    padding: 3rem 0;
+    @include breakpoint(medium) {
+      padding: 10rem 0;
+    }
+    h2 {
+      font-family: 'Kite One', sans-serif;
+      text-shadow: 0 0 4px $black;
+    }
   }
   .search-form {
-    background: #dddddd;
     @include breakpoint(medium) {
       padding: 1.5rem;
     }
@@ -56,21 +63,6 @@ body.home {
         padding: 0.3rem 0.5rem;
         @include breakpoint(medium) {
           padding: 0.8rem 1rem;
-        }
-        .places, .products {
-          font-size: 0.8rem;
-          margin-left: 0.5rem;
-        }
-        .places a {
-          color: $body-font-color;
-          font-weight: bold;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-        .products span {
-          margin-bottom: 0.2rem;
-          a { color: $white; }
         }
       }
     }

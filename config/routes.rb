@@ -5,9 +5,6 @@ Rails.application.routes.draw do
   get '/lancement', to: 'root#landing', as: :landing
   get '/je-veux-tester', to: 'root#skip_landing', as: :skip_landing
 
-  # Autocomplete
-  get '/autocomplete/products', :to => 'root#autocomplete_products'
-
   # Account
   devise_for :users, :skip => [:registrations, :sessions, :passwords]
   devise_scope :user do
@@ -39,9 +36,6 @@ Rails.application.routes.draw do
   # Farm account
   scope '/mon-compte', :module => 'account', as: :user do
     resource :farm, path: 'ma-ferme', path_names: {new: 'enregistrement', edit: 'parametres'}, except: :update do
-      resources :places, path: 'points-de-vente', path_names: {new: 'nouveau', edit: ''}, except: [:index, :show, :destroy] do
-        post '/destroy', to: 'places#destroy', on: :collection, as: :destroy
-      end
       resources :products, path: 'produits', path_names: {new: 'nouveau', edit: ''}, :except => [:index, :show, :destroy] do
         post '/destroy', to: 'products#destroy', on: :collection, as: :destroy
       end
@@ -55,7 +49,7 @@ Rails.application.routes.draw do
   end
 
   # Public farm page
-  get     '/:url(#:place_id)',        to: 'root#farm',        as: :farm
+  get     '/:url',                    to: 'root#farm',        as: :farm
   post    '/:farm_url/subscribtion',  to: 'root#subscribe',   as: :farm_subscribtion
   delete  '/:farm_url/subscribtion',  to: 'root#unsubscribe'
 

@@ -17,5 +17,8 @@ module Jaimelelocal
 
     # Include all helpers.
     config.action_controller.include_all_helpers = true
+
+    # Time zone aware types.
+    config.active_record.time_zone_aware_types = [:datetime, :time]
   end
 end

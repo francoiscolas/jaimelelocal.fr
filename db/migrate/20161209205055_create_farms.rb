@@ -8,6 +8,8 @@ class CreateFarms < ActiveRecord::Migration[5.0]
       t.string      :website
       t.string      :phone
       t.text        :address
+      t.float       :lat
+      t.float       :lng
       t.attachment  :banner
 
       t.timestamps

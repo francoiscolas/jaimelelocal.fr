@@ -1,8 +1,6 @@
 class Farm < ApplicationRecord
 
-  def to_param
-    url
-  end
+  geocoded_by :address, :latitude => :lat, :longitude => :lng
 
   has_attached_file :banner,
     url:         '/system/:hash.:extension',
@@ -13,10 +11,12 @@ class Farm < ApplicationRecord
   # Associations
 
   belongs_to :user
-  has_many :places, -> { order 'name' }, :dependent => :destroy
-  has_many :products, -> { includes('product_name').order('product_names.name ASC') }, :dependent => :destroy
+
   has_many :subscribtions, dependent: :destroy
   has_many :subscribers, through: :subscribtions, source: :user
+
+  has_many :business_hours, dependent: :destroy
+  accepts_nested_attributes_for :business_hours, allow_destroy: true
 
   #
   # Validations
@@ -43,6 +43,24 @@ class Farm < ApplicationRecord
       value = value.gsub(/(.{2})(?=.)/, '\1 \2')
     end 
     super(value)
-  end 
+  end
+
+  #
+  # Methods
+
+#  def ensure_business_hours
+#    if business_hours.empty?
+#      business_hours.build(day_of_week: 0)
+#      (1..5).each do |i|
+#        business_hours.build(day_of_week: i, activated: true, opens_at: '09:00', closes_at: '19:00')
+#      end
+#      business_hours.build(day_of_week: 6)
+#    end
+#    business_hours
+#  end
+
+  def to_param
+    url
+  end
 
 end

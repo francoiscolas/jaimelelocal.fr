@@ -2,14 +2,13 @@
   <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI"></script>
 <% end %>
 <% content_for :pagename do 'home' end %>
-
-<div class="row text-center subtitle">
+<div class="expanded row text-center subtitle">
   <h2><strong>Producteurs</strong> en vente <strong>directe</strong>.</h2>
 </div>
 <div class="row search-form">
   <form action="/" method="get" data-remote="true">
     <div class="medium-6 columns" id="query-input">
-      <input type="text" id="q" name="q" value="<%= @query %>" placeholder="Légume, fruit, ..." data-autocomplete-url="<%= autocomplete_products_path %>"/>
+      <input type="text" id="q" name="q" value="<%= @query %>" placeholder="Légume, fruit, ..."/>
     </div>
     <div class="medium-6 columns" id="where-input">
       <input type="text" id="l" name="l" value="<%= @location_name %>" placeholder="Lieu">
@@ -21,6 +20,14 @@
     </div>
   </form>
 </div>
-<div class="row content">
-  <%= render 'results' %>
+<div class="expanded row">
+  <iframe
+     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102621.43915401265!2d-0.621340212963831!3d47.47651863080393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480878da00e58e9d%3A0x40d37521e0d9c30!2sAngers!5e0!3m2!1sfr!2sfr!4v1539287991468"
+     width="100%"
+     height="500px"
+     frameborder="0"
+     style="border:0"
+     allowfullscreen>
+  </iframe>
+  <%#= render 'results' %>
 </div>

@@ -1,4 +1,11 @@
 fr:
+  Sunday: "Dimanche"
+  Monday: "Lundi"
+  Tuesday: "Mardi"
+  Wednesday: "Mercredi"
+  Thursday: "Jeudi"
+  Friday: "Vendredi"
+  Saturday: "Samedi"
   account:
     farms:
       update:
@@ -25,8 +32,6 @@ fr:
   activerecord:
     models:
       user: "Utilisateur"
-      place: "Point de vente"
-      product: "Produit"
     attributes:
       user:
         email: "Adresse e-mail"
@@ -45,15 +50,6 @@ fr:
         address: "Adresse géographique"
         description: "Présentation"
         banner: "Bannière"
-      place:
-        name: "Point de vente"
-        address: "Adresse"
-        description: "Description"
-      product:
-        name: "Nom du produit"
-        price: "Prix (en €)"
-        available: "Actuellement disponible"
-        description: "Description"
     errors:
       messages:
         inclusion: "is not included in the list"
