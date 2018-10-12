@@ -48,7 +48,7 @@ fr:
         website: "Adresse internet"
         phone: "Téléphone"
         address: "Adresse géographique"
-        description: "Présentation"
+        description: "Courte présentation (100 caractères)"
         banner: "Bannière"
     errors:
       messages:

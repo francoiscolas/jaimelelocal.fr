@@ -1,5 +1,7 @@
 class Farm < ApplicationRecord
 
+  DESCRIPTION_MAX_LENGTH = 100
+
   geocoded_by :address, :latitude => :lat, :longitude => :lng
 
   has_attached_file :banner,

@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&libraries=places"></script>
+<% end %>
 <%= form_for(@farm, url: @farm.new_record? ? user_farm_path : edit_user_farm_path) do |f| %>
   <div>
     <%= f.label :name %>
@@ -5,6 +8,8 @@
     <% if @farm.errors[:name].any? %>
       <p class="field_error_message"><%= @farm.errors[:name][0] %></p>
     <% end %>
+  </div>
+  <div>
     <div class="input-group">
       <span class="input-group-label"><%= root_url %></span>
       <%= f.text_field :url, class: 'input-group-field', placeholder: 'ferme-de-martin' %>
@@ -14,10 +19,10 @@
     <% end %>
   </div>
   <div>
-    <%= f.label :website %>
-    <%= f.url_field :website %>
-    <% if @farm.errors[:website].any? %>
-      <p class="field_error_message"><%= @farm.errors[:website][0] %></p>
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 2, autoresize: true, maxlength: Farm::DESCRIPTION_MAX_LENGTH %>
+    <% if @farm.errors[:description].any? %>
+      <p class="field_error_message"><%= @farm.errors[:description][0] %></p>
     <% end %>
   </div>
   <div>
@@ -29,16 +34,19 @@
   </div>
   <div>
     <%= f.label :address %>
-    <%= f.text_area :address, rows: 2, autoresize: true, required: true %>
+    <%= f.text_field :address, required: true %>
+    <%= f.hidden_field :lat, :autocomplete => 'off' %>
+    <%= f.hidden_field :lng, :autocomplete => 'off' %>
     <% if @farm.errors[:address].any? %>
       <p class="field_error_message"><%= @farm.errors[:address][0] %></p>
     <% end %>
+    <div id="map"></div>
   </div>
   <div>
-    <%= f.label :description %>
-    <%= f.text_area :description, rows: 2, autoresize: true, placeholder: "Présentation de la ferme, du lieu, du système de production, etc..." %>
-    <% if @farm.errors[:description].any? %>
-      <p class="field_error_message"><%= @farm.errors[:description][0] %></p>
+    <%= f.label :website %>
+    <%= f.url_field :website %>
+    <% if @farm.errors[:website].any? %>
+      <p class="field_error_message"><%= @farm.errors[:website][0] %></p>
     <% end %>
   </div>
   <div class="actions">
