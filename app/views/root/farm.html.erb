@@ -1,67 +1,78 @@
 <% content_for :head do %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI"></script>
+  <script>
+    var farm = <%= @farm.to_json(:only => [:name, :address, :lat, :lng]).html_safe %>;
+    farm.page = [
+      {type: 'text', data: "<h1>Je me présente</h1><div>Ça y est, depuis peu, je suis maraîcher bio. En 2016, j'ai quitté mon travail pour me lancer dans cette nouvelle aventure. Après une année de formation à l'<a href=\"http://www.groupe-esa.com/\">ESA d'Angers</a>, je me lance sur ce terrain test de 3000m². Cela va me permettre d'améliorer ma technique et de me donner le temps de mûrir mon projet avant de m'installer pour de bon.<br> Mes récoltes ne sont pas certifiées AB (Agriculture Biologique) car je ne vais pas rester assez longtemps sur ce terrain pour pouvoir bénéficier de la certification. Cependant, je respecte strictement les règles de l'Agriculture Biologique. N'hésitez pas à venir me rendre visite pour vous rendre compte de la sincérité de ma démarche.&nbsp;<br><br></div><div>À bientôt.&nbsp;<br><br></div>"},
+      {type: 'map', data: null}
+    ];
+  </script>
+  <% if @is_owner %>
+    <script type="text/template" id="add-template">
+      <div class="add-row">
+        <b><i class="fi-plus"></i> Ajouter un bloc</b>
+        <div class="button-group">
+          <button class="add-text-row button">Texte</button>
+          <button class="add-map-row button">Carte</button>
+        </div>
+      </div>
+    </script>
+    <script type="text/template" id="edit-template">
+      <div class="edit-row">
+        <b><i class="fi-page-edit"></i> Modifier le bloc ci-dessous</b>
+        <div class="button-group">
+          <button class="ascend-row button" disabled><i class="fi-arrow-up"></i> Monter</button>
+          <button class="descend-row button" disabled><i class="fi-arrow-down"></i> Descendre</button>
+          <button class="remove-row alert button"><i class="fi-minus"></i> Supprimer</button>
+        </div>
+      </div>
+    </script>
+    <script type="text/template" id="edit-text-template">
+      <div class="text-edit farm-row">
+        <input type="hidden" id="frt-${i}" value="${_.escape(data)}"/>
+        <trix-editor input="frt-${i}"></trix-editor>
+      </div>
+    </script>
+    <script type="text/template" id="edit-map-template">
+      <div class="map farm-row">
+        <iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>
+      </div>
+    </script>
+  <% else %>
+    <script type="text/template" id="text-template">
+      <div class="text farm-row">
+        ${data}
+      </div>
+    </script>
+    <script type="text/template" id="map-template">
+      <div class="map farm-row">
+        <iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>
+      </div>
+    </script>
+  <% end %>
 <% end %>
 <% content_for :title do "#{@farm.name} - " end %>
 <% content_for :pagename do "farm#{' is-owner' if @is_owner}" end %>
 <div class="banner" style="background-image:url(<%= asset_path @farm.banner %>)">
   <h2><%= @farm.name %></h2>
   <div class="row banner-btns">
-  <% if @is_owner %>
-    <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>
-      <%= f.label :banner, "Modifier l'image", class: 'update-banner banner-btn' %>
-      <%= f.file_field :banner, class: 'show-for-sr' %>
-      <button type="button" class="remove-banner banner-btn">Supprimer l'image</button>
-    <% end %>
-    <%= link_to 'Voir la page publique', farm_path(@farm), class: 'go-public banner-btn' %>
-  <% else %>
-    <% if user_signed_in? && current_user.subscribed_to?(@farm) %>
-      <%= link_to farm_subscribtion_path(@farm), method: :delete, class: 'unfollow banner-btn' do %>
-        NE PLUS SUIVRE
+    <% if @is_owner %>
+      <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>
+        <%= f.label :banner, "Modifier l'image", class: 'update-banner banner-btn' %>
+        <%= f.file_field :banner, class: 'show-for-sr' %>
+        <button type="button" class="remove-banner banner-btn">Supprimer l'image</button>
       <% end %>
+      <%= link_to 'Voir la page publique', farm_path(@farm), class: 'go-public banner-btn' %>
     <% else %>
-      <%= link_to farm_subscribtion_path(@farm), method: :post, class: 'follow banner-btn' do %>
-        SUIVRE
+      <% if user_signed_in? && current_user.subscribed_to?(@farm) %>
+        <%= link_to farm_subscribtion_path(@farm), method: :delete, class: 'unfollow banner-btn' do %>
+          NE PLUS SUIVRE
+        <% end %>
+      <% else %>
+        <%= link_to farm_subscribtion_path(@farm), method: :post, class: 'follow banner-btn' do %>
+          SUIVRE
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
   </div>
 </div>
-<div class="row content">
-  <div data-equalizer data-equalize-on="medium">
-    <div class="small-12 medium-<%= @farm.description.blank? ? '9' : '7' %> columns hide-for-small-only">
-      <div class="photos box" data-equalizer-watch>
-        <h3>Photos</h3>
-      </div>
-    </div>
-    <div class="small-12 medium-<%= @farm.description.blank? ? '3' : '5' %> columns">
-      <div class="infos box" data-equalizer-watch>
-        <h3>
-          Infos
-          <% if @is_owner %>
-            <%= link_to "Modifier", edit_user_farm_path, class: "small button" %>
-          <% end %>
-        </h3>
-        <div class="row">
-          <% if !@farm.description.blank? %>
-            <div class="small-12 medium-6 columns">
-              <ul>
-                <li><i class="fi-comment"></i> <%= simple_format @farm.description, nil, wrapper_tag: 'span' %></li>
-              </ul>
-            </div>
-            <div class="small-12 medium-6 columns">
-          <% else %>
-            <div class="small-12 columns">
-          <% end %>
-            <ul>
-              <li><i class="fi-telephone"></i> <%= link_to @farm.phone, "tel://#{@farm.phone}" %></li>
-              <li><i class="fi-marker"></i> <%= simple_format @farm.address, nil, wrapper_tag: 'span' %></li>
-              <% if !@farm.website.blank? %>
-                <li><i class="fi-web"></i> <%= link_to @farm.website %></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="farm-rows"></div>
