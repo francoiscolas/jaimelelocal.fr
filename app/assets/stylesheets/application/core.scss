@@ -15,6 +15,8 @@ header {
   }
   #actions {
     text-align: right;
+    form {
+      display: inline-block; }
     .action {
       @include button(false, $primary-color, darken($primary-color, 5%), $white, solid);
       @include button-click-effect;

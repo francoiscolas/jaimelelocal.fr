@@ -15,6 +15,7 @@ body.farm {
     }
   }
   .banner {
+    background-position: center;
     background-size: cover;
     height: 200px;
     position: relative;
@@ -65,13 +66,9 @@ body.farm {
     @extend .medium-centered;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    &.text {
-      h1 { @extend h3; text-align: center; }
-      div { text-align: justify; }
-    }
-    &.text-edit {
-      trix-editor h1 { @extend h3; text-align: center; }
-      trix-editor div { text-align: justify; }
+    .content-edit {
+      display: none;
+      margin: 3rem 0 1rem;
     }
     &.map {
       margin-left: 0;
@@ -87,16 +84,14 @@ body.farm {
       }
     }
   }
-  .add-row, .edit-row {
-    font-variant: small-caps;
-    text-align: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    width: 100%;
-    .button, .button-group {
+  .owner-ui {
+    position: absolute;
+    .rbutton {
+      @include button(false, red, auto, white, solid);
       font-variant: small-caps;
-      margin-bottom: 0;
+    }
+    .dropdown-pane {
+      padding: 0;
     }
   }
 }

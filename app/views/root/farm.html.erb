@@ -1,48 +1,46 @@
 <% content_for :head do %>
+  <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css" />
   <script>
     var farm = <%= @farm.to_json(:only => [:name, :address, :lat, :lng]).html_safe %>;
-    farm.page = [
-      {type: 'text', data: "<h1>Je me présente</h1><div>Ça y est, depuis peu, je suis maraîcher bio. En 2016, j'ai quitté mon travail pour me lancer dans cette nouvelle aventure. Après une année de formation à l'<a href=\"http://www.groupe-esa.com/\">ESA d'Angers</a>, je me lance sur ce terrain test de 3000m². Cela va me permettre d'améliorer ma technique et de me donner le temps de mûrir mon projet avant de m'installer pour de bon.<br> Mes récoltes ne sont pas certifiées AB (Agriculture Biologique) car je ne vais pas rester assez longtemps sur ce terrain pour pouvoir bénéficier de la certification. Cependant, je respecte strictement les règles de l'Agriculture Biologique. N'hésitez pas à venir me rendre visite pour vous rendre compte de la sincérité de ma démarche.&nbsp;<br><br></div><div>À bientôt.&nbsp;<br><br></div>"},
-      {type: 'map', data: null}
-    ];
+    <% if @farm.page_content.blank? %>
+      farm.page_content = [
+        {type: 'text', data: "<h1 class=\"ql-align-center\">Titre</h1><p class=\"ql-align-justify\">Votre texte ici...</p><p><br></p>"},
+        {type: 'map', data: null},
+      ];
+    <% else %>
+      farm.page_content = <%= @farm.page_content.to_json.html_safe %>;
+    <% end %>
   </script>
   <% if @is_owner %>
-    <script type="text/template" id="add-template">
-      <div class="add-row">
-        <b><i class="fi-plus"></i> Ajouter un bloc</b>
-        <div class="button-group">
-          <button class="add-text-row button">Texte</button>
-          <button class="add-map-row button">Carte</button>
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script type="text/template" id="owner-ui-template">
+      <div class="owner-ui">
+        <button class="rbutton" data-toggle="add-row-menu">
+          <i class="fi-plus"></i> Ajouter un bloc
+        </button>
+        <button class="rbutton" data-toggle="edit-row-menu">
+          <i class="fi-page-edit"></i> Modifier
+        </button>
+        <button class="rbutton" id="preview-row-btn">
+          <i class="fi-eye"></i> Prévisualiser
+        </button>
+        <div id="add-row-menu" class="dropdown-pane" data-dropdown data-close-on-click="true">
+          <ul class="vertical menu align-left">
+            <li><a class="text"><i class="fi-pencil"></i> Texte</a></li>
+            <li><a class="map"><i class="fi-marker"></i> Carte</a></li>
+          </ul>
         </div>
-      </div>
-    </script>
-    <script type="text/template" id="edit-template">
-      <div class="edit-row">
-        <b><i class="fi-page-edit"></i> Modifier le bloc ci-dessous</b>
-        <div class="button-group">
-          <button class="ascend-row button" disabled><i class="fi-arrow-up"></i> Monter</button>
-          <button class="descend-row button" disabled><i class="fi-arrow-down"></i> Descendre</button>
-          <button class="remove-row alert button"><i class="fi-minus"></i> Supprimer</button>
+        <div id="edit-row-menu" class="dropdown-pane" data-dropdown data-close-on-click="true" data-dropdown-position="bottom">
+          <ul class="vertical menu align-left">
+            <li><a class="edit"><i class="fi-page-edit"></i> Modifier</a></li>
+            <li><a class="remove"><i class="fi-minus"></i> Supprimer</a></li>
+            <li><a class="ascend"><i class="fi-arrow-up"></i> Monter</a></li>
+            <li><a class="descend"><i class="fi-arrow-down"></i> Descendre</a></li>
+          </ul>
         </div>
-      </div>
-    </script>
-    <script type="text/template" id="edit-text-template">
-      <div class="text-edit farm-row">
-        <input type="hidden" id="frt-${i}" value="${_.escape(data)}"/>
-        <trix-editor input="frt-${i}"></trix-editor>
-      </div>
-    </script>
-    <script type="text/template" id="edit-map-template">
-      <div class="map farm-row">
-        <iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>
       </div>
     </script>
   <% else %>
-    <script type="text/template" id="text-template">
-      <div class="text farm-row">
-        ${data}
-      </div>
-    </script>
     <script type="text/template" id="map-template">
       <div class="map farm-row">
         <iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>
@@ -52,13 +50,23 @@
 <% end %>
 <% content_for :title do "#{@farm.name} - " end %>
 <% content_for :pagename do "farm#{' is-owner' if @is_owner}" end %>
-<div class="banner" style="background-image:url(<%= asset_path @farm.banner %>)">
+<% content_for :actions do %>
+  <% if @is_owner %>
+    <%= form_for @farm, url: user_farm_path, html: { id: 'page-content-form' } do |f| %>
+      <%= f.hidden_field :page_content %>
+      <button class="action" type="button">
+        <i class="fi-save"></i><span class="hide-for-small-only"> Enregistrer les modifications</span>
+      </button>
+    <% end %>
+  <% end %>
+<% end %>
+<div class="banner" style="background-image:url(<%= asset_path @farm.page_header %>)">
   <h2><%= @farm.name %></h2>
   <div class="row banner-btns">
     <% if @is_owner %>
       <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>
-        <%= f.label :banner, "Modifier l'image", class: 'update-banner banner-btn' %>
-        <%= f.file_field :banner, class: 'show-for-sr' %>
+        <%= f.label :page_header, "Modifier l'image", class: 'update-banner banner-btn' %>
+        <%= f.file_field :page_header, class: 'show-for-sr' %>
         <button type="button" class="remove-banner banner-btn">Supprimer l'image</button>
       <% end %>
       <%= link_to 'Voir la page publique', farm_path(@farm), class: 'go-public banner-btn' %>

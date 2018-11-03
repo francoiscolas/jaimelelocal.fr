@@ -44,7 +44,7 @@ Rails.application.routes.draw do
         post '/destroy',  to: 'subscribtions#destroy',  on: :collection
       end
       patch '/parametres', to: 'farms#update', as: nil
-      patch '/',           to: 'farms#update_banner'
+      patch '/',           to: 'farms#update_page'
     end
   end
 

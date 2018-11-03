@@ -10,7 +10,8 @@ class CreateFarms < ActiveRecord::Migration[5.0]
       t.text        :address
       t.float       :lat
       t.float       :lng
-      t.attachment  :banner
+      t.attachment  :page_header
+      t.json        :page_content
 
       t.timestamps
     end

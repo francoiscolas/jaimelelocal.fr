@@ -32,6 +32,10 @@ trix-editor {
   height: auto !important;
 }
 
+.quill {
+  min-height: 200px;
+}
+
 .ui-autocomplete {
   background: $input-background;
   border: $input-border;

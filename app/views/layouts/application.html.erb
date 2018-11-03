@@ -17,9 +17,7 @@
       </h1>
     </div>
     <div class="small-4 medium-8 columns" id="actions">
-      <button class="action" type="button">
-        <i class="fi-save"></i><span class="hide-for-small-only"> Enregistrer les modifications</span>
-      </button>
+      <%= yield :actions %>
       <% if !user_has_farm? %>
         <%= link_to i_am_farmer_path, class: 'action i-am-a-farmer hide-for-small-only' do %>
           <i class="fi-arrow-right"></i> Je suis producteur

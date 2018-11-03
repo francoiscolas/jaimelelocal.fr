@@ -31,11 +31,11 @@ class Account::FarmsController < Account::AccountController
   end
 
   # PATCH /account/farm (user_farm_path)
-  def update_banner
+  def update_page
     @farm = current_user.farm
-    @farm.banner = (params[:farm]) ? params[:farm][:banner] : nil
-    if !@farm.save
-      flash[:alert] = @farm.errors[:banner][0]
+
+    if @farm.update(farm_params)
+      flash[:notice] = t('.updated')
     end
     redirect_to user_farm_path
   end
