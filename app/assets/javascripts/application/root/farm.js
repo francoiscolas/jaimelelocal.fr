@@ -20,7 +20,7 @@ $(function () {
 
   var Header = function () {
     this.$el = $('.banner');
-    this.$el.on('click', '.remove-banner.action-btn', _.bind(this.submitForm, this));
+    this.$el.on('click', '.remove-banner.banner-btn', _.bind(this.submitForm, this));
     this.$el.on('change', 'input[type=file]', _.bind(this.submitForm, this));
   };
 

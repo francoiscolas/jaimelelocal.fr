@@ -49,7 +49,7 @@ fr:
         phone: "Téléphone"
         address: "Adresse géographique"
         description: "Courte présentation (100 caractères)"
-        banner: "Bannière"
+        page_header: "Bannière"
     errors:
       messages:
         inclusion: "is not included in the list"
@@ -74,9 +74,9 @@ fr:
       models:
         farm:
           attributes:
-            banner:
+            page_header:
               in_between: "L'image ne doit pas dépasser %{max}."
-            banner_content_type:
+            page_header_content_type:
               invalid: "Le fichier doit être une image valide."
   number:
     human:

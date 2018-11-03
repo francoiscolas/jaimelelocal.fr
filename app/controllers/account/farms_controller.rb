@@ -34,7 +34,12 @@ class Account::FarmsController < Account::AccountController
   def update_page
     @farm = current_user.farm
 
-    if @farm.update(farm_params)
+    if params[:farm].blank? # => remove page_header
+      @farm.page_header = nil
+      if !@farm.save
+        flash[:alert] = @farm.errors[:banner][0]
+      end
+    elsif @farm.update(farm_params)
       flash[:notice] = t('.updated')
     end
     redirect_to user_farm_path
