@@ -47,7 +47,8 @@ $(function () {
     if (_.isString(typeObj.name)
         && _.isFunction(typeObj.makeFunc)
         && _.isFunction(typeObj.editFunc)
-        && _.isFunction(typeObj.prevFunc))
+        && _.isFunction(typeObj.prevFunc)
+        && _.isFunction(typeObj.saveFunc))
       this.types[typeObj.name] = typeObj;
   };
 
@@ -125,7 +126,7 @@ $(function () {
 
     if (typeObj) {
       var $rows = this.getRows();
-      var $row  = typeObj.makeFunc.call(typeObj, farm, row.data)
+      var $row  = typeObj.makeFunc.call(typeObj, this.farm, row.data)
         .data('typeName', typeObj.name);
   
       if (i == 0)
@@ -140,11 +141,11 @@ $(function () {
   };
 
   Rows.prototype._onAddRowBtnClick = function ($btn) {
-    var type = $btn.attr('class');
-    var $row = $btn.parents('.farm-row');
+    var typeObj = this.types[$btn.attr('class')];
+    var $row    = $btn.parents('.farm-row');
    
-    this.insertRow({type: type, data: null},
-      this.getRows().index($row.prev()) + 1);
+    this.insertRow({type: typeObj.name, data: typeObj.defaultData},
+      this.getRows().index($row) + 1);
     this.saveManager.setChanged(true);
     this.renderOwnerUi($row);
   };
@@ -176,8 +177,7 @@ $(function () {
     if (this.isEditing) return ;
     var typeObj = this.types[$row.data('typeName')];
 
-    if (typeObj) {
-      typeObj.editFunc.call(typeObj, $row);
+    if (typeObj && typeObj.editFunc.call(typeObj, $row)) {
       $row.find('.content').toggle();
       $row.find('.content-edit').toggle();
       this.isEditing = true;
@@ -216,6 +216,7 @@ $(function () {
 
   Rows.TextRow = {
     name: 'text',
+    defaultData: '<p>Votre texte ici ...</p>',
     template: _.template(
       '<div class="farm-row text">' +
         '<div class="content">' +
@@ -234,8 +235,9 @@ $(function () {
       return $row;
     },
     editFunc: function ($row) {
-      if ($row.data('quill')) return ;
-      $row.data('quill', Helpers.newQuill($row.find('.content-edit div').get(0)));
+      if (!$row.data('quill'))
+        $row.data('quill', Helpers.newQuill($row.find('.content-edit div').get(0)));
+      return true;
     },
     prevFunc: function ($row) {
       var quill = $row.data('quill');
@@ -251,12 +253,17 @@ $(function () {
 
   Rows.MapRow = {
     name: 'map',
-    template: _.template($((isOwner ? '#edit-' : '#') + 'map-template').html()),
-    makeFunc: function (row, farm) {
-      return $(this.template({data: row.data, farm: farm}));
+    template: _.template(
+      '<div class="map farm-row">' +
+        '<iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>' +
+      '</div>'
+    ),
+    makeFunc: function (farm, rowData) {
+      return $(this.template({farm: farm, rowData: rowData}));
     },
-    saveFunc: function () {
-    },
+    editFunc: _.noop,
+    prevFunc: _.noop,
+    saveFunc: _.noop,
   };
 
   //

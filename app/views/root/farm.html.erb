@@ -40,12 +40,6 @@
         </div>
       </div>
     </script>
-  <% else %>
-    <script type="text/template" id="map-template">
-      <div class="map farm-row">
-        <iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>
-      </div>
-    </script>
   <% end %>
 <% end %>
 <% content_for :title do "#{@farm.name} - " end %>
