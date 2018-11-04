@@ -11,6 +11,8 @@ Farm.create({
   user_id: 1,
   name: "Les jardins de Béné",
   url: "les-jardins-de-bene",
-  address: "Esplanade Jean Moulin\n49460 Montreuil-Juigné",
+  address: "Allée Frédéric Chopin, 49460 Montreuil-Juigné, France",
+  lat: 47.54076892246994,
+  lng: -0.6044452259033051,
   phone: "06 95 18 14 22"
 })
