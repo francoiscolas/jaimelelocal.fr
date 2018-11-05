@@ -317,7 +317,7 @@ $(function () {
       +'<div class="contact farm-row">'
         +'<div class="content">'
           +'<div class="ql-editor">${rowData.text}</div>'
-          +'<form>'
+          +'<form action="${window.location.pathname}/sendmail" accept-charset="UTF-8" method="post">'
             +'<div>'
               +'<label for="contact_name">Prénom NOM</label>'
               +'<input id="contact_name" name="contact[name]" type="text" required/>'

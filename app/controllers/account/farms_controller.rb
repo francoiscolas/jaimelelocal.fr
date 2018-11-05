@@ -8,6 +8,7 @@ class Account::FarmsController < Account::AccountController
   # GET /account/farm/new (new_user_farm_path)
   def new
     @farm = current_user.build_farm
+    @farm.email = current_user.email
     render :new
   end
 

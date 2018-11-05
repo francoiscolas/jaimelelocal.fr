@@ -14,5 +14,6 @@ Farm.create({
   address: "Allée Frédéric Chopin, 49460 Montreuil-Juigné, France",
   lat: 47.54076892246994,
   lng: -0.6044452259033051,
+  email: "francois@jaimelelocal.fr",
   phone: "06 95 18 14 22"
 })

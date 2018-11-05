@@ -25,8 +25,10 @@ ActiveRecord::Schema.define(version: 2017_11_10_205027) do
     t.integer "user_id"
     t.string "name"
     t.string "url"
-    t.string "website"
+    t.string "shortdesc"
+    t.string "email"
     t.string "phone"
+    t.string "website"
     t.text "address"
     t.float "lat"
     t.float "lng"
@@ -37,7 +39,6 @@ ActiveRecord::Schema.define(version: 2017_11_10_205027) do
     t.json "page_content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
     t.index ["name"], name: "index_farms_on_name", unique: true
     t.index ["url"], name: "index_farms_on_url", unique: true
     t.index ["user_id"], name: "index_farms_on_user_id"

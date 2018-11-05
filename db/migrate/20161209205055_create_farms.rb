@@ -5,8 +5,10 @@ class CreateFarms < ActiveRecord::Migration[5.0]
 
       t.string      :name
       t.string      :url
-      t.string      :website
+      t.string      :shortdesc
+      t.string      :email
       t.string      :phone
+      t.string      :website
       t.text        :address
       t.float       :lat
       t.float       :lng

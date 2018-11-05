@@ -1,6 +1,6 @@
 class Farm < ApplicationRecord
 
-  DESCRIPTION_MAX_LENGTH = 100
+  SHORTDESC_MAX_LENGTH = 100
 
   geocoded_by :address, :latitude => :lat, :longitude => :lng
 
@@ -26,6 +26,7 @@ class Farm < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { minimum: 3 }
   validates :url, presence: true, uniqueness: true, length: { minimum: 3 }
   validates :address, presence: true
+  validates :email, presence: true, format: { with: Devise::email_regexp }
   validates :phone, presence: true, format: { with: /\A([0-9]{2} ){4}[0-9]{2}\Z/ }
   validates :page_header, attachment_content_type: { content_type: /image/ }
   validates :page_header, attachment_size: { in: 0..800.kilobytes }

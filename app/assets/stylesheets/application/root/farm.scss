@@ -20,10 +20,11 @@ body.farm {
     height: 200px;
     position: relative;
     @include breakpoint(medium) {
-      height: 555px; }
+      height: 600px; }
     h2 {
       font-family: 'Gloria Hallelujah', sans-serif;
-      font-weight: bold;
+      font-size: 4rem;
+      font-weight: normal;
       color: $white;
       text-align: center;
       text-decoration: underline;
@@ -42,20 +43,17 @@ body.farm {
       @include button-click-effect(light);
       font-weight: normal;
       text-decoration: none;
-      margin: 0;
-      padding: 0.4em;
+      box-shadow: 0 0 4px $light-gray;
       position: absolute;
       right: 1rem;
       bottom: 1rem;
+      margin: 0;
       &.follow {
-        @include button-style($alert-color, auto, $white);
-        font-size: large;
-        font-weight: bold;
-      }
+        @include button-style($alert-color, auto, $white); }
       &.update-banner {
-        bottom: 5rem; }
+        bottom: 6rem; }
       &.remove-banner {
-        bottom: 3rem; }
+        bottom: 3.5rem; }
     }
   }
   .farm-row {

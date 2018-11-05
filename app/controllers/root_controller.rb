@@ -1,6 +1,7 @@
 class RootController < ApplicationController
 
   skip_before_action :redirect_to_landing, only: [:landing, :skip_landing]
+  skip_before_action :verify_authenticity_token, only: :sendmail
 
   def landing
     render layout: false
@@ -52,7 +53,7 @@ class RootController < ApplicationController
 
   # GET farm_path
   def farm
-    @farm = Farm.find_by_url(params[:url]) or
+    @farm = Farm.find_by_url(params[:farm_url]) or
       raise ActionController::RoutingError, 'Not Found'
     @is_owner = false
   end
@@ -80,6 +81,23 @@ class RootController < ApplicationController
       store_location_for(:user, farm_path(@farm))
       redirect_to new_user_session_path
     end
+  end
+
+  def sendmail
+    @farm = Farm.find_by_url(params[:farm_url]) or
+      raise ActionController::RoutingError, 'Not Found'
+
+    subject = params[:contact][:subject]
+    subject.prepend("/ ") if !subject.blank?
+
+    ApplicationMailer.mailto(
+      to: @farm.email,
+      from: "#{params[:contact][:name]} <#{params[:contact][:email]}>",
+      subject: "Jaimelelocal.fr / Contact #{subject}",
+      body: params[:contact][:msg]
+    ).deliver
+
+    redirect_to farm_path(@farm), notice: t('.sent')
   end
 
   private

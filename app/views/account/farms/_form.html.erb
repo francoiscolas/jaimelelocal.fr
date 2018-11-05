@@ -19,10 +19,17 @@
     <% end %>
   </div>
   <div>
-    <%= f.label :description %>
-    <%= f.text_area :description, rows: 2, autoresize: true, maxlength: Farm::DESCRIPTION_MAX_LENGTH %>
-    <% if @farm.errors[:description].any? %>
-      <p class="field_error_message"><%= @farm.errors[:description][0] %></p>
+    <%= f.label :shortdesc %>
+    <%= f.text_area :shortdesc, rows: 2, autoresize: true, maxlength: Farm::SHORTDESC_MAX_LENGTH %>
+    <% if @farm.errors[:shortdesc].any? %>
+      <p class="field_error_message"><%= @farm.errors[:shortdesc][0] %></p>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :email %>
+    <%= f.phone_field :email, required: true %>
+    <% if @farm.errors[:email].any? %>
+      <p class="field_error_message"><%= @farm.errors[:email][0] %></p>
     <% end %>
   </div>
   <div>
