@@ -369,6 +369,46 @@ $(function () {
     },
   };
 
+  Rows.ImageRow = {
+    id: 'image',
+    name: '<i class="fi-photo"></i> Image',
+    defaultData: _.noop,
+    template: _.template(''
+      +'<div class="image expanded farm-row">'
+        +'<div class="content"></div>'
+        +'<div class="content-edit">'
+          +'<label for="image_row_input">Changer l\'image...</label>'
+          +'<input type="file" id="image_row_input"/>'
+        +'</div>'
+      +'</div>'
+    ),
+    makeFunc: function (farm, rowData) {
+      $row = $(this.template({farm: farm, rowData: rowData}));
+      if (rowData.dataUrl)
+        $row.find('.content, .content-edit').css('background-image', 'url(' + rowData.dataUrl + ')');
+      $row.find('input').on('change', function () {
+        var file   = this.files[0];
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+          $row.data('dataUrl', reader.result);
+          $row.find('.content, .content-edit').css('background-image', 'url(' + reader.result + ')');
+        }, false);
+
+        if (file)
+          reader.readAsDataURL(file);
+      });
+      return $row;
+    },
+    editFunc: function ($row) {
+      return true;
+    },
+    prevFunc: _.noop,
+    saveFunc: function ($row) {
+      return {dataUrl: $row.data('dataUrl')};
+    },
+  };
+
   //
   // SaveManager
 
@@ -406,9 +446,10 @@ $(function () {
   var header = new Header();
   var rows = new Rows({farm: window.farm, saveManager: save});
 
-  rows.registerType(Rows.TextRow);
-  rows.registerType(Rows.MapRow);
   rows.registerType(Rows.ContactRow);
+  rows.registerType(Rows.ImageRow);
+  rows.registerType(Rows.MapRow);
+  rows.registerType(Rows.TextRow);
   rows.render();
 
   save.setOnBeforeSaveListener(function () {
