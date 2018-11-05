@@ -20,7 +20,7 @@ body.farm {
     height: 200px;
     position: relative;
     @include breakpoint(medium) {
-      height: 500px; }
+      height: 555px; }
     h2 {
       font-family: 'Gloria Hallelujah', sans-serif;
       font-weight: bold;
@@ -60,28 +60,29 @@ body.farm {
   }
   .farm-row {
     @extend .row;
-    @extend .columns;
-    @extend .small-12;
-    @extend .medium-8;
-    @extend .medium-centered;
     margin-top: 2rem;
     margin-bottom: 2rem;
     .content-edit {
       display: none;
       margin: 3rem 0 1rem;
     }
-    &.map {
-      margin-left: 0;
-      margin-right: 0;
-      padding-left: 0;
-      padding-right: 0;
-      max-width: none;
+    &.contact .content,
+    &.contact .content-edit,
+    &.text .content,
+    &.text .content-edit {
+      @extend .columns;
+      @extend .small-12;
+      @extend .medium-8;
+      @extend .medium-centered;
+    }
+    &.contact .content,
+    &.contact .content-edit {
+      @extend .large-6;
+    }
+    &.map iframe {
+      border: 0;
       width: 100%;
-      iframe {
-        border: 0;
-        width: 100%;
-        height: 400px;
-      }
+      height: 400px;
     }
   }
   .owner-ui {

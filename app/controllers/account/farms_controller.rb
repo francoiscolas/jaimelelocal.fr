@@ -30,17 +30,21 @@ class Account::FarmsController < Account::AccountController
     render :'root/farm'
   end
 
-  # PATCH /account/farm (user_farm_path)
+  # POST /account/farm (user_farm_path)
   def update_page
     @farm = current_user.farm
 
-    if params[:farm].blank? # => remove page_header
-      @farm.page_header = nil
-      if !@farm.save
-        flash[:alert] = @farm.errors[:banner][0]
+    if params[:farm].blank? || params[:farm][:page_header].present?
+      @farm.page_header = (params[:farm]) ? params[:farm][:page_header] : nil
+      if @farm.save
+        flash[:notice] = t('.updated')
+      else
+        flash[:alert] = @farm.errors[:page_header][0]
       end
-    elsif @farm.update(farm_params)
-      flash[:notice] = t('.updated')
+    else
+      if @farm.update(farm_params)
+        flash[:notice] = t('.updated')
+      end
     end
     redirect_to user_farm_path
   end

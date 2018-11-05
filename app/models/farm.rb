@@ -28,7 +28,7 @@ class Farm < ApplicationRecord
   validates :address, presence: true
   validates :phone, presence: true, format: { with: /\A([0-9]{2} ){4}[0-9]{2}\Z/ }
   validates :page_header, attachment_content_type: { content_type: /image/ }
-  validates :page_header, attachment_size: { in: 0..500.kilobytes }
+  validates :page_header, attachment_size: { in: 0..800.kilobytes }
 
   #
   # Accessors

@@ -43,13 +43,43 @@ $(function () {
     this.types = {};
   };
 
+  Rows.ownerUiTemplate = _.template(''
+    +'<div class="owner-ui">'
+      +'<button class="rbutton" data-toggle="add-row-menu">'
+        +'<i class="fi-plus"></i> Ajouter un bloc'
+      +'</button>'
+      +'<button class="rbutton" data-toggle="edit-row-menu">'
+        +'<i class="fi-page-edit"></i> Modifier'
+      +'</button>'
+      +'<button class="rbutton" id="preview-row-btn">'
+        +'<i class="fi-eye"></i> Prévisualiser'
+      +'</button>'
+      +'<div id="add-row-menu" class="dropdown-pane" data-dropdown data-close-on-click="true">'
+        +'<ul class="vertical menu align-left">'
+          +'<% for (var id in types) { %>'
+           +'<li><a class="${id}">${types[id].name}</a></li>'
+          +'<% } %>'
+        +'</ul>'
+      +'</div>'
+      +'<div id="edit-row-menu" class="dropdown-pane" data-dropdown data-close-on-click="true" data-dropdown-position="bottom">'
+        +'<ul class="vertical menu align-left">'
+          +'<li><a class="edit"><i class="fi-page-edit"></i> Modifier</a></li>'
+          +'<li><a class="remove"><i class="fi-minus"></i> Supprimer</a></li>'
+          +'<li><a class="ascend"><i class="fi-arrow-up"></i> Monter</a></li>'
+          +'<li><a class="descend"><i class="fi-arrow-down"></i> Descendre</a></li>'
+        +'</ul>'
+      +'</div>'
+    +'</div>'
+  );
+
   Rows.prototype.registerType = function (typeObj) {
-    if (_.isString(typeObj.name)
+    if (_.isString(typeObj.id)
+        && _.isFunction(typeObj.defaultData)
         && _.isFunction(typeObj.makeFunc)
         && _.isFunction(typeObj.editFunc)
         && _.isFunction(typeObj.prevFunc)
         && _.isFunction(typeObj.saveFunc))
-      this.types[typeObj.name] = typeObj;
+      this.types[typeObj.id] = typeObj;
   };
 
   Rows.prototype.render = function () {
@@ -83,17 +113,17 @@ $(function () {
 
     this.getRows().each(function () {
       var $row = $(this);
-      var typeObj = that.types[$row.data('typeName')];
+      var typeObj = that.types[$row.data('typeId')];
 
       if (typeObj)
-        data.push({type: typeObj.name, data: typeObj.saveFunc($row)});
+        data.push({type: typeObj.id, data: typeObj.saveFunc($row)});
     });
     return data;
   };
 
   Rows.prototype.showOwnerUi = function ($row) {
     if (this.$ownerUi) return ;
-    this.$ownerUi = $(_.template($('#owner-ui-template').html())());
+    this.$ownerUi = $(Rows.ownerUiTemplate({types: this.types}));
     this.$ownerUi.appendTo($row);
     this.$ownerUi.find('.dropdown-pane').foundation();
     this.$ownerUi.show();
@@ -126,8 +156,9 @@ $(function () {
 
     if (typeObj) {
       var $rows = this.getRows();
-      var $row  = typeObj.makeFunc.call(typeObj, this.farm, row.data)
-        .data('typeName', typeObj.name);
+      var data  =_.get(row, 'data', typeObj.defaultData(this.farm));
+      var $row  = typeObj.makeFunc.call(typeObj, this.farm, data)
+        .data('typeId', typeObj.id);
   
       if (i == 0)
         this.$el.prepend($row);
@@ -144,7 +175,7 @@ $(function () {
     var typeObj = this.types[$btn.attr('class')];
     var $row    = $btn.parents('.farm-row');
    
-    this.insertRow({type: typeObj.name, data: typeObj.defaultData},
+    this.insertRow({type: typeObj.id, data: typeObj.defaultData(this.farm)},
       this.getRows().index($row) + 1);
     this.saveManager.setChanged(true);
     this.renderOwnerUi($row);
@@ -162,7 +193,7 @@ $(function () {
   Rows.prototype._onPreviewRowBtnClick = function ($btn) {
     if (!this.isEditing) return ;
     var $row    = $btn.parents('.farm-row');
-    var typeObj = this.types[$row.data('typeName')];
+    var typeObj = this.types[$row.data('typeId')];
 
     if (typeObj) {
       typeObj.prevFunc.call(typeObj, $row);
@@ -175,7 +206,7 @@ $(function () {
 
   Rows.prototype._onEditRowAction = function ($row) {
     if (this.isEditing) return ;
-    var typeObj = this.types[$row.data('typeName')];
+    var typeObj = this.types[$row.data('typeId')];
 
     if (typeObj && typeObj.editFunc.call(typeObj, $row)) {
       $row.find('.content').toggle();
@@ -215,17 +246,20 @@ $(function () {
   };
 
   Rows.TextRow = {
-    name: 'text',
-    defaultData: '<p>Votre texte ici ...</p>',
-    template: _.template(
-      '<div class="farm-row text">' +
-        '<div class="content">' +
-          '<div class="ql-editor">${rowData}</div>' +
-        '</div>' +
-        '<div class="content-edit">' +
-          '<div>${rowData}</div>' +
-        '</div>' +
-      '</div>'
+    id: 'text',
+    name: '<i class="fi-pencil"></i> Texte',
+    defaultData: function (farm) {
+      return {text: '<h1>Titre</h1><p>Votre texte ici ...</p>'};
+    },
+    template: _.template(''
+      +'<div class="text farm-row">'
+        +'<div class="content">'
+          +'<div class="ql-editor">${rowData.text}</div>'
+        +'</div>'
+        +'<div class="content-edit">'
+          +'<div>${rowData.text}</div>'
+        +'</div>'
+      +'</div>'
     ),
     makeFunc: function (farm, rowData) {
       var $row;
@@ -241,10 +275,10 @@ $(function () {
     },
     prevFunc: function ($row) {
       var quill = $row.data('quill');
-      var data  = quill.root.innerHTML;
+      var html  = quill.root.innerHTML;
 
-      $row.data('data', data);
-      $row.find('.content .ql-editor').html(data);
+      $row.data('data', {text: html});
+      $row.find('.content .ql-editor').html(html);
     },
     saveFunc: function ($row) {
       return $row.data('data');
@@ -252,11 +286,13 @@ $(function () {
   };
 
   Rows.MapRow = {
-    name: 'map',
-    template: _.template(
-      '<div class="map farm-row">' +
-        '<iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>' +
-      '</div>'
+    id: 'map',
+    name: '<i class="fi-marker"></i> Carte',
+    defaultData: _.noop,
+    template: _.template(''
+      +'<div class="map expanded farm-row">'
+        +'<iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>'
+      +'</div>'
     ),
     makeFunc: function (farm, rowData) {
       return $(this.template({farm: farm, rowData: rowData}));
@@ -264,6 +300,73 @@ $(function () {
     editFunc: _.noop,
     prevFunc: _.noop,
     saveFunc: _.noop,
+  };
+
+  Rows.ContactRow = {
+    id: 'contact',
+    name: '<i class="fi-mail"></i> Contact',
+    defaultData: function (farm) {
+      return {text: _.template(''
+        +'<h1 class="ql-align-center">Nous contacter</h1>'
+        +'<p class="ql-align-justify">Pour nous contacter, vous pouvez utiliser le formulaire ci-dessous,'
+        +' nous vous répondrons au plus vite. Vous pouvez aussi passer par'
+        +' <a href=\"tel:${farm.phone}\">téléphone au (${farm.phone})</a>.</p><p><br/></p>'
+      )()}
+    },
+    template: _.template(''
+      +'<div class="contact farm-row">'
+        +'<div class="content">'
+          +'<div class="ql-editor">${rowData.text}</div>'
+          +'<form>'
+            +'<div>'
+              +'<label for="contact_name">Prénom NOM</label>'
+              +'<input id="contact_name" name="contact[name]" type="text" required/>'
+            +'</div>'
+            +'<div>'
+              +'<label for="contact_email">Adresse électronique</label>'
+              +'<input id="contact_email" name="contact[email]" type="text" required/>'
+            +'</div>'
+            +'<div>'
+              +'<label for="contact_subject">Sujet</label>'
+              +'<input id="contact_subject" name="contact[subject]" type="text"/>'
+            +'</div>'
+            +'<div>'
+              +'<label for="contact_msg">Message</label>'
+              +'<textarea id="contact_msg" name="contact[msg]" rows="7" required></textarea>'
+            +'</div>'
+            +'<div class="actions">'
+              +'<button type="submit" class="button">'
+              +'<i class="fi-mail"></i> Envoyer</button>'
+            +'</div>'
+          +'</form>'
+        +'</div>'
+        +'<div class="content-edit">'
+          +'<div>${rowData.text}</div>'
+        +'</div>'
+      +'</div>'
+    ),
+    makeFunc: function (farm, rowData) {
+      var $row;
+      
+      $row = $(this.template({farm: farm, rowData: rowData}));
+      $row.data('data', rowData);
+      return $row;
+    },
+    editFunc: function ($row) {
+      if (!$row.data('quill'))
+        $row.data('quill', Helpers.newQuill($row.find('.content-edit div').get(0)));
+      return true;
+    },
+    prevFunc: function ($row) {
+      var quill = $row.data('quill');
+      var html  = quill.root.innerHTML;
+
+      $row.data('data', {text: html});
+      $row.find('.content .ql-editor').html(html);
+    },
+    saveFunc: function ($row) {
+      return $row.data('data');
+    },
   };
 
   //
@@ -305,6 +408,7 @@ $(function () {
 
   rows.registerType(Rows.TextRow);
   rows.registerType(Rows.MapRow);
+  rows.registerType(Rows.ContactRow);
   rows.render();
 
   save.setOnBeforeSaveListener(function () {

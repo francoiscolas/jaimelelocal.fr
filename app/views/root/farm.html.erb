@@ -1,11 +1,10 @@
 <% content_for :head do %>
   <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css" />
   <script>
-    var farm = <%=raw @farm.to_json(:only => [:name, :address, :lat, :lng]) %>;
+    var farm = <%=raw @farm.to_json(:only => [:name, :phone, :address, :lat, :lng]) %>;
     <% if @farm.page_content.blank? %>
       farm.page_content = [
-        {type: 'text', data: "<h1 class=\"ql-align-center\">Titre</h1><p class=\"ql-align-justify\">Votre texte ici...</p><p><br></p>"},
-        {type: 'map', data: null},
+        {type: 'text'}, {type: 'map'}, {type: 'contact'}
       ];
     <% else %>
       farm.page_content = <%=raw @farm.page_content %>;
@@ -13,33 +12,6 @@
   </script>
   <% if @is_owner %>
     <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
-    <script type="text/template" id="owner-ui-template">
-      <div class="owner-ui">
-        <button class="rbutton" data-toggle="add-row-menu">
-          <i class="fi-plus"></i> Ajouter un bloc
-        </button>
-        <button class="rbutton" data-toggle="edit-row-menu">
-          <i class="fi-page-edit"></i> Modifier
-        </button>
-        <button class="rbutton" id="preview-row-btn">
-          <i class="fi-eye"></i> Prévisualiser
-        </button>
-        <div id="add-row-menu" class="dropdown-pane" data-dropdown data-close-on-click="true">
-          <ul class="vertical menu align-left">
-            <li><a class="text"><i class="fi-pencil"></i> Texte</a></li>
-            <li><a class="map"><i class="fi-marker"></i> Carte</a></li>
-          </ul>
-        </div>
-        <div id="edit-row-menu" class="dropdown-pane" data-dropdown data-close-on-click="true" data-dropdown-position="bottom">
-          <ul class="vertical menu align-left">
-            <li><a class="edit"><i class="fi-page-edit"></i> Modifier</a></li>
-            <li><a class="remove"><i class="fi-minus"></i> Supprimer</a></li>
-            <li><a class="ascend"><i class="fi-arrow-up"></i> Monter</a></li>
-            <li><a class="descend"><i class="fi-arrow-down"></i> Descendre</a></li>
-          </ul>
-        </div>
-      </div>
-    </script>
   <% end %>
 <% end %>
 <% content_for :title do "#{@farm.name} - " end %>
