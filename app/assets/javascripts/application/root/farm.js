@@ -384,6 +384,7 @@ $(function () {
     ),
     makeFunc: function (farm, rowData) {
       $row = $(this.template({farm: farm, rowData: rowData}));
+      $row.data('data', rowData);
       if (rowData.dataUrl)
         $row.find('.content, .content-edit').css('background-image', 'url(' + rowData.dataUrl + ')');
       $row.find('input').on('change', function () {
@@ -391,7 +392,7 @@ $(function () {
         var reader = new FileReader();
 
         reader.addEventListener("load", function () {
-          $row.data('dataUrl', reader.result);
+          $row.data('data', {dataUrl: reader.result});
           $row.find('.content, .content-edit').css('background-image', 'url(' + reader.result + ')');
         }, false);
 
@@ -405,7 +406,7 @@ $(function () {
     },
     prevFunc: _.noop,
     saveFunc: function ($row) {
-      return {dataUrl: $row.data('dataUrl')};
+      return $row.data('data');
     },
   };
 
