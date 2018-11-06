@@ -6,10 +6,15 @@ fr:
   Thursday: "Jeudi"
   Friday: "Vendredi"
   Saturday: "Samedi"
+  root:
+    sendmail:
+      sent: "Votre message a bien été envoyé :)"
   account:
     farms:
       update:
         updated: "Votre compte a été modifié avec succès."
+      update_page:
+        updated: "Vos modifications ont été enregistrés avec succès :)"
     subscribtions:
       create:
         added:
