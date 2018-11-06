@@ -96,6 +96,12 @@ class RootController < ApplicationController
       subject: "Jaimelelocal.fr / Contact #{subject}",
       body: params[:contact][:msg]
     ).deliver
+    ApplicationMailer.mailto(
+      to: params[:contact][:email],
+      from: "#{params[:contact][:name]} <#{params[:contact][:email]}>",
+      subject: "Jaimelelocal.fr / Contact #{subject}",
+      body: params[:contact][:msg]
+    ).deliver
 
     redirect_to farm_path(@farm), notice: t('.sent')
   end
