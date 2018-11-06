@@ -27,7 +27,7 @@
   <% end %>
 <% end %>
 <div class="banner" style="background-image:url(<%= asset_path @farm.page_header %>)">
-  <h2><%= @farm.name %></h2>
+  <h1><%= @farm.name %></h1>
   <div class="row banner-btns">
     <% if @is_owner %>
       <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>

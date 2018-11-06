@@ -17,11 +17,11 @@ body.farm {
   .banner {
     background-position: center;
     background-size: cover;
-    height: 200px;
+    height: 300px;
     position: relative;
     @include breakpoint(medium) {
       height: 600px; }
-    h2 {
+    h1 {
       font-family: 'Gloria Hallelujah', sans-serif;
       font-weight: normal;
       color: $white;
@@ -83,13 +83,9 @@ body.farm {
     }
     &.image {
       background: black;
-      height: 400px;
-      .content, .content-edit {
-        background-position: center;
-        background-size: cover;
-        height: 100%;
-        margin: 0;
-      }
+      height: 250px;
+      @include breakpoint(medium) {
+        height: 500px; }
       label {
         color: white;
         background: black;
@@ -99,7 +95,14 @@ body.farm {
         padding: 2rem;
       }
       input {
-        display: none; }
+        display: none;
+      }
+      .content, .content-edit {
+        background-position: center;
+        background-size: cover;
+        height: 100%;
+        margin: 0;
+      }
     }
   }
   .owner-ui {
