@@ -76,10 +76,33 @@ body.farm {
     &.contact .content-edit {
       @extend .large-6;
     }
-    &.map iframe {
-      border: 0;
-      width: 100%;
-      height: 400px;
+    &.map {
+      .content {
+        @include breakpoint(medium) {
+          position: relative;
+          .infos {
+            background: $body-background;
+            box-shadow: 0 0 2px $light-gray;
+            position: absolute;
+            top: 42px;
+            right: 70px;
+            width: 300px;
+            margin: 0;
+            padding: 1rem;
+          }
+        }
+        .infos {
+          margin: 0 1rem 1rem;
+          .ql-editor { height: auto; }
+          .fi-marker { vertical-align: top; margin-right: 7px; }
+          .addr { display: inline-block; }
+        }
+        iframe {
+          border: 0;
+          width: 100%;
+          min-height: 400px;
+        }
+      }
     }
     &.image {
       background: black;

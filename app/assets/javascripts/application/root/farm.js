@@ -288,18 +288,69 @@ $(function () {
   Rows.MapRow = {
     id: 'map',
     name: '<i class="fi-marker"></i> Carte',
-    defaultData: _.noop,
+    defaultData: function (farm) {
+      return {text: _.template(''
+        +'<h1 class="ql-align-center">Ou ?</h1>'
+        +'<p class="ql-align-justify">Mettre ici les indications routières pour accéder à votre ferme.</p><p><br/></p>'
+      )()}
+    },
     template: _.template(''
       +'<div class="map expanded farm-row">'
-        +'<iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>'
+        +'<div class="content">'
+          +'<div class="infos">'
+            +'<div class="ql-editor">${rowData.text}</div>'
+            +'<i class="fi-marker"></i>'
+            +'<div class="addr">'
+              +'${_.replace(farm.address, /, /g, "<br/>")}<br/>'
+              +'<u>Lat</u> : ${farm.lat}<br/>'
+              +'<u>Lon</u> : ${farm.lng}'
+            +'</div>'
+          +'</div>'
+          +'<iframe src="https://www.google.com/maps/embed/v1/place?q=${farm.lat},${farm.lng}&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&language=fr" allowfullscreen></iframe>'
+        +'</div>'
+        +'<div class="content-edit">'
+          +'<div>${rowData.text}</div>'
+        +'</div>'
       +'</div>'
     ),
     makeFunc: function (farm, rowData) {
-      return $(this.template({farm: farm, rowData: rowData}));
+      var $row;
+
+      $row = $(this.template({farm: farm, rowData: rowData}));
+      $row.data('data', rowData);
+      this._resizeMap($row);
+      return $row;
     },
-    editFunc: _.noop,
-    prevFunc: _.noop,
-    saveFunc: _.noop,
+    editFunc: function ($row) {
+      if (!$row.data('quill'))
+        $row.data('quill', Helpers.newQuill($row.find('.content-edit div').get(0)));
+      return true;
+    },
+    prevFunc: function ($row) {
+      var quill = $row.data('quill');
+      var html  = quill.root.innerHTML;
+
+      $row.data('data', {text: html});
+      $row.find('.content .ql-editor').html(html);
+      this._resizeMap($row);
+    },
+    saveFunc: function ($row) {
+      return $row.data('data');
+    },
+    _resizeMap: function ($row) {
+      var $infos = $row.find('.infos');
+
+      _.defer(function () {
+        var isAbsolute = ($infos.css('position') == 'absolute');
+
+        $row.find('iframe').css(
+          'height', $infos.height()
+            + (isAbsolute ? $infos.position().top * 2 : 0)
+            + parseInt($infos.css('padding-top')) * 2
+            + 'px'
+        );
+      });
+    },
   };
 
   Rows.ContactRow = {
@@ -383,6 +434,8 @@ $(function () {
       +'</div>'
     ),
     makeFunc: function (farm, rowData) {
+      var $row;
+
       $row = $(this.template({farm: farm, rowData: rowData}));
       $row.data('data', rowData);
       if (rowData.dataUrl)
