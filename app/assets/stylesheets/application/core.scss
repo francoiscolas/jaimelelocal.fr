@@ -63,13 +63,14 @@ header {
 
 .flash {
   position: absolute;
-  top: 2rem;
+  z-index: 10000;
+  top: 4rem;
   left: 0;
   right: 0;
-  z-index: 10000;
   .callout {
     border: 0;
     color: $white;
+    box-shadow: 0 0 2px $black;
     &.success {
       background: $success-color;
       border-top: 4px solid darken($success-color, 7%);
