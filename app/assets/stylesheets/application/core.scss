@@ -36,6 +36,7 @@ header {
       }
     }
     #menu {
+      z-index: 99999;
       padding: 0;
       li.user-name {
         @extend .show-for-small-only;

@@ -20,4 +20,8 @@ module ApplicationHelper
     '<span class="logo"><b>jaimelelocal</b>.fr</span>'.html_safe
   end
 
+  def address_to_bloc(address)
+    address.gsub(/, /, '<br/>').html_safe
+  end
+
 end

@@ -26,9 +26,9 @@
     <% end %>
   <% end %>
 <% end %>
-<div class="banner" style="background-image:url(<%= asset_path @farm.page_header %>)">
+<div class="banner">
   <h1><%= @farm.name %></h1>
-  <div class="row banner-btns">
+  <div class="banner-btns" style="background-image:url(<%= asset_path @farm.page_header %>)">
     <% if @is_owner %>
       <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>
         <%= f.label :page_header, "Modifier l'image", class: 'update-banner banner-btn' %>
@@ -47,6 +47,28 @@
         <% end %>
       <% end %>
     <% end %>
+  </div>
+  <div class="infos">
+    <% if @farm.shortdesc.present? %>
+      <p><%= @farm.shortdesc %></p>
+    <% end %>
+    <i class="fi-telephone"></i>
+    <a href="tel://<%= @farm.phone %>">
+      <%= @farm.phone %></a><br/>
+    <i class="fi-mail"></i>
+    <a href="mailto://<%= @farm.email %>">
+      <%= @farm.email %></a><br/>
+    <% if @farm.website.present? %>
+      <i class="fi-web"></i>
+      <a href="<%= @farm.website %>">
+        <%= @farm.website %></a><br/>
+    <% end %>
+    <i class="fi-marker"></i>
+    <div>
+      <%=address_to_bloc @farm.address %>
+      <br/><u>Lat</u> : <%= @farm.lat %>
+      <br/><u>Lon</u> : <%= @farm.lng %>
+    </div>
   </div>
 </div>
 <div id="farm-rows"></div>

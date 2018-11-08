@@ -15,44 +15,70 @@ body.farm {
     }
   }
   .banner {
-    background-position: center;
-    background-size: cover;
-    height: 300px;
     position: relative;
-    @include breakpoint(medium) {
-      height: 600px; }
     h1 {
       font-family: 'Gloria Hallelujah', sans-serif;
       font-weight: normal;
       color: $white;
       text-align: center;
       text-decoration: underline;
-      text-shadow: 0 0 4px $dark-gray;
+      text-shadow: 0 0 4px $black;
       width: 100%;
       margin: 0;
       position: absolute;
+      z-index: 999;
       top: 1rem;
     }
     .banner-btns {
-      height: 100%;
+      background-position: center;
+      background-size: cover;
       position: relative;
+      z-index: 99;
+      height: 300px;
+      @include breakpoint(medium) {
+        height: 555px;
+      }
     }
     .banner-btn {
       @include button(false, $light-gray, auto, $body-font-color, solid);
       @include button-click-effect(light);
       font-weight: normal;
       text-decoration: none;
-      box-shadow: 0 0 4px $light-gray;
+      box-shadow: 0 0 4px $black;
       position: absolute;
       right: 1rem;
       bottom: 1rem;
       margin: 0;
+      @include breakpoint(medium) {
+        right: 3rem; }
       &.follow {
         @include button-style($alert-color, auto, $white); }
       &.update-banner {
         bottom: 6rem; }
       &.remove-banner {
         bottom: 3.5rem; }
+    }
+    .infos {
+      background: $body-background;
+      padding: 1rem;
+      @include breakpoint(medium) {
+        box-shadow: 0 0 4px $black;
+        max-width: 300px;
+        position: absolute;
+        z-index: 9999;
+        left: 3rem;
+        bottom: -1.5rem;
+      }
+      i {
+        vertical-align: top;
+        margin: 0 7px 0;
+      }
+      p {
+        text-align: justify;
+      }
+      div {
+        display: inline-block;
+      }
     }
   }
   .farm-row {
