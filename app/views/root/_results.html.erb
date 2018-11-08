@@ -1,16 +1,12 @@
-<div class="small-12 medium-8 columns">
-  <% if @farms.empty? %>
-    <div class="farms is-empty">
-      Aucun producteur trouvé :(
-    </div>
-  <% else %>
-    <div class="farms">
-      <ul>
-        <% @farms.each do |farm| %>
-          <li><%= link_to farm.name, farm_path(farm) %></li>
-        <% end %>
-      </ul>
-    </div>
-    <%= will_paginate @farms, :param_name => :p %>
-  <% end %>
-</div>
+{
+  'q': "<%=j raw @query %>",
+  'l': "<%=j raw @location_name %>",
+  'd': <%= @distance %>,
+<% if @location_coordinates %>
+  'lat': <%= @location_coordinates[0] %>,
+  'lng': <%= @location_coordinates[1] %>,
+<% end %>
+  'farms': <%=raw @farms.to_json(only: [
+    :id, :name, :url, :shortdesc, :address, :lat, :lng, :distance
+   ]) %>,
+}

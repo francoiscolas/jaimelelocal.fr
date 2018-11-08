@@ -10,6 +10,11 @@
   <%= yield :head %>
 </head>
 <body<%= (' class="' + yield(:pagename) + '"').html_safe if content_for?(:pagename) %>>
+  <div class="loading-bar">
+    <div class="line"></div>
+    <div class="subline inc"></div>
+    <div class="subline dec"></div>
+  </div>
   <header class="expanded row">
     <div class="small-8 medium-4 columns">
       <h1>

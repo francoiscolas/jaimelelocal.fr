@@ -48,9 +48,30 @@ body.home {
       }
     }
   }
-  .content {
-    min-height: 300px;
+  .search-result {
+    #map {
+      height: 500px;
+      .iw {
+        color: $black;
+        max-width: 200px;
+        .title {
+          font-size: 1.1em;
+          font-weight: bold;
+        }
+        .desc {
+          text-align: justify;
+        }
+      }
+    }
+    .no-location, .no-farm {
+      text-align: center;
+      font-family: 'Kite One', sans-serif;
+      font-size: 3rem;
+      margin: 5rem 1rem 10rem;
+      .small { font-size: 1.5rem; }
+    }
   }
+  /*
   .farms {
     padding: 0;
     ul {
@@ -67,4 +88,5 @@ body.home {
       }
     }
   }
+  */
 }

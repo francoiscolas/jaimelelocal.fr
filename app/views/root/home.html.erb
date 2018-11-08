@@ -1,5 +1,14 @@
 <% content_for :head do %>
   <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI"></script>
+  <script type="text/template" id="infowindow-tpl">
+    <div class="iw">
+      <div class="title">${farm.name}</div>
+      <div class="desc">${farm.shortdesc}</div>
+      <!--p>TODO / Production / label / etc</p-->
+      <a href="/${farm.url}">Voir la page...</a>
+    </div>
+  </script>
+  <script>$(function(){window._form.setResult(<%= render 'results' %>, false);})</script>
 <% end %>
 <% content_for :pagename do 'home' end %>
 <div class="expanded row text-center subtitle">
@@ -8,26 +17,29 @@
 <div class="row search-form">
   <form action="/" method="get" data-remote="true">
     <div class="medium-6 columns" id="query-input">
-      <input type="text" id="q" name="q" value="<%= @query %>" placeholder="Légume, fruit, ..."/>
+      <input type="text" id="q" name="q" placeholder="Légume, fruit, ..."/>
     </div>
     <div class="medium-6 columns" id="where-input">
-      <input type="text" id="l" name="l" value="<%= @location_name %>" placeholder="Lieu">
+      <input type="text" id="l" name="l" placeholder="Lieu" />
       <select id="d" name="d">
         <% [[10,'< 10'],[20,'< 20'],[50,'< 50'],[100,'< 100']].each do |v| %>
-          <option value="<%= v[0] %>" <%= 'selected="selected"' if @distance == v[0] %>><%= v[1] %> km</option>
+          <option value="<%= v[0] %>"><%= v[1] %> km</option>
         <% end %>
       </select>
     </div>
   </form>
 </div>
-<div class="expanded row">
-  <iframe
-     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102621.43915401265!2d-0.621340212963831!3d47.47651863080393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480878da00e58e9d%3A0x40d37521e0d9c30!2sAngers!5e0!3m2!1sfr!2sfr!4v1539287991468"
-     width="100%"
-     height="500px"
-     frameborder="0"
-     style="border:0"
-     allowfullscreen>
-  </iframe>
-  <%#= render 'results' %>
+<div class="expanded row search-result">
+  <div class="no-location">
+    <i class="fi-arrow-up"></i><br/>
+    Entrez un lieu de recherche ci-dessus.
+  </div>
+  <div class="no-farm">
+    <p><i class="fi-x"></i><br/>
+      Aucun producteur trouvé :(</p>
+    <p class="small">Essayez d'élargir votre recherche ou pourquoi pas
+      parler de <%= text_logo %> autour de vous pour nous faire connaître&nbsp;:)</p>
+  </div>
+  <div id="map"></div>
+  <div class="loading"></div>
 </div>

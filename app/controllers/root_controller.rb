@@ -19,13 +19,17 @@ class RootController < ApplicationController
 
     if params.key? :l
       @location = Geocoder.search(params[:l]).first
-    elsif false
+    else
       if session[:user_location]
         @location_name = session[:user_location]['name']
         @location_coordinates = session[:user_location]['coordinates']
       else
-        @location = request.location
-        @location = Geocoder.search('78.221.215.68').first
+        if Rails.env.development?
+          @location = Geocoder.search('78.221.215.68').first
+        else
+          @location = request.location
+        end
+
         if location_is_valid? @location
           session[:user_location] = {
             'name' => @location.city,
@@ -42,13 +46,11 @@ class RootController < ApplicationController
     @distance = params[:d].to_i
     @distance = 20 if @distance == 0
 
-    #if @location_coordinates
-    #  ids = Place.near(@location_coordinates, @distance).order('distance').select('id').map(&:farm_id)
-    #  @farms = Farm.where(:id => ids)
-    #else
-      @farms = Farm.order(:updated_at)
-    #end
-    @farms = @farms.page(params[:p]).per_page(10)
+    if @location_coordinates
+      @farms = Farm.near(@location_coordinates, @distance)
+    else
+      @farms = nil
+    end
   end
 
   # GET farm_path
@@ -109,7 +111,7 @@ class RootController < ApplicationController
   private
 
   def location_is_valid? location
-    location && location.coordinates != [0.0, 0.0]
+    location and location.coordinates != [0.0, 0.0]
   end
 
 end
