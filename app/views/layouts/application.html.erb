@@ -35,8 +35,7 @@
         <div id="menu" class="dropdown-pane" data-dropdown data-position="bottom" data-close-on-click="true">
           <ul class="vertical menu align-left">
             <li class="user-name"><%= current_user.name %></li>
-            <%= menu_box_item "Mon profil", edit_user_profile_path %>
-            <%= menu_box_item "Mes identifiants", edit_user_registration_path %>
+            <%= menu_box_item "Mon compte", edit_user_registration_path %>
             <% if user_has_farm? %>
               <%= menu_box_item "Ferme > Page", user_farm_path %>
               <%= menu_box_item "Ferme > Abonnés", user_farm_subscribtions_path %>

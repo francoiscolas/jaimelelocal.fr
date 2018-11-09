@@ -7,16 +7,6 @@ class Account::RegistrationsController < Devise::RegistrationsController
     store_location_for(:user, new_user_farm_path)
   end
 
-  def profile
-    render :profile
-  end
-
-  def profile_update
-    update do
-      return render :profile if !resource.errors.blank?
-    end
-  end
-
   protected
 
     def update_resource(resource, params)

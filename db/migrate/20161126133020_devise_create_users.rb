@@ -2,10 +2,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users do |t|
       ## Public profile
-      t.string  :name,        null: true
-      t.boolean :show_email,  null: false, default: false
-      t.string  :url,         null: true
-      t.text    :bio,         null: true
+      t.string :name, null: true
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

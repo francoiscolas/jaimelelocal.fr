@@ -10,11 +10,9 @@ Rails.application.routes.draw do
     get    '/je-suis-producteur',     to: 'account/registrations#i_am_farmer',    as: :i_am_farmer
     get    '/inscription',            to: 'account/registrations#new',            as: :new_user_registration
     post   '/mon-compte',             to: 'account/registrations#create',         as: :user_registration
-    get    '/mon-compte',             to: redirect('/mon-compte/profil'),         as: :user
-    get    '/mon-compte/identifiants',  to: 'account/registrations#edit',         as: :edit_user_registration
-    patch  '/mon-compte/identifiants',  to: 'account/registrations#update'
-    get    '/mon-compte/profil',      to: 'account/registrations#profile',        as: :edit_user_profile
-    patch  '/mon-compte/profil',      to: 'account/registrations#profile_update'
+    get    '/mon-compte',             to: redirect('/mon-compte/modifier'),       as: :user
+    get    '/mon-compte/modifier',    to: 'account/registrations#edit',           as: :edit_user_registration
+    patch  '/mon-compte',             to: 'account/registrations#update'
     get    '/mon-compte/cancel',      to: 'account/registrations#cancel',         as: :cancel_user_registration
     delete '/mon-compte',             to: 'account/registrations#destroy'
 
