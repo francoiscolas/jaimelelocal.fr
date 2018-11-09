@@ -52,10 +52,10 @@ body.home {
     #map {
       height: 500px;
       .iw {
+        font-size: 16px;
         color: $black;
-        max-width: 200px;
+        max-width: 250px;
         .title {
-          font-size: 1.1em;
           font-weight: bold;
         }
         .desc {
@@ -71,22 +71,4 @@ body.home {
       .small { font-size: 1.5rem; }
     }
   }
-  /*
-  .farms {
-    padding: 0;
-    ul {
-      list-style: none;
-      margin: 0;
-      li {
-        background: #e8e8e8;
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-        padding: 0.3rem 0.5rem;
-        @include breakpoint(medium) {
-          padding: 0.8rem 1rem;
-        }
-      }
-    }
-  }
-  */
 }
