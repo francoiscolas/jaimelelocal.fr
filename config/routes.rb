@@ -2,8 +2,6 @@ Rails.application.routes.draw do
 
   # Root
   root to: 'root#home'
-  get '/lancement', to: 'root#landing', as: :landing
-  get '/je-veux-tester', to: 'root#skip_landing', as: :skip_landing
 
   # Account
   devise_for :users, :skip => [:registrations, :sessions, :passwords]
