@@ -5,7 +5,8 @@ window.Helpers.newQuill = function (selector) {
     modules: {
       toolbar: [
         [{header:1}, {header:2}],
-        ['bold', 'italic', 'underline', 'strike', 'link'],
+        ['bold', 'italic', 'underline', 'strike'],
+        ['link', 'image'],
         [{color:[]}, {background:[]}],
         [{list:'bullet'}, {list:'ordered'}, {align:[]}, {indent:'-1'}, {indent:'+1'}],
         ['clean'],
