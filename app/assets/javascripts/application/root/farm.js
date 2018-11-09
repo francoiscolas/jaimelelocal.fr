@@ -290,7 +290,7 @@ $(function () {
     name: '<i class="fi-marker"></i> Carte',
     defaultData: function (farm) {
       return {text: _.template(''
-        +'<h1 class="ql-align-center">Ou ?</h1>'
+        +'<h1 class="ql-align-center">Où ?</h1>'
         +'<p class="ql-align-justify">Mettre ici les indications routières pour accéder à votre ferme.</p><p><br/></p>'
       )()}
     },
