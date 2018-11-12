@@ -60,6 +60,7 @@ class Account::FarmsController < Account::AccountController
   def update
     @farm = current_user.farm
 
+    logger.debug farm_params
     if @farm.update(farm_params)
       flash[:notice] = t('.updated')
     end
@@ -88,7 +89,8 @@ class Account::FarmsController < Account::AccountController
     end
 
     def farm_params
-      params.require(:farm).permit!
+      params.require(:farm)
+        .permit!.reverse_merge(category_ids: [])
     end
 
 end

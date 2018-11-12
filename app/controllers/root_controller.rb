@@ -5,14 +5,16 @@ class RootController < ApplicationController
   def home
     params.permit! # FIXME need to enhance this
 
-    @query = params[:q]
+    @query   = params[:q]
+    @autoLoc = false
 
     if params.key? :l
       @location = Geocoder.search(params[:l]).first
     else
       if session[:user_location]
-        @location_name = session[:user_location]['name']
-        @location_coordinates = session[:user_location]['coordinates']
+        @autoLoc = true
+        @locName = session[:user_location]['name']
+        @locCoor = session[:user_location]['coordinates']
       else
         if Rails.env.development?
           @location = Geocoder.search('78.221.215.68').first
@@ -21,6 +23,7 @@ class RootController < ApplicationController
         end
 
         if location_is_valid? @location
+          @autoLoc = true
           session[:user_location] = {
             'name' => @location.city,
             'coordinates' => @location.coordinates
@@ -29,18 +32,33 @@ class RootController < ApplicationController
       end
     end
     if location_is_valid? @location
-      @location_name = @location.city
-      @location_coordinates = @location.coordinates
+      @locName = @location.city
+      @locCoor = @location.coordinates
     end
 
     @distance = params[:d].to_i
     @distance = 20 if @distance == 0
 
-    if @location_coordinates
-      @farms = Farm.near(@location_coordinates, @distance)
+    if @locCoor
+      @farms = Farm.near(@locCoor, @distance)
+      if @autoLoc and @farms.count(:all) == 0
+        @locName = nil
+        @locCoor = nil
+        @farms = Farm
+      end
     else
-      @farms = nil
+      @farms = Farm
     end
+    @farms = @farms.left_outer_joins(:categories)
+      .where('LOWER(farm_categories.name) LIKE LOWER(?)
+              OR LOWER(shortdesc) LIKE LOWER(?)
+              OR LOWER(page_content) LIKE LOWER(?)',
+              "%#{@query}%", "%#{@query}%", "%#{@query}%")
+  end
+
+  # GET autocomplete_q
+  def autocomplete_q
+    render :json => FarmCategory.where("LOWER(name) LIKE LOWER(?)", "%#{params[:term]}%").limit(10).pluck(:name)
   end
 
   # GET farm_path

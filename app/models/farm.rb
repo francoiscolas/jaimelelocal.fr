@@ -14,6 +14,9 @@ class Farm < ApplicationRecord
 
   belongs_to :user
 
+  has_many :farm_categorizations, dependent: :destroy
+  has_many :categories, through: :farm_categorizations, source: :farm_category
+
   has_many :subscribtions, dependent: :destroy
   has_many :subscribers, through: :subscribtions, source: :user
 

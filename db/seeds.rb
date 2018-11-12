@@ -1,4 +1,32 @@
 # encoding: UTF-8
+#
+
+FarmCategory.create([
+    {name: "Fruits"},
+    {name: "Fruits transformés"},
+    {name: "Laitages de brebis"},
+    {name: "Laitages de bufflonne"},
+    {name: "Laitages de chamelle"},
+    {name: "Laitages de chèvre"},
+    {name: "Laitages de vache"},
+    {name: "Laitages de yak"},
+    {name: "Lapins"},
+    {name: "Légumes"},
+    {name: "Miel"},
+    {name: "Noisettes"},
+    {name: "Noix"},
+    {name: "Oeufs"},
+    {name: "Pain"},
+    {name: "Pâtes"},
+    {name: "Petits fruits"},
+    {name: "Plantes à parfum, aromatiques et médicinales"},
+    {name: "Vin"},
+    {name: "Viande de boeuf"},
+    {name: "Viande de veau"},
+    {name: "Viande de mouton"},
+    {name: "Viande de porc"},
+    {name: "Volailles"},
+])
 
 #
 # Default users
@@ -9,8 +37,9 @@ User.create({
 })
 Farm.create({
   user_id: 1,
-  name: "Les jardins de Béné",
-  url: "les-jardins-de-bene",
+  name: "François Colas",
+  url: "francois-colas",
+  shortdesc: "Jardin maraîcher de 3000m² en AB. Ouvert tous les mercredis matin de 9h à 12h.",
   address: "Allée Frédéric Chopin, 49460 Montreuil-Juigné, France",
   lat: 47.54076892246994,
   lng: -0.6044452259033051,

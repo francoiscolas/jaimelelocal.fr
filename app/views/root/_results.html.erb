@@ -1,10 +1,10 @@
 {
   'q': "<%=j raw @query %>",
-  'l': "<%=j raw @location_name %>",
+  'l': "<%=j raw @locName %>",
   'd': <%= @distance %>,
-<% if @location_coordinates %>
-  'lat': <%= @location_coordinates[0] %>,
-  'lng': <%= @location_coordinates[1] %>,
+<% if @locCoor %>
+  'lat': <%= @locCoor[0] %>,
+  'lng': <%= @locCoor[1] %>,
 <% end %>
   'farms': <%=raw @farms.to_json(only: [
     :id, :name, :url, :shortdesc, :address, :lat, :lng, :distance

@@ -19,6 +19,17 @@
     <% end %>
   </div>
   <div>
+    <%= f.label :categories %>
+    <div class="scrollable" style="height:150px;margin-bottom:1rem;">
+      <% FarmCategory.all.each do |category| %>
+        <label>
+          <%= check_box_tag "farm[category_ids][]", category.id, @farm.categories.include?(category) %>
+          <%= category.name %>
+        </label>
+      <% end %>
+    </div>
+  </div>
+  <div>
     <%= f.label :shortdesc %>
     <%= f.text_area :shortdesc, rows: 2, autoresize: true, maxlength: Farm::SHORTDESC_MAX_LENGTH, required: true%>
     <% if @farm.errors[:shortdesc].any? %>

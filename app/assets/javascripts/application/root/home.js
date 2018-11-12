@@ -1,5 +1,5 @@
 $(function () {
-  
+
   if ($('body.home').length == 0)
     return ;
 
@@ -21,7 +21,7 @@ $(function () {
     this.$d = this.$('#d');
     this.$d.on('change', this.submit.bind(this));
 
-    this.$noLocation = this.$('.no-location');
+    this.$noQuery = this.$('.no-query');
     this.$noFarm = this.$('.no-farm');
 
     this.geocoder = new google.maps.Geocoder();
@@ -72,21 +72,18 @@ $(function () {
     this.$d.val(result.d);
     this.farms = result.farms;
 
-    if (_.isEmpty(result.l)) {
-      this.$noLocation.show();
+    if (_.isEmpty(result.q) && _.isEmpty(result.l)) {
+      this.$noQuery.show();
       this.$noFarm.hide();
       this.$map.hide();
     } else if (_.isEmpty(result.farms)) {
-      this.$noLocation.hide();
+      this.$noQuery.hide();
       this.$noFarm.show();
       this.$map.hide();
     } else {
-      this.$noLocation.hide();
+      this.$noQuery.hide();
       this.$noFarm.hide();
       this.$map.show();
-
-      this.lmarker.setPosition(
-        _.pick(result, 'lat', 'lng'));
 
       this.markers.forEach(function (marker) {
         marker.setMap(null);
@@ -114,7 +111,14 @@ $(function () {
         bounds.extend(marker.getPosition());
       }, this);
 
-      bounds.extend(this.lmarker.getPosition());
+      this.lmarker.setPosition(
+        (result.lat && result.lng)
+          ? _.pick(result, 'lat', 'lng')
+          : null
+      );
+      if (this.lmarker.getPosition())
+        bounds.extend(this.lmarker.getPosition());
+
       this.map.fitBounds(bounds);
     }
 

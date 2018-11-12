@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_11_10_205027) do
+ActiveRecord::Schema.define(version: 2018_11_09_223412) do
 
   create_table "business_hours", force: :cascade do |t|
     t.integer "farm_id"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 2017_11_10_205027) do
     t.time "opens_at"
     t.time "closes_at"
     t.index ["farm_id"], name: "index_business_hours_on_farm_id"
+  end
+
+  create_table "farm_categories", force: :cascade do |t|
+    t.string "name"
+    t.index ["name"], name: "index_farm_categories_on_name", unique: true
+  end
+
+  create_table "farm_categorizations", id: false, force: :cascade do |t|
+    t.integer "farm_id", null: false
+    t.integer "farm_category_id", null: false
+    t.index ["farm_category_id", "farm_id"], name: "index_farm_categorizations_on_farm_category_id_and_farm_id"
+    t.index ["farm_id", "farm_category_id"], name: "index_farm_categorizations_on_farm_id_and_farm_category_id"
   end
 
   create_table "farms", force: :cascade do |t|
@@ -40,6 +52,8 @@ ActiveRecord::Schema.define(version: 2017_11_10_205027) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_farms_on_name", unique: true
+    t.index ["page_content"], name: "index_farms_on_page_content"
+    t.index ["shortdesc"], name: "index_farms_on_shortdesc"
     t.index ["url"], name: "index_farms_on_url", unique: true
     t.index ["user_id"], name: "index_farms_on_user_id"
   end

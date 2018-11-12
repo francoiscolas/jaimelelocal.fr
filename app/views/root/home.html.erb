@@ -4,7 +4,6 @@
     <div class="iw">
       <div class="title">${farm.name}</div>
       <div class="desc">${farm.shortdesc}</div>
-      <!--p>TODO / Production / label / etc</p-->
       <a href="/${farm.url}">Voir la page...</a>
     </div>
   </script>
@@ -17,7 +16,7 @@
 <div class="row search-form">
   <form action="/" method="get" data-remote="true">
     <div class="medium-6 columns" id="query-input">
-      <input type="text" id="q" name="q" placeholder="Légume, fruit, ..."/>
+      <input type="text" id="q" name="q" placeholder="Légumes, fruits, ..." data-autocomplete-url="<%= autocomplete_q_path %>"/>
     </div>
     <div class="medium-6 columns" id="where-input">
       <input type="text" id="l" name="l" placeholder="Lieu" />
@@ -30,9 +29,9 @@
   </form>
 </div>
 <div class="expanded row search-result">
-  <div class="no-location">
+  <div class="no-query">
     <i class="fi-arrow-up"></i><br/>
-    Entrez un lieu de recherche ci-dessus.
+    Entrez votre recherche ci-dessus.
   </div>
   <div class="no-farm">
     <p><i class="fi-x"></i><br/>
@@ -41,5 +40,4 @@
       parler de <%= text_logo %> autour de vous pour nous faire connaître&nbsp;:)</p>
   </div>
   <div id="map"></div>
-  <div class="loading"></div>
 </div>

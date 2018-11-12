@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   # Root
   root to: 'root#home'
 
+  # Autocomplete
+  get '/autocomplete/q', :to => 'root#autocomplete_q'
+
   # Account
   devise_for :users, :skip => [:registrations, :sessions, :passwords]
   devise_scope :user do

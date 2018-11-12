@@ -52,6 +52,7 @@ fr:
         address: "Adresse géographique"
         shortdesc: "Courte présentation (100 caractères)"
         page_header: "Bannière"
+        categories: "Productions principales"
     errors:
       messages:
         inclusion: "is not included in the list"

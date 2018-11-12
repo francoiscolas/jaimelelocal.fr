@@ -19,5 +19,7 @@ class CreateFarms < ActiveRecord::Migration[5.0]
     end
     add_index :farms, :name, unique: true
     add_index :farms, :url, unique: true
+    add_index :farms, :shortdesc
+    add_index :farms, :page_content
   end
 end
