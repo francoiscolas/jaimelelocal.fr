@@ -25,6 +25,7 @@ class Farm < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, length: { minimum: 3 }
   validates :url, presence: true, uniqueness: true, length: { minimum: 3 }
+  validates :shortdesc, presence: true, length: {maximum: SHORTDESC_MAX_LENGTH}
   validates :address, presence: true
   validates :email, presence: true, format: { with: Devise::email_regexp }
   validates :phone, presence: true, format: { with: /\A([0-9]{2} ){4}[0-9]{2}\Z/ }

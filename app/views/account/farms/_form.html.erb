@@ -20,7 +20,7 @@
   </div>
   <div>
     <%= f.label :shortdesc %>
-    <%= f.text_area :shortdesc, rows: 2, autoresize: true, maxlength: Farm::SHORTDESC_MAX_LENGTH %>
+    <%= f.text_area :shortdesc, rows: 2, autoresize: true, maxlength: Farm::SHORTDESC_MAX_LENGTH, required: true%>
     <% if @farm.errors[:shortdesc].any? %>
       <p class="field_error_message"><%= @farm.errors[:shortdesc][0] %></p>
     <% end %>
