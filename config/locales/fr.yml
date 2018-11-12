@@ -45,9 +45,6 @@ fr:
         current_password: "Mot de passe actuel"
         remember_me: "Se souvenir de moi"
         name: "Prénom NOM"
-        show_email: "Adresse e-mail"
-        url: "Site personnel"
-        bio: "Minibio"
       farm:
         name: "Nom de la ferme"
         website: "Adresse internet"
