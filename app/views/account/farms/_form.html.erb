@@ -22,7 +22,7 @@
     <%= f.label :categories %>
     <div class="scrollable" style="height:150px;margin-bottom:1rem;">
       <% FarmCategory.all.each do |category| %>
-        <label>
+        <label style="font-weight:normal;margin-left:0.4rem;">
           <%= check_box_tag "farm[category_ids][]", category.id, @farm.categories.include?(category) %>
           <%= category.name %>
         </label>
@@ -31,7 +31,7 @@
   </div>
   <div>
     <%= f.label :shortdesc %>
-    <%= f.text_area :shortdesc, rows: 2, autoresize: true, maxlength: Farm::SHORTDESC_MAX_LENGTH, required: true%>
+    <%= f.text_area :shortdesc, rows: 2, autoresize: true, maxlength: Farm::SHORTDESC_MAX_LENGTH, required: true %>
     <% if @farm.errors[:shortdesc].any? %>
       <p class="field_error_message"><%= @farm.errors[:shortdesc][0] %></p>
     <% end %>

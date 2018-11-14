@@ -5,7 +5,7 @@ $(function () {
   $('.scrollable')
     .css({
       'overflow-y': 'scroll',
-      'box-shadow': top,
+      'box-shadow': bot,
     })
     .scroll(function () {
       var $el = $(this);
