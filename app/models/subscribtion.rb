@@ -1,7 +1,7 @@
 class Subscribtion < ApplicationRecord
 
   belongs_to :farm
-  belongs_to :user
+  belongs_to :user, optional: true
 
   validate do |s|
     if s.email

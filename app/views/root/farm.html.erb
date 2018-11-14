@@ -37,14 +37,24 @@
       <% end %>
       <%= link_to 'Voir la page publique', farm_path(@farm), class: 'go-public banner-btn' %>
     <% else %>
-      <% if user_signed_in? && current_user.subscribed_to?(@farm) %>
+      <% if false && user_signed_in? && current_user.subscribed_to?(@farm) %>
+        <!-- Never go there. This feature will be enabled later. -->
         <%= link_to farm_subscribtion_path(@farm), method: :delete, class: 'unfollow banner-btn' do %>
           NE PLUS SUIVRE
         <% end %>
       <% else %>
-        <%= link_to farm_subscribtion_path(@farm), method: :post, class: 'follow banner-btn' do %>
-          SUIVRE
-        <% end %>
+        <button type="button" class="follow banner-btn" data-toggle="follow-pane">SUIVRE</button>
+        <div class="dropdown-pane left" id="follow-pane" data-dropdown data-hover="true" data-hover-pane="true">
+          <%= form_for @farm.subscribtions.new, url: farm_subscribtion_path(@farm) do |f| %>
+            <div>
+              <%= f.label :email %>
+              <%= f.text_field :email %>
+            </div>
+            <div class="actions">
+              <%= f.submit "Suivre ce producteur", class: 'button' %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     <% end %>
   </div>

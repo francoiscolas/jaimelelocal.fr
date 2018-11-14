@@ -53,6 +53,8 @@ fr:
         shortdesc: "Courte présentation (100 caractères)"
         page_header: "Bannière"
         categories: "Productions principales"
+      subscribtion:
+        email: "Votre adresse e-mail"
     errors:
       messages:
         inclusion: "is not included in the list"
