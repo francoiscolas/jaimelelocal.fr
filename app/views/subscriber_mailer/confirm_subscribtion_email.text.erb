@@ -1,0 +1,14 @@
+Madame, Monsieur,
+
+Nous vous confirmons que vous êtes inscrits aux actualités du producteur "<%= @subscribtion.farm.name %>".
+
+Vous pouvez accéder aux informations de ce producteur en vous rendant sur la page <%= farm_url @subscribtion.farm %> ou chercher d'autres producteurs via <%= root_url %>.
+
+Merci de l'intérêt que vous portez à <%= @subscribtion.farm.name %> et à Jaimelelocal.fr.
+
+Si vous avez été inscrits par erreur, suivez le lien suivant pour vous désinscrire : <%= farm_unsubscribe_url(@subscribtion.farm, @subscribtion.token) %>.
+
+À bientôt et bonne journée :)
+
+--
+L'équipe de Jaimelelocal.fr

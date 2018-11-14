@@ -48,9 +48,10 @@ Rails.application.routes.draw do
   end
 
   # Public farm page
-  get     '/:farm_url',               to: 'root#farm',        as: :farm
-  post    '/:farm_url/subscribtion',  to: 'root#subscribe',   as: :farm_subscribtion
+  get     '/:farm_url',                     to: 'root#farm',        as: :farm
+  post    '/:farm_url/subscribtion',        to: 'root#subscribe',   as: :farm_subscribtion
+  get     '/:farm_url/unsubscribe/:token',  to: 'root#unsubscribe', as: :farm_unsubscribe
 #  delete  '/:farm_url/subscribtion',  to: 'root#unsubscribe'
-  post    '/:farm_url/sendmail',      to: 'root#sendmail'
+  post    '/:farm_url/sendmail',            to: 'root#sendmail'
 
 end

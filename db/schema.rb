@@ -62,8 +62,10 @@ ActiveRecord::Schema.define(version: 2018_11_09_223412) do
     t.integer "farm_id"
     t.integer "user_id"
     t.string "email"
+    t.string "token"
     t.index ["farm_id", "user_id"], name: "index_subscribtions_on_farm_id_and_user_id", unique: true
     t.index ["farm_id"], name: "index_subscribtions_on_farm_id"
+    t.index ["token"], name: "index_subscribtions_on_token", unique: true
     t.index ["user_id"], name: "index_subscribtions_on_user_id"
   end
 

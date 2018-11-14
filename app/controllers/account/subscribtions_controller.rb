@@ -37,7 +37,7 @@ class Account::SubscribtionsController < Account::AccountController
   end
 
   def destroy
-    Subscribtion.destroy_all(farm_id: current_user.farm.id, id: params[:ids])
+    Subscribtion.where(farm_id: current_user.farm.id, id: params[:ids]).delete_all
     redirect_to user_farm_subscribtions_path, flash: {notice: t('.destroyed')}
   end
 

@@ -3,6 +3,8 @@ class Subscribtion < ApplicationRecord
   belongs_to :farm
   belongs_to :user, optional: true
 
+  has_secure_token # Token is the 'token' attribute.
+
   validate do |s|
     if s.email
       if Subscribtion.where(email: s.email).exists? or
