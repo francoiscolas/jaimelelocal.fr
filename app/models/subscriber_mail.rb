@@ -6,11 +6,7 @@ class SubscriberMail
   attr_accessor :subject, :body
 
   validates_presence_of :subject
-  validates_presence_of :body
-
-  def self.prepend_subject_with(farm)
-    "#{farm.name} - "
-  end
+  validate :body_is_present?
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -20,5 +16,13 @@ class SubscriberMail
 
   def persisted?
     false
+  end
+
+  protected
+
+  def body_is_present?
+    if body.blank? or body == '<p><br></p>'
+      errors.add(:body, I18n.t('.activemodel.errors.models.subscriber_mail.attributes.body.blank'))
+    end
   end
 end

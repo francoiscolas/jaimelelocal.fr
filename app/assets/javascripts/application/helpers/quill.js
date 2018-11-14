@@ -14,3 +14,21 @@ window.Helpers.newQuill = function (selector) {
     }
   });
 };
+
+//
+// Auto "Quillify" div with data-quill="<input-field-id>" attribute.
+
+$(function () {
+  $('div[data-quill]').each(function () {
+    var $div   = $(this);
+    var $input = $($div.data('quill'));
+    var quill  = null;
+
+    $input.parents('form').submit(function () {
+      $input.val(quill.root.innerHTML);
+    });
+
+    $div.html($input.val());
+    quill = window.Helpers.newQuill(this);
+  });
+});

@@ -1,0 +1,8 @@
+<% content_for :head do %>
+  <link rel="stylesheet" href="//cdn.quilljs.com/0.16.0/quill.snow.css" />
+<% end %>
+<div class="ql-editor">
+  <%= raw @body %>
+  <small>Pour ne plus reçevoir de mail de <a href="<%= farm_url(@farm) %>"><%= @farm.name %></a>,
+    merci de cliquer <a href="<%= farm_unsubscribe_url(@farm, @subscribtion.token) %>">ici</a>.</small>
+</div>

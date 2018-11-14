@@ -22,13 +22,11 @@ class Account::SubscribtionsController < Account::AccountController
     @mail = SubscriberMail.new(mail_params)
     if @mail.valid?
       current_user.farm.subscribtions.each do |s|
-        ApplicationMailer.mailto(
-          reply_to: current_user.email,
-          to: s.get_email,
-          content_type: 'text/html; charset=utf-8',
-          subject: SubscriberMail.prepend_subject_with(@farm) + @mail.subject,
+        SubscriberMailer.with(
+          subscribtion: s,
+          subject: @mail.subject,
           body: @mail.body
-        ).deliver_later
+        ).newsletter_email.deliver_later
       end
       redirect_to user_farm_subscribtions_path, flash: {notice: t('.sent')}
     else

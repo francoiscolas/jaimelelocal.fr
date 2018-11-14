@@ -10,7 +10,10 @@ form {
   .field_with_errors select,
   .field_with_errors select:focus,
   .field_with_errors .input-group,
-  .field_with_errors trix-editor {
+  .field_with_errors .ql-toolbar {
+    border-color: $alert-color !important;
+  }
+  .field_with_errors .ql-container {
     border-color: $alert-color !important;
     margin-bottom: -1px !important;
   }
@@ -27,13 +30,11 @@ form {
   }
 }
 
-trix-editor {
-  @include form-element;
-  height: auto !important;
-}
-
-.quill {
-  min-height: 200px;
+.ql-container {
+  margin-bottom: 1rem !important;
+  .ql-editor {
+    min-height: 200px;
+  }
 }
 
 .ui-autocomplete {
