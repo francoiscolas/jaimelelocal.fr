@@ -438,7 +438,7 @@ $(function () {
 
       $row = $(this.template({farm: farm, rowData: rowData}));
       $row.data('data', rowData);
-      if (rowData.dataUrl)
+      if (rowData && rowData.dataUrl)
         $row.find('.content, .content-edit').css('background-image', 'url(' + rowData.dataUrl + ')');
       $row.find('input').on('change', function () {
         var file   = this.files[0];
