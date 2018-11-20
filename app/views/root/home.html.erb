@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI"></script>
+  <%= google_maps('&libraries=places') %>
   <script type="text/template" id="infowindow-tpl">
     <div class="iw">
       <div class="title">${farm.name}</div>

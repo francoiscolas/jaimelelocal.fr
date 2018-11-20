@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5V1m3yWciaNyGX6XqDc2cVoN9nYujzaI&libraries=places"></script>
+  <%= google_maps('&libraries=places') %>
 <% end %>
 <%= form_for(@farm, url: @farm.new_record? ? user_farm_path : edit_user_farm_path) do |f| %>
   <div>

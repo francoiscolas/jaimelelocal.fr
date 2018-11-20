@@ -24,4 +24,10 @@ module ApplicationHelper
     address.gsub(/, /, '<br/>').html_safe
   end
 
+  def google_maps(args)
+    "<script src=\"https://maps.googleapis.com/maps/api/js?key=" \
+    "#{Rails.application.credentials.google_api_key!}#{args}\">" \
+    "</script>".html_safe
+  end
+
 end
