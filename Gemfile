@@ -6,6 +6,7 @@ gem 'devise'            # Manage authentication.
 gem 'puma', '~> 3.0'    # Use Puma as the app server.
 gem 'sqlite3'
 gem 'bootsnap'
+gem 'data_migrate'
 
 # gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'redis', '~> 3.0' # Use Redis adapter to run Action Cable in production
@@ -13,7 +14,7 @@ gem 'bootsnap'
 # Models
 gem 'paperclip'           # To manage attachment files.
 gem 'geocoder'            # To help searching by location.
-gem 'will_paginate'
+#gem 'will_paginate'
 
 # Ui
 gem 'jquery-rails'
