@@ -62,11 +62,12 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'in-v3.mailjet.com',
-    port: 587,
-    authentication: 'plain',
-    user_name: ENV['SMTP_USERNAME'],
-    password: ENV['SMTP_PASSWORD']
+    address:              'in-v3.mailjet.com',
+    port:                 587,
+    user_name:            Rails.application.credentials.mailjet_username!,
+    password:             Rails.application.credentials.mailjet_password!,
+    enable_starttls_auto: true,
+    authentication:       'plain'
   }
   config.action_mailer.default_url_options = {host: 'jaimelelocal.fr'}
 
