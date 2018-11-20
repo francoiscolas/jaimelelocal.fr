@@ -35,9 +35,6 @@ Rails.application.routes.draw do
   # Farm account
   scope '/mon-compte', :module => 'account', as: :user do
     resource :farm, path: 'ma-ferme', path_names: {new: 'enregistrement', edit: 'parametres'}, except: :update do
-      resources :products, path: 'produits', path_names: {new: 'nouveau', edit: ''}, :except => [:index, :show, :destroy] do
-        post '/destroy', to: 'products#destroy', on: :collection, as: :destroy
-      end
       resources :subscribtions, path: 'abonnements', except: [:new, :show, :edit, :update, :destroy] do
         post '/sendmail', to: 'subscribtions#sendmail', on: :collection
         post '/destroy',  to: 'subscribtions#destroy',  on: :collection
