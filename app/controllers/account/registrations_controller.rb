@@ -1,6 +1,6 @@
 class Account::RegistrationsController < Devise::RegistrationsController
 
-  before_action :authenticate_scope!, only: [:edit, :update, :destroy, :profile, :profile_update]
+  before_action :authenticate_scope!, only: [:edit, :update, :destroy]
   before_action :configure_permitted_parameters
 
   def i_am_farmer
