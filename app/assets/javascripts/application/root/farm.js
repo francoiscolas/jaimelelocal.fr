@@ -428,8 +428,10 @@ $(function () {
       +'<div class="image expanded farm-row">'
         +'<div class="content"></div>'
         +'<div class="content-edit">'
-          +'<label for="image_row_input">Changer l\'image...</label>'
-          +'<input type="file" id="image_row_input"/>'
+          +'<label>'
+            +'Changer l\'image...'
+            +'<input type="file"/>'
+            +'</label>'
         +'</div>'
       +'</div>'
     ),
