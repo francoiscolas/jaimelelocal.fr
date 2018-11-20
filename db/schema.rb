@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 2018_11_09_223412) do
     t.index ["name"], name: "index_farm_categories_on_name", unique: true
   end
 
-  create_table "farm_categorizations", id: false, force: :cascade do |t|
-    t.integer "farm_id", null: false
-    t.integer "farm_category_id", null: false
-    t.index ["farm_category_id", "farm_id"], name: "index_farm_categorizations_on_farm_category_id_and_farm_id"
-    t.index ["farm_id", "farm_category_id"], name: "index_farm_categorizations_on_farm_id_and_farm_category_id"
+  create_table "farm_categorizations", force: :cascade do |t|
+    t.integer "farm_id"
+    t.integer "farm_category_id"
+    t.index ["farm_category_id"], name: "index_farm_categorizations_on_farm_category_id"
+    t.index ["farm_id"], name: "index_farm_categorizations_on_farm_id"
   end
 
   create_table "farms", force: :cascade do |t|
