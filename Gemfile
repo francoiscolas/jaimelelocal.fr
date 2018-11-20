@@ -23,9 +23,6 @@ gem 'lodash-rails', '~> 4'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
   # console
@@ -43,8 +40,4 @@ group :development do
   # background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
-  # Mina for deployment.
-  gem 'mina'
-  gem 'mina-puma'
 end
