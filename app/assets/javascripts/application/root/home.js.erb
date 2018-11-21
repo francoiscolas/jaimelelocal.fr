@@ -37,7 +37,7 @@ $(function () {
 
     this.lmarker = new google.maps.Marker({
       map : this.map,
-      icon: 'http://www.robotwoods.com/dev/misc/bluecircle.png',
+      icon: '<%= asset_path("bluecircle.png") %>',
     });
 
     this.infoWindow = new google.maps.InfoWindow();
