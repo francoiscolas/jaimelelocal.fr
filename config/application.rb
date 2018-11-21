@@ -20,5 +20,8 @@ module Jaimelelocal
 
     # Time zone aware types.
     config.active_record.time_zone_aware_types = [:datetime, :time]
+
+    # SQlite represent boolean column as integer (1 or 0) instead of 't' or 'f'.
+    config.active_record.sqlite3.represent_boolean_as_integer = true
   end
 end
