@@ -119,6 +119,30 @@ $(function () {
     this.map.setZoom(17);
   };
 
+  Geocoder.prototype.setAddressValue = function (place) {
+    var address   = {};
+    var formatted = '';
+    var types     = ['street_number', 'route', 'locality', 'postal_code'];
+
+    if (place.name && _.indexOf(place.types, 'establishment') >= 0) {
+      address.name = place.name;
+    }
+    _.each(place.address_components, function (c) {
+      _.each(types, function (t) {
+        if (_.indexOf(c.types, t) >= 0)
+          address[t] = c.long_name;
+      });
+    });
+
+    if (address.name) formatted += place.name + ', ';
+    if (address.street_number) formatted += address.street_number + ' ';
+    if (address.route) formatted += address.route + ', ';
+    if (address.postal_code) formatted += address.postal_code + ' ';
+    if (address.locality) formatted += address.locality;
+
+    this.$address.val(formatted);
+  };
+
   Geocoder.prototype._onMarkerPositionChanged = function () {
     var position = this.marker.getPosition();
 
@@ -131,11 +155,12 @@ $(function () {
     var position = (place && place.geometry) ? place.geometry.location : null;
 
     if (position) {
+      this.setAddressValue(place);
       this.setMarkerPosition(position);
     } else {
       this.geocoder.geocode({address: this.$address.val()}, _.bind(function (results, status) {
         if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-          this.$address.val(results[0].formatted_address);
+          this.setAddressValue(results[0]);
           this.setMarkerPosition(results[0].geometry.location);
         }
       }, this));
