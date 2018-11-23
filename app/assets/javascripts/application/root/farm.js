@@ -386,7 +386,7 @@ $(function () {
             +'</div>'
             +'<div class="actions">'
               +'<button type="submit" class="btn">'
-              +'<i class="icon icon-email"></i> Envoyer</button>'
+              +'<i class="icon icon-mail"></i> Envoyer</button>'
             +'</div>'
           +'</form>'
         +'</div>'

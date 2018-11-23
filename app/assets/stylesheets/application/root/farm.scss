@@ -3,7 +3,7 @@ body.farm {
     header {
       .navbar-brand {
         margin: 0 .4rem !important;
-        img { height: 1rem; }
+        img { height: 1.5rem; }
       }
       button {font-size: 90%;}
     }
@@ -136,7 +136,7 @@ body.farm {
         .infos {
           margin: 0 1rem 1rem;
           .ql-editor { height: auto; }
-          .fi-marker { vertical-align: top; margin-right: 7px; }
+          .icon { vertical-align: top; margin-right: 7px; }
           .addr { display: inline-block; }
         }
         iframe {
