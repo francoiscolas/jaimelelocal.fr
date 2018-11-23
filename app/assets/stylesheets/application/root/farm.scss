@@ -29,7 +29,7 @@ body.farm {
       position: relative;
       z-index: 99;
       height: 300px;
-      @media (min-width: $size-md) {
+      @media (min-width: $size-sm) {
         height: 555px;
       }
     }
@@ -41,7 +41,7 @@ body.farm {
       right: 1rem;
       bottom: 1rem;
       margin: 0;
-      @media (min-width: $size-md) {
+      @media (min-width: $size-sm) {
         right: 3rem; }
       &.update-banner {
         bottom: 6rem; }
@@ -58,9 +58,9 @@ body.farm {
     .infos {
       background: $body-bg;
       padding: 1rem;
-      @media (min-width: $size-md) {
+      @media (min-width: $size-sm) {
         box-shadow: 0 0 4px $dark-color;
-        max-width: 300px;
+        max-width: 350px;
         position: absolute;
         z-index: 9999;
         left: 3rem;
@@ -108,7 +108,7 @@ body.farm {
       margin: 0 auto;
       padding: 1rem;
       width: 100%;
-      @media (min-width: $size-md) {
+      @media (min-width: $size-sm) {
         width: 66%;
       }
     }
@@ -120,7 +120,7 @@ body.farm {
     }
     &.map {
       .content {
-        @media (min-width: $size-md) {
+        @media (min-width: $size-sm) {
           position: relative;
           .infos {
             background: $body-bg;
@@ -149,7 +149,7 @@ body.farm {
     &.image {
       background: black;
       height: 250px;
-      @media (min-width: $size-md) {
+      @media (min-width: $size-sm) {
         height: 500px; }
       label {
         color: white;

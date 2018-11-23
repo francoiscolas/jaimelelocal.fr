@@ -13,7 +13,7 @@ $alert-box-color: $error-color;
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     margin: -0.8rem -0.8rem 0.8rem;
-    @media (min-width: $size-md) {
+    @media (min-width: $size-sm) {
       font-size: 1.6rem; }
   }
   h3 {

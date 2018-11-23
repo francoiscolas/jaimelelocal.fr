@@ -34,7 +34,7 @@ header {
       vertical-align: middle;
       height: 1.5rem;
     }
-    @media (min-width: $size-md) {
+    @media (min-width: $size-sm) {
       img { height: 2.5rem; }
     }
   }
@@ -62,7 +62,7 @@ header {
   right: 0;
   left: 0;
 }
-@media (min-width: $size-md) {
+@media (min-width: $size-sm) {
   .flash {
     right: 2rem;
     left: auto;
