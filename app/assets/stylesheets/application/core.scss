@@ -27,6 +27,14 @@
   }
 }
 
+.py-1rem {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+.mt-1rem {
+  margin-top: 1rem !important;
+}
+
 header {
   background: $primary-color;
   .navbar-brand {
@@ -36,6 +44,14 @@ header {
     }
     @media (min-width: $size-sm) {
       img { height: 2.5rem; }
+    }
+  }
+  .i-am-farmer.btn {
+    background: $footer-color;
+    border: 0;
+    color: $light-color;
+    &:hover, &.active {
+      background: lighten($footer-color, 5%);
     }
   }
   .btn-link {
@@ -73,6 +89,7 @@ header {
 footer {
   background: $footer-color;
   color: $light-color;
+  padding: 2rem 0;
   h3 {
     font-variant: small-caps;
     font-weight: bold;
@@ -83,7 +100,7 @@ footer {
     padding: 0;
     a { color: $light-color !important; }
   }
-  .column, .copy {
-    margin-top: 2rem;
+  .column {
+    margin-bottom: 2rem;
   }
 }

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   # Root
   root to: 'root#home'
+  get '/je-suis-producteur', to: 'root#i_am_farmer', as: :i_am_farmer
 
   # Autocomplete
   get '/autocomplete/q', :to => 'root#autocomplete_q'
@@ -10,7 +11,6 @@ Rails.application.routes.draw do
   devise_for :users, :skip => [:registrations, :sessions, :passwords]
   devise_scope :user do
     # Registrations
-    get    '/je-suis-producteur',     to: 'account/registrations#i_am_farmer',    as: :i_am_farmer
     get    '/inscription',            to: 'account/registrations#new',            as: :new_user_registration
     post   '/mon-compte',             to: 'account/registrations#create',         as: :user_registration
     get    '/mon-compte',             to: redirect('/mon-compte/modifier'),       as: :user

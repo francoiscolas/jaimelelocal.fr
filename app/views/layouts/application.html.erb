@@ -23,7 +23,7 @@
     <section class="navbar-section mr-2">
       <%= yield :actions %>
       <% if !user_has_farm? %>
-        <%= link_to i_am_farmer_path, class: 'btn hide-sm' do %>
+        <%= link_to i_am_farmer_path, class: 'btn hide-sm i-am-farmer' do %>
           <i class="icon icon-check"></i> Je suis producteur
         <% end %>
       <% end %>
@@ -76,6 +76,7 @@
           <ul>
             <li><a href="#">Comment ça marche ?</a></li>
             <li><a href="#">Qui sommes nous ?</a></li>
+            <li><%= link_to 'Vous êtes producteur ?', i_am_farmer_path %></li>
             <li><a href="#">Nos engagements</a></li>
           </ul>
         </div>

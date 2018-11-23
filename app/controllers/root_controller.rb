@@ -61,6 +61,10 @@ class RootController < ApplicationController
     render :json => FarmCategory.where("LOWER(name) LIKE LOWER(?)", "%#{params[:term]}%").limit(10).pluck(:name)
   end
 
+  def i_am_farmer
+    store_location_for(:user, new_user_farm_path)
+  end
+
   # GET farm_path
   def farm
     @farm = Farm.find_by_url(params[:farm_url]) or
