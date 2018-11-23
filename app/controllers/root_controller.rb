@@ -65,6 +65,20 @@ class RootController < ApplicationController
     store_location_for(:user, new_user_farm_path)
   end
 
+  def contact_post
+    subject = params[:contact][:subject]
+    subject = "Pas de sujet" if subject.blank?
+
+    ApplicationMailer.mailto(
+      to: [ApplicationMailer.default[:from], params[:contact][:email]],
+      from: "#{params[:contact][:name]} <#{params[:contact][:email]}>",
+      subject: "Jaimelelocal.fr / Contact / #{subject}",
+      body: params[:contact][:msg]
+    ).deliver_later
+    flash[:notice] = "Merci pour votre message, une copie vous a été envoyé."
+    render :contact
+  end
+
   # GET farm_path
   def farm
     @farm = Farm.find_by_url(params[:farm_url]) or

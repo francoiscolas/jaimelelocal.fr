@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   root to: 'root#home'
   get '/je-suis-producteur', to: 'root#i_am_farmer', as: :i_am_farmer
 
+  get  '/contact', to: 'root#contact'
+  post '/contact', to: 'root#contact_post'
+
   # Autocomplete
   get '/autocomplete/q', :to => 'root#autocomplete_q'
 
