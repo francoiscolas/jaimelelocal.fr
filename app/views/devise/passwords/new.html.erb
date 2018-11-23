@@ -1,22 +1,23 @@
 <% content_for :title do "Nouveau mot de passe - " end %>
-
-<div class="content row">
-  <div class="small-12 medium-10 medium-centered large-5 columns">
-    <div class="box">
-      <h2>Vous voulez un nouveau mot de passe ?</h2>
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name)) do |f| %>
-        <div>
-          <p>Merci de saisir votre e-mail. Nous vous enverrons un lien qui vous permettra de changer de mot de passe.</p>
-          <%= f.email_field :email, autofocus: true %>
-          <% if resource.errors[:email].any? %>
-            <p class="field_error_message"><%= resource.errors[:email][0] %></p>
-          <% end %>
-        </div>
-        <div class="actions">
-          <%= f.submit "Valider", class: "button" %>
-        </div>
-      <% end %>
-      <%= render "devise/shared/links" %>
+<div class="container">
+  <div class="columns">
+    <div class="column col-sm-12 col-md-10 col-5 col-mx-auto">
+      <div class="box">
+        <h2>Vous voulez un nouveau mot de passe ?</h2>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name)) do |f| %>
+          <div class="form-group">
+            <p>Merci de saisir votre e-mail. Nous vous enverrons un lien qui vous permettra de changer de mot de passe.</p>
+            <%= f.email_field :email, autofocus: true, class: 'form-input' %>
+            <% if resource.errors[:email].any? %>
+              <p class="field_error_message"><%= resource.errors[:email][0] %></p>
+            <% end %>
+          </div>
+          <div class="actions">
+            <%= f.submit "Valider", class: "btn" %>
+          </div>
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
     </div>
   </div>
 </div>

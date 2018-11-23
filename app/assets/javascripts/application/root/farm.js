@@ -45,30 +45,30 @@ $(function () {
 
   Rows.ownerUiTemplate = _.template(''
     +'<div class="owner-ui">'
-      +'<button class="rbutton" data-toggle="add-row-menu">'
-        +'<i class="fi-plus"></i> Ajouter un bloc'
-      +'</button>'
-      +'<button class="rbutton" data-toggle="edit-row-menu">'
-        +'<i class="fi-page-edit"></i> Modifier'
-      +'</button>'
-      +'<button class="rbutton" id="preview-row-btn">'
-        +'<i class="fi-eye"></i> Prévisualiser'
-      +'</button>'
-      +'<div id="add-row-menu" class="dropdown-pane" data-dropdown data-close-on-click="true">'
-        +'<ul class="vertical menu align-left">'
+      +'<div class="dropdown">'
+        +'<button class="btn-red dropdown-toggle">'
+          +'<i class="icon icon-plus"></i><span class="hide-sm"> Ajouter un bloc</span>'
+        +'</button>'
+        +'<ul class="menu" id="add-row-menu">'
           +'<% for (var id in types) { %>'
-           +'<li><a class="${id}">${types[id].name}</a></li>'
+           +'<li class="menu-item"><a class="${id}">${types[id].name}</a></li>'
           +'<% } %>'
         +'</ul>'
       +'</div>'
-      +'<div id="edit-row-menu" class="dropdown-pane" data-dropdown data-close-on-click="true" data-dropdown-position="bottom">'
-        +'<ul class="vertical menu align-left">'
-          +'<li><a class="edit"><i class="fi-page-edit"></i> Modifier</a></li>'
-          +'<li><a class="remove"><i class="fi-minus"></i> Supprimer</a></li>'
-          +'<li><a class="ascend"><i class="fi-arrow-up"></i> Monter</a></li>'
-          +'<li><a class="descend"><i class="fi-arrow-down"></i> Descendre</a></li>'
+      +'<div class="dropdown">'
+        +'<button class="btn-red dropdown-toggle">'
+          +'<i class="icon icon-edit"></i><span class="hide-sm"> Modifier</span>'
+        +'</button>'
+        +'<ul class="menu" id="edit-row-menu">'
+          +'<li class="menu-item"><a class="edit"><i class="icon icon-edit"></i> Modifier</a></li>'
+          +'<li class="menu-item"><a class="remove"><i class="icon icon-minus"></i> Supprimer</a></li>'
+          +'<li class="menu-item"><a class="ascend"><i class="icon icon-upward"></i> Monter</a></li>'
+          +'<li class="menu-item"><a class="descend"><i class="icon icon-downward"></i> Descendre</a></li>'
         +'</ul>'
       +'</div>'
+      +'<button class="btn-red" id="preview-row-btn">'
+        +'<i class="icon icon-check"></i><span class="hide-sm"> Prévisualiser</span>'
+      +'</button>'
     +'</div>'
   );
 
@@ -125,7 +125,6 @@ $(function () {
     if (this.$ownerUi) return ;
     this.$ownerUi = $(Rows.ownerUiTemplate({types: this.types}));
     this.$ownerUi.appendTo($row);
-    this.$ownerUi.find('.dropdown-pane').foundation();
     this.$ownerUi.show();
     this.$ownerUi.parent().css('outline', '4px solid red');
     this.renderOwnerUi();
@@ -247,7 +246,7 @@ $(function () {
 
   Rows.TextRow = {
     id: 'text',
-    name: '<i class="fi-pencil"></i> Texte',
+    name: '<i class="icon icon-edit"></i> Texte',
     defaultData: function (farm) {
       return {text: '<h1>Titre</h1><p>Votre texte ici ...</p>'};
     },
@@ -287,7 +286,7 @@ $(function () {
 
   Rows.MapRow = {
     id: 'map',
-    name: '<i class="fi-marker"></i> Carte',
+    name: '<i class="icon icon-location"></i> Carte',
     defaultData: function (farm) {
       return {text: _.template(''
         +'<h1 class="ql-align-center">Où ?</h1>'
@@ -299,7 +298,7 @@ $(function () {
         +'<div class="content">'
           +'<div class="infos">'
             +'<div class="ql-editor">${rowData.text}</div>'
-            +'<i class="fi-marker"></i>'
+            +'<i class="icon icon-location"></i>'
             +'<div class="addr">'
               +'${_.replace(farm.address, /, /g, "<br/>")}<br/>'
               +'<u>Lat</u> : ${farm.lat}<br/>'
@@ -355,7 +354,7 @@ $(function () {
 
   Rows.ContactRow = {
     id: 'contact',
-    name: '<i class="fi-mail"></i> Contact',
+    name: '<i class="icon icon-mail"></i> Contact',
     defaultData: function (farm) {
       return {text: _.template(''
         +'<h1 class="ql-align-center">Nous contacter</h1>'
@@ -369,25 +368,25 @@ $(function () {
         +'<div class="content">'
           +'<div class="ql-editor">${rowData.text}</div>'
           +'<form action="${window.location.pathname}/sendmail" accept-charset="UTF-8" method="post">'
-            +'<div>'
-              +'<label for="contact_name">Prénom NOM</label>'
-              +'<input id="contact_name" name="contact[name]" type="text" required/>'
+            +'<div class="form-group">'
+              +'<label for="contact_name" class="form-label">Prénom NOM</label>'
+              +'<input id="contact_name" name="contact[name]" type="text" class="form-input" required/>'
             +'</div>'
-            +'<div>'
-              +'<label for="contact_email">Adresse électronique</label>'
-              +'<input id="contact_email" name="contact[email]" type="text" required/>'
+            +'<div class="form-group">'
+              +'<label for="contact_email" class="form-label">Adresse électronique</label>'
+              +'<input id="contact_email" name="contact[email]" type="text" class="form-input" required/>'
             +'</div>'
-            +'<div>'
-              +'<label for="contact_subject">Sujet</label>'
-              +'<input id="contact_subject" name="contact[subject]" type="text"/>'
+            +'<div class="form-group">'
+              +'<label for="contact_subject" class="form-label">Sujet</label>'
+              +'<input id="contact_subject" name="contact[subject]" type="text" class="form-input"/>'
             +'</div>'
-            +'<div>'
-              +'<label for="contact_msg">Message</label>'
-              +'<textarea id="contact_msg" name="contact[msg]" rows="7" required></textarea>'
+            +'<div class="form-group">'
+              +'<label for="contact_msg" class="form-label">Message</label>'
+              +'<textarea id="contact_msg" name="contact[msg]" rows="7" class="form-input" required></textarea>'
             +'</div>'
             +'<div class="actions">'
-              +'<button type="submit" class="button">'
-              +'<i class="fi-mail"></i> Envoyer</button>'
+              +'<button type="submit" class="btn">'
+              +'<i class="icon icon-email"></i> Envoyer</button>'
             +'</div>'
           +'</form>'
         +'</div>'
@@ -422,10 +421,10 @@ $(function () {
 
   Rows.ImageRow = {
     id: 'image',
-    name: '<i class="fi-photo"></i> Image',
+    name: '<i class="icon icon-photo"></i> Image',
     defaultData: _.noop,
     template: _.template(''
-      +'<div class="image expanded farm-row">'
+      +'<div class="image farm-row">'
         +'<div class="content"></div>'
         +'<div class="content-edit">'
           +'<label>'

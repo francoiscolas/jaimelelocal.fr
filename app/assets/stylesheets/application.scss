@@ -1,9 +1,12 @@
-@import 'lib/foundation-and-overrides';
-@import 'lib/foundation-icons';
+@import 'lib/spectre';
+@import 'lib/spectre-exp';
+@import 'lib/spectre-icons';
+@import 'lib/spectre-variables';
 @import 'lib/jquery.ui-1.10.3.core';
 @import 'lib/jquery.ui-1.10.3.menu';
 @import 'lib/jquery.ui-1.10.3.autocomplete';
 @import 'fonts/*';
+@import 'application/variables';
 @import 'application/button';
 @import 'application/core';
 @import 'application/*';

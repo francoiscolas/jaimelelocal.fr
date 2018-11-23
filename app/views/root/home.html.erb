@@ -10,34 +10,40 @@
   <script>$(function(){window._form.setResult(<%= render 'results' %>, false);})</script>
 <% end %>
 <% content_for :pagename do 'home' end %>
-<div class="expanded row text-center subtitle">
+<div class="subtitle text-center">
   <h2><strong>Producteurs</strong> en vente <strong>directe</strong>.</h2>
 </div>
-<div class="row search-form">
-  <form action="/" method="get" data-remote="true">
-    <div class="medium-6 columns" id="query-input">
-      <input type="text" id="q" name="q" placeholder="Légumes, fruits, ..." data-autocomplete-url="<%= autocomplete_q_path %>"/>
+<form action="/" method="get" data-remote="true" class="search-form">
+  <div class="container">
+    <div class="columns">
+      <div class="column col-sm-12 col-4 col-ml-auto" id="query-input">
+        <input type="text" id="q" name="q" placeholder="Je cherche ..." data-autocomplete-url="<%= autocomplete_q_path %>"/>
+      </div>
+      <div class="column col-sm-12 col-4 col-mr-auto" id="where-input">
+        <input type="text" id="l" name="l" placeholder="Où ..." />
+        <select id="d" name="d">
+          <% [[10,'< 10'],[20,'< 20'],[50,'< 50'],[100,'< 100']].each do |v| %>
+            <option value="<%= v[0] %>"><%= v[1] %> km</option>
+          <% end %>
+        </select>
+      </div>
     </div>
-    <div class="medium-6 columns" id="where-input">
-      <input type="text" id="l" name="l" placeholder="Lieu" />
-      <select id="d" name="d">
-        <% [[10,'< 10'],[20,'< 20'],[50,'< 50'],[100,'< 100']].each do |v| %>
-          <option value="<%= v[0] %>"><%= v[1] %> km</option>
-        <% end %>
-      </select>
-    </div>
-  </form>
-</div>
-<div class="expanded row search-result">
-  <div class="no-query">
-    <i class="fi-arrow-up"></i><br/>
-    Entrez votre recherche ci-dessus.
   </div>
-  <div class="no-farm">
-    <p><i class="fi-x"></i><br/>
-      Aucun producteur trouvé :(</p>
-    <p class="small">Essayez d'élargir votre recherche ou pourquoi pas
-      parler de <%= text_logo %> autour de vous pour nous faire connaître&nbsp;:)</p>
+</form>
+<div class="search-result">
+  <div class="container">
+    <div class="columns">
+      <div class="no-query column col-sm-12 col-8 col-mx-auto">
+        <i class="icon icon-upward"></i><br/>
+        Entrez votre recherche ci-dessus.
+      </div>
+      <div class="no-farm column col-sm-12 col-8 col-mx-auto">
+        <p><i class="icon icon-cross"></i><br/>
+          Aucun producteur trouvé :(</p>
+        <p class="small">Essayez d'élargir votre recherche ou pourquoi pas
+          parler de <%= text_logo %> autour de vous pour nous faire connaître&nbsp;:)</p>
+      </div>
+    </div>
   </div>
   <div id="map"></div>
 </div>

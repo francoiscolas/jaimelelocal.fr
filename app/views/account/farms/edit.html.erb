@@ -1,18 +1,20 @@
 <% content_for :title do 'Paramètres de la ferme - ' end %>
 <% content_for :pagename do 'edit-user-farm' end %>
-<div class="content row">
-  <div class="small-12 medium-8 medium-centered columns">
-    <div class="box">
-      <h2>Paramètres de la ferme</h2>
-      <%= render 'form' %>
-    </div>
-    <div class="alert box">
-      <h2>Supprimer la ferme</h2>
-      <p><strong>Attention!</strong> Une fois que votre ferme sera supprimé,
-      il n'y aura pas de retour possible. Êtes-vous sûr de vouloir supprimer
-      votre ferme ?</p>
-      <div class="text-right">
-        <%= button_to "Oui, je veux supprimer ma ferme !", user_farm_path, data: {confirm: "Confirmez-vous la suppression de votre ferme et de toutes les données liées ?"}, method: :delete, :class => "alert button" %>
+<div class="container">
+  <div class="columns">
+    <div class="column col-sm-12 col-8 col-mx-auto">
+      <div class="box">
+        <h2>Paramètres de la ferme</h2>
+        <%= render 'form' %>
+      </div>
+      <div class="alert box">
+        <h2>Supprimer la ferme</h2>
+        <p><strong>Attention!</strong> Une fois que votre ferme sera supprimé,
+        il n'y aura pas de retour possible. Êtes-vous sûr de vouloir supprimer
+        votre ferme ?</p>
+        <div class="text-right">
+          <%= button_to "Oui, je veux supprimer ma ferme !", user_farm_path, data: {confirm: "Confirmez-vous la suppression de votre ferme et de toutes les données liées ?"}, method: :delete, :class => "btn btn-error" %>
+        </div>
       </div>
     </div>
   </div>

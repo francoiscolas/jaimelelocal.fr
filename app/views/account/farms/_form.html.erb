@@ -2,57 +2,57 @@
   <%= google_maps('&libraries=places') %>
 <% end %>
 <%= form_for(@farm, url: @farm.new_record? ? user_farm_path : edit_user_farm_path) do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name, placeholder: 'Ferme de Martin', required: true %>
+  <div class="form-group">
+    <%= f.label :name, class: 'form-label' %>
+    <%= f.text_field :name, placeholder: 'Ferme de Martin', required: true, class: 'form-input' %>
     <% if @farm.errors[:name].any? %>
       <p class="field_error_message"><%= @farm.errors[:name][0] %></p>
     <% end %>
   </div>
-  <div>
+  <div class="form-group">
     <div class="input-group">
-      <span class="input-group-label"><%= root_url %></span>
-      <%= f.text_field :url, class: 'input-group-field', placeholder: 'ferme-de-martin' %>
+      <span class="input-group-addon"><%= root_url %></span>
+      <%= f.text_field :url, class: 'form-input', placeholder: 'ferme-de-martin' %>
     </div>
     <% if @farm.errors[:url].any? %>
       <p class="field_error_message after-input-group"><%= @farm.errors[:url][0] %></p>
     <% end %>
   </div>
-  <div>
-    <%= f.label :categories %>
+  <div class="form-group">
+    <%= f.label :categories, class: 'form-label' %>
     <div class="scrollable" style="height:150px;margin-bottom:1rem;">
       <% FarmCategory.all.each do |category| %>
-        <label style="font-weight:normal;margin-left:0.4rem;">
+        <label class="form-checkbox">
           <%= check_box_tag "farm[category_ids][]", category.id, @farm.categories.include?(category) %>
-          <%= category.name %>
+          <i class="form-icon"></i> <%= category.name %>
         </label>
       <% end %>
     </div>
   </div>
-  <div>
-    <%= f.label :shortdesc %>
-    <%= f.text_area :shortdesc, rows: 2, autoresize: true, maxlength: Farm::SHORTDESC_MAX_LENGTH, required: true %>
+  <div class="form-group">
+    <%= f.label :shortdesc, class: 'form-label' %>
+    <%= f.text_area :shortdesc, rows: 3, autoresize: true, maxlength: Farm::SHORTDESC_MAX_LENGTH, required: true, class: 'form-input' %>
     <% if @farm.errors[:shortdesc].any? %>
       <p class="field_error_message"><%= @farm.errors[:shortdesc][0] %></p>
     <% end %>
   </div>
-  <div>
-    <%= f.label :email %>
-    <%= f.phone_field :email, required: true %>
+  <div class="form-group">
+    <%= f.label :email, class: 'form-label' %>
+    <%= f.phone_field :email, required: true, class: 'form-input' %>
     <% if @farm.errors[:email].any? %>
       <p class="field_error_message"><%= @farm.errors[:email][0] %></p>
     <% end %>
   </div>
-  <div>
-    <%= f.label :phone %>
-    <%= f.phone_field :phone, required: true %>
+  <div class="form-group">
+    <%= f.label :phone, class: 'form-label' %>
+    <%= f.phone_field :phone, required: true, class: 'form-input' %>
     <% if @farm.errors[:phone].any? %>
       <p class="field_error_message"><%= @farm.errors[:phone][0] %></p>
     <% end %>
   </div>
-  <div>
-    <%= f.label :address %>
-    <%= f.text_field :address, required: true %>
+  <div class="form-group">
+    <%= f.label :address, class: 'form-label' %>
+    <%= f.text_field :address, required: true, class: 'form-input' %>
     <%= f.hidden_field :lat, :autocomplete => 'off' %>
     <%= f.hidden_field :lng, :autocomplete => 'off' %>
     <% if @farm.errors[:address].any? %>
@@ -60,14 +60,14 @@
     <% end %>
     <div id="map"></div>
   </div>
-  <div>
-    <%= f.label :website %>
-    <%= f.url_field :website %>
+  <div class="form-group">
+    <%= f.label :website, class: 'form-label' %>
+    <%= f.url_field :website, class: 'form-input' %>
     <% if @farm.errors[:website].any? %>
       <p class="field_error_message"><%= @farm.errors[:website][0] %></p>
     <% end %>
   </div>
   <div class="actions">
-    <%= f.submit "Enregistrer", class: "button" %>
+    <%= f.submit "Enregistrer", class: "btn" %>
   </div>
 <% end %>

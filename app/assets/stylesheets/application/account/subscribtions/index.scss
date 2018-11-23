@@ -6,16 +6,12 @@ body.user-farm-subscribtions {
         position: absolute;
         right: 0.8rem;
         top: 0.4rem;
-        @include breakpoint(medium) {
-          top: 0.8rem;
-        }
-        .button {
-          background: $white;
-        }
+        label { font-size: $font-size; }
       }
     }
     .cl-list-content {
       height: 200px;
     }
   }
+  .popover-container { left: -.8rem !important; }
 }

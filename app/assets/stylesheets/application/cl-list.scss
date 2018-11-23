@@ -1,14 +1,10 @@
-.cl-list-actions {
-  @extend .small;
-  @extend .button-group;
-}
 %cl-list-style {
   background: $box-background;
   border: 1px solid $box-color;
 }
 .cl-list-empty {
-  @extend .callout;
   @extend %cl-list-style;
+  padding: 1rem;
 }
 .cl-list-filter {
   border-color: $box-color !important;

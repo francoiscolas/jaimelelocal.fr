@@ -4,80 +4,87 @@
 <% end %>
 <% content_for :title do "Abonnés de ma ferme - " end %>
 <% content_for :pagename do 'user-farm-subscribtions' end %>
-<div class="content row">
-  <div class="small-12 medium-8 medium-centered columns">
-    <div class="box">
-      <h2>Message aux abonnés (par courriel)</h2>
-      <%= form_tag sendmail_user_farm_subscribtions_path do %>
-        <div<%= ' class="field_with_errors"'.html_safe if @mail.errors[:subject].any? %>>
-          <%= label_tag 'mail[subject]', 'Objet' %>
-          <div class="input-group">
-            <span class="input-group-label"><%= @farm.name %> /</span>
-            <%= text_field_tag 'mail[subject]', @mail.subject, class: 'input-group-field', required: true %>
+<div class="container">
+  <div class="columns">
+    <div class="column col-sm-12 col-8 col-mx-auto">
+      <div class="box">
+        <h2>Message aux abonnés (par courriel)</h2>
+        <%= form_tag sendmail_user_farm_subscribtions_path do %>
+          <div class="form-group">
+            <%= label_tag 'mail[subject]', 'Objet', class: 'form-label' %>
+            <div class="input-group">
+              <span class="input-group-addon"><%= @farm.name %> /</span>
+              <%= text_field_tag 'mail[subject]', @mail.subject, required: true, class: 'form-input' %>
+            </div>
+            <% if @mail.errors[:subject].any? %>
+              <p class="field_error_message"><%= @mail.errors[:subject].first %></p>
+            <% end %>
           </div>
-        </div>
-        <% if @mail.errors[:subject].any? %>
-          <p class="field_error_message"><%= @mail.errors[:subject].first %></p>
-        <% end %>
-        <div<%= ' class="field_with_errors"'.html_safe if @mail.errors[:body].any? %>>
-          <%= label_tag 'mail[body]', 'Message' %>
-          <%= hidden_field_tag 'mail[body]', @mail.body, required: true %>
-          <div data-quill="#mail_body"></div>
-        </div>
-        <% if @mail.errors[:body].any? %>
-          <p class="field_error_message"><%= @mail.errors[:body].first %></p>
-        <% end %>
-        <div class="actions">
-          <%= submit_tag 'Envoyer', class: 'button' %>
-        </div>
-      <% end %>
-    </div>
-    <div class="cl-list box">
-      <%= form_tag destroy_user_farm_subscribtions_path do %>
-        <h2>
-          Abonnés
-          <div class="cl-list-actions">
-            <button type="button" class="button" data-toggle="add-subscriber-panel">
-              <i class="fi-plus"></i> Ajouter
-            </button>
-            <button type="submit" class="alert button" data-confirm="Êtes-vous sûr de vouloir désabonner ces personnes ?">
-              <i class="fi-trash"></i> Désabonner
-            </button>
+          <div class="form-group">
+            <%= label_tag 'mail[body]', 'Message', class: 'form-label' %>
+            <%= hidden_field_tag 'mail[body]', @mail.body, required: true %>
+            <div data-quill="#mail_body"></div>
+            <% if @mail.errors[:body].any? %>
+              <p class="field_error_message"><%= @mail.errors[:body].first %></p>
+            <% end %>
           </div>
-        </h2>
-        <% if @farm.subscribtions.empty? %>
-          <div class="cl-list-empty">Pas d'abonné.</div>
-        <% else %>
-          <input class="cl-list-filter" type="text" placeholder="Filtrer parmis les abonnés"/>
-          <div class="cl-list-content">
-            <table>
-              <% @farm.subscribtions.each do |s| %>
-                <tr>
-                  <td class="checkbox">
-                    <input type="checkbox" name="ids[]" value="<%= s.id %>"/>
-                  </td>
-                  <td>
-                    <% if s.user %>
-                       <%= s.user.name %> - <%= mail_to s.user.email %>
-                    <% else %>
-                      <%= s.email %>
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
-            </table>
+          <div class="actions">
+            <%= submit_tag 'Envoyer', class: 'btn' %>
           </div>
         <% end %>
-      <% end %>
-    </div>
-    <div id="add-subscriber-panel" class="dropdown-pane" data-dropdown data-close-on-click="true">
-      <%= form_tag user_farm_subscribtions_path do %>
-        <%= label_tag 'emails', 'Email(s) à ajouter' %>
-        <%= text_area_tag 'emails', nil, placeholder: 'pierre@kephas.fr jean@martin.ca', required: true, autoresize: true %>
-        <div class="actions">
-          <%= submit_tag 'Envoyer', class: 'button' %>
+      </div>
+      <div class="cl-list box">
+        <%= form_tag destroy_user_farm_subscribtions_path do %>
+          <h2>
+            Abonnés
+            <div class="cl-list-actions btn-group btn-group-block">
+              <button class="btn btn-primary btn-sm" type="button" data-dropdown-pane="add-emails-pane">
+                <i class="icon icon-plus"></i> <span class="hide-sm">Ajouter</span></button>
+              <button class="btn btn-error btn-sm" type="submit" data-confirm="Êtes-vous sûr de vouloir désabonner ces personnes ?">
+                <i class="icon icon-delete"></i> <span class="hide-sm">Désabonner</span>
+              </button>
+            </div>
+          </h2>
+          <% if @farm.subscribtions.empty? %>
+            <div class="cl-list-empty">Pas d'abonné.</div>
+          <% else %>
+            <input class="cl-list-filter form-input" type="text" placeholder="Je filtre..."/>
+            <div class="cl-list-content">
+              <table>
+                <% @farm.subscribtions.each do |s| %>
+                  <tr>
+                    <td class="checkbox">
+                      <input type="checkbox" name="ids[]" value="<%= s.id %>"/>
+                    </td>
+                    <td>
+                      <% if s.user %>
+                         <%= s.user.name %> - <%= mail_to s.user.email %>
+                      <% else %>
+                        <%= s.email %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="popover" id="add-emails-pane">
+        <div class="card">
+          <div class="card-body">
+            <%= form_tag user_farm_subscribtions_path do %>
+              <div class="form-group">
+                <%= label_tag 'emails', 'Email(s) à ajouter', class: 'form-label' %>
+                <%= text_area_tag 'emails', nil, placeholder: 'pierre@kephas.fr jean@martin.ca', required: true, autoresize: true, class: 'form-input' %>
+              </div>
+              <div class="actions">
+                <%= submit_tag 'Envoyer', class: 'btn' %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

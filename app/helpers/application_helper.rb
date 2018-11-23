@@ -1,12 +1,10 @@
 module ApplicationHelper
 
   def menu_box_item(name, url)
-    if url_for == url
-      content_tag(:li, class: 'is-active') do
-        link_to name
-      end
-    else
-      content_tag(:li) do
+    content_tag(:li, class: 'menu-item') do
+      if url_for == url
+        link_to name, url, class: 'active'
+      else
         link_to name, url
       end
     end

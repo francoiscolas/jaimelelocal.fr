@@ -15,26 +15,27 @@
     <div class="subline inc"></div>
     <div class="subline dec"></div>
   </div>
-  <header class="expanded row">
-    <div class="small-8 medium-4 columns">
-      <h1>
-        <a href="/"><%= image_tag 'logo.png', alt: request.host %></a>
-      </h1>
-    </div>
-    <div class="small-4 medium-8 columns" id="actions">
+  <header class="navbar">
+    <section class="navbar-section">
+      <a href="/" class="navbar-brand m-2">
+        <%= image_tag 'logo.png', alt: request.host %></a>
+    </section>
+    <section class="navbar-section mr-2">
       <%= yield :actions %>
       <% if !user_has_farm? %>
-        <%= link_to i_am_farmer_path, class: 'action i-am-a-farmer hide-for-small-only' do %>
-          <i class="fi-arrow-right"></i> Je suis producteur
+        <%= link_to i_am_farmer_path, class: 'btn hide-sm' do %>
+          <i class="icon icon-check"></i> Je suis producteur
         <% end %>
       <% end %>
       <% if user_signed_in? %>
-        <button class="action" type="button" data-toggle="menu">
-          <i class="fi-torso"></i><span class="dropdown hide-for-small-only"> <%= current_user.name %> </span>
-        </button>
-        <div id="menu" class="dropdown-pane" data-dropdown data-position="bottom" data-close-on-click="true">
-          <ul class="vertical menu align-left">
-            <li class="user-name"><%= current_user.name %></li>
+        <div class="dropdown dropdown-right">
+          <button class="btn btn-link dropdown-toggle">
+            <i class="icon icon-people"></i>
+            <span class="hide-sm"><%= current_user.name %></span>
+            <i class="icon icon-caret"></i>
+          </button>
+          <ul class="menu">
+            <li class="username"><%= current_user.name %></li>
             <%= menu_box_item "Mon compte", edit_user_registration_path %>
             <% if user_has_farm? %>
               <%= menu_box_item "Ferme > Page", user_farm_path %>
@@ -43,36 +44,52 @@
             <% else %>
               <%= menu_box_item 'Enregistrer ma ferme', new_user_farm_path %>
             <% end %>
-            <li><%= link_to 'Déconnexion', destroy_user_session_path, method: :delete %></li>
+            <li class="menu-item">
+              <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete %></li>
           </ul>
         </div>
       <% else %>
-        <%= link_to new_user_session_path, class: 'action' do %>
-          <i class="fi-torso"></i><span class="hide-for-small-only"> Connexion</span>
+        <%= link_to new_user_session_path, class: 'btn btn-link' do %>
+          <i class="icon icon-people"></i><span class="hide-sm"> Connexion</span>
         <% end %>
       <% end %>
-    </div>
+    </section>
   </header>
   <% if notice %>
-    <div class="flash" data-closable>
-      <div class="success callout text-center">
-        <i class="fi-check"></i>&emsp;<%= notice %>
-        <button class="close-button" data-close>&times;</button>
-      </div>
+    <div class="flash toast toast-success">
+      <button class="btn btn-clear float-right"></button>
+      <%= notice %>
     </div>
   <% end %>
   <% if alert %>
-    <div class="flash" data-closable>
-      <div class="alert callout text-center">
-        <i class="fi-alert"></i>&emsp;<%= alert %>
-        <button class="close-button" data-close>&times;</button>
-      </div>
+    <div class="flash toast toast-error">
+      <button class="btn btn-clear float-right"></button>
+      <%= alert %>
     </div>
   <% end %>
   <%= yield %>
-  <footer class="expanded row">
-    <div class="small-12 column text-center">
-      &copy; 2016 <%= request.host.capitalize %>
+  <footer>
+    <div class="container">
+      <div class="columns">
+        <div class="column col-sm-12 col-md-4 col-3 col-ml-auto text-center">
+          <h3>Le projet</h3>
+          <ul>
+            <li><a href="#">Comment ça marche ?</a></li>
+            <li><a href="#">Qui sommes nous ?</a></li>
+            <li><a href="#">Nos engagements</a></li>
+          </ul>
+        </div>
+        <div class="column col-sm-12 col-md-4 col-3 col-mr-auto text-center">
+          <h3>Besoin d'aide ?</h3>
+          <ul>
+            <li><a href="#">Questions fréquentes</a></li>
+            <li><a href="#">Nous contacter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy text-center">
+        &copy; 2016 <%= request.host.capitalize %>
+      </div>
     </div>
   </footer>
 </body>

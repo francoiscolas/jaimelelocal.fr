@@ -1,18 +1,18 @@
 <%- if controller_name != 'sessions' %>
   <%= link_to new_session_path(resource_name) do %>
-    <i class="fi-foot"></i> J'ai déjà un compte !
+    <i class="icon icon-forward"></i> J'ai déjà un compte !
   <% end %><br/>
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <%= link_to new_registration_path(resource_name) do %>
-    <i class="fi-foot"></i> Je veux créer un compte, merci :)
+    <i class="icon icon-forward"></i> Je veux créer un compte, merci :)
   <% end %><br/>
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <%= link_to new_password_path(resource_name) do %>
-    <i class="fi-foot"></i> J'ai oublié mon mot de passe, aidez-moi svp :/
+    <i class="icon icon-forward"></i> J'ai oublié mon mot de passe, aidez-moi svp :/
   <% end %><br/>
 <% end -%>
 

@@ -1,51 +1,44 @@
-$search-form-background: #cc1446;
-
 body.home {
   .subtitle {
     background-image: image-url(home-subtitle-bg);
     background-size: cover;
-    color: $white;
-    padding: 3rem 0;
-    @include breakpoint(medium) {
-      padding: 10rem 0;
-    }
+    color: $light-color;
+    padding: 2rem 0;
     h2 {
       font-family: 'Kite One', sans-serif;
-      text-shadow: 0 0 4px $black;
+      text-shadow: 0 0 4px $dark-color;
+    }
+  }
+  @media (min-width: $size-md) {
+    header {
+      background: none;
+      position: absolute;
+      width: 100%;
+      .btn-link {
+        text-shadow: 0 0 2px $dark-color;
+        &:hover, &.active {
+          text-shadow: 0 0 2px $light-color; }
+      }
+    }
+    .subtitle {
+      padding: 10rem 0;
     }
   }
   .search-form {
-    @include breakpoint(medium) {
-      padding: 1.5rem;
+    padding: 1.5rem 0;
+    input, select {
+      border: none;
+      border-bottom: 2px solid $gray-color-dark;
+      vertical-align: bottom;
+      padding: 0.4rem 0.4rem;
+      width: 100%;
+      &:focus, &:hover {
+        border-bottom-color: $primary-color;
+      }
     }
-    .columns {
-      background: $search-form-background;
-      box-shadow: 0 0 7px $search-form-background;
-      input, select {
-        display: initial;
-        border: 1px solid darken($search-form-background, 10%);
-        box-shadow: none;
-        margin: 0.5rem 0;
-        padding: 0.4rem 0.4rem;
-      }
-      &#where-input {
-        input {
-          width: 68%;
-        }
-        select {
-          width: 30%;
-          float: right;
-        }
-        @include breakpoint(small only) {
-          padding-top: 0;
-          input, select {
-            margin-top: 0;
-          }
-        }
-        @include breakpoint(medium) {
-          padding-left: 0;
-        }
-      }
+    #where-input {
+      input { width: 68%; }
+      select { width: 30%; }
     }
   }
   .search-result {
@@ -53,7 +46,7 @@ body.home {
       height: 500px;
       .iw {
         font-size: 16px;
-        color: $black;
+        color: $dark-color;
         max-width: 250px;
         .title {
           font-weight: bold;
@@ -66,9 +59,9 @@ body.home {
     .no-query, .no-farm {
       text-align: center;
       font-family: 'Kite One', sans-serif;
-      font-size: 3rem;
-      margin: 5rem 1rem 10rem;
-      .small { font-size: 1.5rem; }
+      font-size: 1.8rem;
+      padding: 1rem 1rem 4rem;
+      .small { font-size: 1.3rem; }
     }
   }
 }

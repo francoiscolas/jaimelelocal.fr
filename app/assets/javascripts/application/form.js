@@ -49,28 +49,28 @@ $(function () {
 
   //
   // Autoresize textareas
-  (function () {
-    $('textarea[autoresize=true]').each(function () {
-      var input = $(this).css({
-        'overflow': 'hidden'
-      });
-      var div = $(document.createElement('div')).css({
-        'display'    : 'none',
-        'font-family': input.css('font-family'),
-        'font-size'  : input.css('font-size'),
-        'min-height' : '20px',
-        'padding'    : input.css('padding'),
-        'white-space': 'pre-wrap',
-        'width'      : input.width(),
-        'word-wrap'  : 'break-word'
-      });
-
-      input.parent().append(div).keyup(function () {
-        div.html(input.val().replace(/\n/g, '<br>') + '<br>');
-        input.height(div.height());
-      }).keyup();
-    });
-  })();
+//  (function () {
+//    $('textarea[autoresize=true]').each(function () {
+//      var input = $(this).css({
+//        'overflow': 'hidden'
+//      });
+//      var div = $(document.createElement('div')).css({
+//        'display'    : 'none',
+//        'font-family': input.css('font-family'),
+//        'font-size'  : input.css('font-size'),
+//        'min-height' : '20px',
+//        'padding'    : input.css('padding'),
+//        'white-space': 'pre-wrap',
+//        'width'      : input.width(),
+//        'word-wrap'  : 'break-word'
+//      });
+//
+//      input.parent().append(div).keyup(function () {
+//        div.html(input.val().replace(/\n/g, '<br>') + '<br>');
+//        input.height(div.height());
+//      }).keyup();
+//    });
+//  })();
 
   //
   // Autocomplete

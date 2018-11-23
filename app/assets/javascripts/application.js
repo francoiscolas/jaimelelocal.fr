@@ -20,12 +20,4 @@
 //= require lib/jquery.ui-1.10.3.position
 //= require lib/jquery.ui-1.10.3.menu
 //= require lib/jquery.ui-1.10.3.autocomplete
-//= require lib/what-input
-//= require lib/foundation
 //= require_tree .
-
-$(function () {
-  //
-  // Initialise Foundation.
-  $(document).foundation();
-});

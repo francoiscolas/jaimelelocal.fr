@@ -18,7 +18,6 @@ gem 'geocoder'            # To help searching by location.
 
 # Ui
 gem 'jquery-rails'
-gem 'foundation-rails', '~> 6.4' # CSS framework.
 gem 'lodash-rails', '~> 4'
 # gem 'coffee-rails', '~> 4.2'    # To use CoffeeScript assets and views.
 gem 'sass-rails', '~> 5.0'

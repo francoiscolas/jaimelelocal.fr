@@ -20,8 +20,8 @@
   <% if @is_owner %>
     <%= form_for @farm, url: user_farm_path, html: { id: 'page-content-form' } do |f| %>
       <%= f.hidden_field :page_content %>
-      <button class="action" type="button">
-        <i class="fi-save"></i><span class="hide-for-small-only"> Enregistrer les modifications</span>
+      <button class="btn btn-link">
+        <i class="icon icon-check"></i><span class="hide-sm"> Enregistrer les modifications</span>
       </button>
     <% end %>
   <% end %>
@@ -31,29 +31,35 @@
   <div class="banner-btns" style="background-image:url(<%= asset_path @farm.page_header %>)">
     <% if @is_owner %>
       <%= form_for @farm, url: user_farm_path, multipart: true, 'data-closable': true do |f| %>
-        <%= f.label :page_header, "Modifier l'image", class: 'update-banner banner-btn' %>
-        <%= f.file_field :page_header, class: 'show-for-sr' %>
-        <button type="button" class="remove-banner banner-btn">Supprimer l'image</button>
+        <%= f.label :page_header, "Modifier l'image", class: 'btn btn-primary update-banner' %>
+        <%= f.file_field :page_header %>
+        <button class="btn btn-primary remove-banner">Supprimer l'image</button>
       <% end %>
-      <%= link_to 'Voir la page publique', farm_path(@farm), class: 'go-public banner-btn' %>
+      <%= link_to 'Voir la page publique', farm_path(@farm), class: 'btn btn-primary go-public' %>
     <% else %>
       <% if false && user_signed_in? && current_user.subscribed_to?(@farm) %>
         <!-- Never go there. This feature will be enabled later. -->
-        <%= link_to farm_subscribtion_path(@farm), method: :delete, class: 'unfollow banner-btn' do %>
+        <%= link_to farm_subscribtion_path(@farm), method: :delete, class: 'btn btn-primary unfollow' do %>
           NE PLUS SUIVRE
         <% end %>
       <% else %>
-        <button type="button" class="follow banner-btn" data-toggle="follow-pane">SUIVRE</button>
-        <div class="dropdown-pane left" id="follow-pane" data-dropdown data-hover="true" data-hover-pane="true">
-          <%= form_for @farm.subscribtions.new, url: farm_subscribtion_path(@farm) do |f| %>
-            <div>
-              <%= f.label :email %>
-              <%= f.text_field :email %>
+        <div class="follow popover popover-left">
+          <button class="btn btn-error">SUIVRE</button>
+          <div class="popover-container">
+            <div class="card">
+              <div class="card-body">
+                <%= form_for @farm.subscribtions.new, url: farm_subscribtion_path(@farm) do |f| %>
+                  <div class="form-group">
+                    <%= f.label :email, class: 'form-label' %>
+                    <%= f.text_field :email, class: 'form-input' %>
+                  </div>
+                  <div class="actions">
+                    <%= f.submit "Suivre ce producteur", class: 'btn' %>
+                  </div>
+                <% end %>
+              </div>
             </div>
-            <div class="actions">
-              <%= f.submit "Suivre ce producteur", class: 'button' %>
-            </div>
-          <% end %>
+          </div>
         </div>
       <% end %>
     <% end %>
@@ -62,18 +68,18 @@
     <% if @farm.shortdesc.present? %>
       <p><%= @farm.shortdesc %></p>
     <% end %>
-    <i class="fi-telephone"></i>
+    <i class="icon  icon-people"></i>
     <a href="tel://<%= @farm.phone %>">
       <%= @farm.phone %></a><br/>
-    <i class="fi-mail"></i>
+    <i class="icon icon-mail"></i>
     <a href="mailto://<%= @farm.email %>">
       <%= @farm.email %></a><br/>
     <% if @farm.website.present? %>
-      <i class="fi-web"></i>
+      <i class="icon icon-link"></i>
       <a href="<%= @farm.website %>">
         <%= @farm.website %></a><br/>
     <% end %>
-    <i class="fi-marker"></i>
+    <i class="icon icon-location"></i>
     <div>
       <%=address_to_bloc @farm.address %>
       <br/><u>Lat</u> : <%= @farm.lat %>

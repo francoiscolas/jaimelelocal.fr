@@ -1,17 +1,11 @@
 body.farm {
   &:not(.is-owner) {
     header {
-      h1 {
-        line-height: 2rem;
-        img { height: 1.5rem; }
+      .navbar-brand {
+        margin: 0 .4rem !important;
+        img { height: 1rem; }
       }
-      #actions {
-        .action {
-          margin-top: 0;
-          @include breakpoint(small only) {
-            i { font-size: 1rem; } }
-        }
-      }
+      button {font-size: 90%;}
     }
   }
   .banner {
@@ -19,10 +13,10 @@ body.farm {
     h1 {
       font-family: 'Gloria Hallelujah', sans-serif;
       font-weight: normal;
-      color: $white;
+      color: $light-color;
       text-align: center;
       text-decoration: underline;
-      text-shadow: 0 0 4px $black;
+      text-shadow: 0 0 4px $dark-color;
       width: 100%;
       margin: 0;
       position: absolute;
@@ -35,34 +29,37 @@ body.farm {
       position: relative;
       z-index: 99;
       height: 300px;
-      @include breakpoint(medium) {
+      @media (min-width: $size-md) {
         height: 555px;
       }
     }
-    .banner-btn {
-      @include button(false, $light-gray, auto, $body-font-color, solid);
-      @include button-click-effect(light);
+    .btn-primary, .btn-error {
       font-weight: normal;
       text-decoration: none;
-      box-shadow: 0 0 4px $black;
+      box-shadow: 0 0 4px $dark-color;
       position: absolute;
       right: 1rem;
       bottom: 1rem;
       margin: 0;
-      @include breakpoint(medium) {
+      @media (min-width: $size-md) {
         right: 3rem; }
-      &.follow {
-        @include button-style($alert-color, auto, $white); }
       &.update-banner {
         bottom: 6rem; }
       &.remove-banner {
         bottom: 3.5rem; }
     }
+    .follow.popover {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+    input#farm_page_header {
+      display: none; }
     .infos {
-      background: $body-background;
+      background: $body-bg;
       padding: 1rem;
-      @include breakpoint(medium) {
-        box-shadow: 0 0 4px $black;
+      @media (min-width: $size-md) {
+        box-shadow: 0 0 4px $dark-color;
         max-width: 300px;
         position: absolute;
         z-index: 9999;
@@ -81,8 +78,23 @@ body.farm {
       }
     }
   }
+  .owner-ui {
+    position: absolute;
+    z-index: 100000;
+    .btn-red {
+      @extend .btn;
+      color: white;
+      background: red;
+      border: 0;
+      border-radius: 0;
+      font-variant: small-caps;
+      margin: 0;
+      &:hover, &:focus { background: darken(red, 10%); }
+    }
+    .menu-item {
+      cursor: pointer; }
+  }
   .farm-row {
-    @extend .row;
     margin-top: 2rem;
     margin-bottom: 2rem;
     .content-edit {
@@ -93,22 +105,26 @@ body.farm {
     &.contact .content-edit,
     &.text .content,
     &.text .content-edit {
-      @extend .columns;
-      @extend .small-12;
-      @extend .medium-8;
-      @extend .medium-centered;
+      margin: 0 auto;
+      padding: 1rem;
+      width: 100%;
+      @media (min-width: $size-md) {
+        width: 66%;
+      }
     }
     &.contact .content,
     &.contact .content-edit {
-      @extend .large-6;
+      @media (min-width: $size-lg) {
+        width: 50%;
+      }
     }
     &.map {
       .content {
-        @include breakpoint(medium) {
+        @media (min-width: $size-md) {
           position: relative;
           .infos {
-            background: $body-background;
-            box-shadow: 0 0 2px $light-gray;
+            background: $body-bg;
+            box-shadow: 0 0 2px $gray-color;
             position: absolute;
             top: 42px;
             right: 70px;
@@ -133,7 +149,7 @@ body.farm {
     &.image {
       background: black;
       height: 250px;
-      @include breakpoint(medium) {
+      @media (min-width: $size-md) {
         height: 500px; }
       label {
         color: white;
@@ -152,17 +168,6 @@ body.farm {
         height: 100%;
         margin: 0;
       }
-    }
-  }
-  .owner-ui {
-    position: absolute;
-    z-index: 100000;
-    .rbutton {
-      @include button(false, red, auto, white, solid);
-      font-variant: small-caps;
-    }
-    .dropdown-pane {
-      padding: 0;
     }
   }
 }

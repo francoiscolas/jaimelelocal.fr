@@ -1,7 +1,10 @@
 form {
   .required {
-    color: $alert-color;
+    color: $error-color;
     font-weight: bold;
+  }
+  .form-input:not(:placeholder-shown):invalid {
+    border-color: $border-color-dark;
   }
   .field_with_errors input,
   .field_with_errors input:focus,
@@ -11,15 +14,15 @@ form {
   .field_with_errors select:focus,
   .field_with_errors .input-group,
   .field_with_errors .ql-toolbar {
-    border-color: $alert-color !important;
+    border-color: $error-color !important;
   }
   .field_with_errors .ql-container {
-    border-color: $alert-color !important;
+    border-color: $error-color !important;
     margin-bottom: -1px !important;
   }
   .field_error_message {
-    background: $alert-color;
-    color: $white;
+    background: $error-color;
+    color: $light-color;
     padding: 0 0.5rem;
     &.after-input-group {
       margin-top: -17px;
@@ -38,14 +41,13 @@ form {
 }
 
 .ui-autocomplete {
-  background: $input-background;
-  border: $input-border;
+  background: $bg-color-light;
+  border: $border-width solid $border-color-dark;
   border-top: 0;
   .ui-menu-item a {
     color: $body-font-color;
     &.ui-state-focus {
       background: $secondary-color;
-      color: $white;
     }
   }
 }

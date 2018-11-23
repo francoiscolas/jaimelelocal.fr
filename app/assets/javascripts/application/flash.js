@@ -3,12 +3,14 @@ $(function () {
   //
   // Bind flash's close button.
 
-  var flashBtn = $('.flash.row .close-button');
+  var flashBtn = $('.flash button');
 
-  if (flashBtn.length > 0) {
-    setTimeout(function () {
-      flashBtn.click();
-    }, 7000);
-  }
+  flashBtn.on('click', function () {
+    $(this).parent().fadeOut();
+  });
+
+  setTimeout(function () {
+    flashBtn.click();
+  }, 7000);
 
 });
