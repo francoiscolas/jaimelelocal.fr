@@ -65,6 +65,12 @@ class RootController < ApplicationController
     store_location_for(:user, new_user_farm_path)
   end
 
+  def farmers
+    params[:q] ||= 'a'
+    @q = params[:q][0].downcase
+    @farms = Farm.where("LOWER(name) LIKE ?", "#{@q}%")
+  end
+
   def contact_post
     subject = params[:contact][:subject]
     subject = "Pas de sujet" if subject.blank?

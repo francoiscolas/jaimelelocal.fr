@@ -71,26 +71,28 @@
   <footer>
     <div class="container">
       <div class="columns">
-        <div class="column col-sm-12 col-md-4 col-3 col-ml-auto text-center">
-          <h3>Le projet</h3>
+        <div class="column col-sm-12 col-md-4 col-4">
           <ul>
             <li><a href="#">Comment ça marche ?</a></li>
             <li><a href="#">Qui sommes nous ?</a></li>
-            <li><%= link_to 'Vous êtes producteur ?', i_am_farmer_path %></li>
-            <li><a href="#">Nos engagements</a></li>
+            <li><a href="#">Notre vision</a></li>
+            <li><a href="#">Informations légales</a></li>
           </ul>
         </div>
-        <div class="column col-sm-12 col-md-4 col-3 col-mr-auto text-center">
-          <h3>Besoin d'aide ?</h3>
+        <div class="column col-sm-12 col-md-4 col-4">
+          <ul>
+            <li><%= link_to 'Vous êtes producteur ?', i_am_farmer_path %></li>
+            <li><%= link_to 'Les producteurs', farmers_path %></li>
+          </ul>
+        </div>
+        <div class="column col-sm-12 col-md-4 col-4">
           <ul>
             <li><a href="#">Questions fréquentes</a></li>
             <li><%= link_to 'Nous contacter', contact_path %></li>
           </ul>
         </div>
       </div>
-      <div class="copy text-center">
-        &copy; 2018 <%= request.host.capitalize %>
-      </div>
+      <small>&copy; 2018 <%= request.host.capitalize %></small>
     </div>
   </footer>
 </body>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # Root
   root to: 'root#home'
   get '/je-suis-producteur', to: 'root#i_am_farmer', as: :i_am_farmer
+  get '/les-producteurs', to: 'root#farmers', as: :farmers
 
   get  '/contact', to: 'root#contact'
   post '/contact', to: 'root#contact_post'

@@ -90,17 +90,28 @@ footer {
   background: $footer-color;
   color: $light-color;
   padding: 2rem 0;
-  h3 {
-    font-variant: small-caps;
-    font-weight: bold;
-  }
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    a { color: $light-color !important; }
-  }
-  .column {
-    margin-bottom: 2rem;
+  .container {
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    @media (min-width: $size-sm) {
+      text-align: left;
+    }
+    @media (min-width: $size-md) {
+      width: 70%;
+    }
+    h3 {
+      font-variant: small-caps;
+      font-weight: bold;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      a { font-weight: bold; color: $light-color !important; }
+    }
+    .column {
+      margin-bottom: 2rem;
+    }
   }
 }

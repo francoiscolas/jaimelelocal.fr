@@ -1,0 +1,29 @@
+<%= content_for :title do 'Les producteurs - ' end %>
+<div class="container">
+  <div class="columns">
+    <div class="column col-sm-12 col-7 col-mx-auto py-1rem">
+      <div class="text-center">
+        <% for c in ('a'..'z') do %>
+          <% if c == @q %>
+            <b><%= c.upcase %></b>
+          <% else %>
+            <%= link_to c.upcase, "?q=#{c}" %>
+          <% end %>
+        <% end %>
+      </div>
+      <h2><%= @q.upcase %></h2>
+      <% if @farms.empty? %>
+        <p class="text-gray text-italic">
+          Pas de producteurs dans cette catégorie.</p>
+      <% else %>
+        <% @farms.each do |farm| %>
+          <div>
+            <%= link_to farm.name, farm_path(farm), class: 'text-bold' %><br/>
+            <%= farm.shortdesc %>
+          </div>
+          <div class="divider"></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
