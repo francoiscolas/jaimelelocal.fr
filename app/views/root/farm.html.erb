@@ -15,6 +15,7 @@
   <% end %>
 <% end %>
 <% content_for :title do "#{@farm.name} - " end %>
+<% content_for :meta_description do @farm.shortdesc end %>
 <% content_for :pagename do "farm#{' is-owner' if @is_owner}" end %>
 <% content_for :actions do %>
   <% if @is_owner %>

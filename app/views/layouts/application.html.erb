@@ -4,6 +4,11 @@
   <meta charset="utf-8"/>
   <title><%= yield(:title) %>Jaimelelocal.fr</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <% if content_for?(:meta_description) %>
+    <meta name="description" content="<%= yield(:meta_description) %>"/>
+  <% else %>
+    <meta name="description" content="Jaimelelocal.fr est un réseau national de producteurs en vente directe."/>
+  <% end %>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
