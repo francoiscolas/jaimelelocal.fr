@@ -20,14 +20,12 @@
   </div>
   <div class="form-group">
     <%= f.label :categories, class: 'form-label' %>
-    <div class="scrollable" style="height:150px;margin-bottom:1rem;">
+    <select name="farm[category_ids][]" multiple jllAutocomplete>
       <% FarmCategory.all.each do |category| %>
-        <label class="form-checkbox">
-          <%= check_box_tag "farm[category_ids][]", category.id, @farm.categories.include?(category) %>
-          <i class="form-icon"></i> <%= category.name %>
-        </label>
+        <option value="<%= category.id %>" <%= 'selected' if @farm.categories.include?(category) %>>
+          <%= category.name %></option>
       <% end %>
-    </div>
+    </select>
   </div>
   <div class="form-group">
     <%= f.label :shortdesc, class: 'form-label' %>
